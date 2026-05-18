@@ -397,6 +397,10 @@
     if(m){m.addEventListener('click',function(e){
       if(e.target.closest('a')) m.removeAttribute('open');
     });}
+    var fd=document.querySelectorAll('.foot-dir details');
+    function footSync(){var mob=matchMedia('(max-width:760px)').matches;
+      fd.forEach(function(x){x.open=!mob;});}
+    footSync();addEventListener('resize',footSync,{passive:true});
   })();
 </script>
 
