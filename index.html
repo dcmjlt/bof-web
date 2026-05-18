@@ -1028,6 +1028,14 @@ and switch twitter:card below to summary_large_image. -->
       if(e.target.closest('a')) m.removeAttribute('open');
     });}
 
+    // Footer directory: open on desktop, collapsed on mobile (<=760).
+    // <details> ships open=good-for-no-JS/desktop; this collapses it on small
+    // screens so the mobile footer is short, not a 2000px scroll.
+    var fd=document.querySelectorAll('.foot-dir details');
+    function footSync(){var mob=matchMedia('(max-width:760px)').matches;
+      fd.forEach(function(x){x.open=!mob;});}
+    footSync();addEventListener('resize',footSync,{passive:true});
+
     // Estimate form: accessible inline validation + progressive-enhancement submit.
     // No-JS users still POST to Netlify (server-side capture); we reply either way.
     var box=document.getElementById('eform');
