@@ -1,0 +1,9 @@
+# Back Office Factory — backofficefactory.com
+# Crawling is allowed so the page-level robots meta (currently noindex while
+# placeholder trust content is live) can be seen. Indexing is controlled by
+# that meta tag, not by this file.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://backofficefactory.com/sitemap.xml

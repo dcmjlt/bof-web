@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Single-page site for now. Authoritative page IA + build order:
+     BOF-Sitemap-Suggested.pdf, reconciled in memory project_site_ia_build_order
+     (17-page Phase-1 build: /hire/{role} x11 -> /services/{cat} x5 -> /about).
+     Add each URL here only AS IT SHIPS and once its `noindex` is removed;
+     listing noindex URLs triggers a Search Console "Submitted URL marked
+     noindex" warning. Do NOT submit this sitemap until the homepage
+     `noindex` is removed. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://backofficefactory.com/</loc>
+    <lastmod>2026-05-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>

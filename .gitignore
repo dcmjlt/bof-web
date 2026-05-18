@@ -5,8 +5,8 @@
 #  static site + deploy config is tracked. Everything strategic, internal,
 #  or working stays local-only.
 #
-#  Tracked (intentionally): index.html, netlify.toml,
-#  netlify/functions/**, README.md, .gitignore
+#  Tracked (intentionally): index.html, privacy.html, robots.txt,
+#  sitemap.xml, netlify.toml, netlify/functions/**, README.md, .gitignore
 # =============================================================================
 
 # --- OS / editor noise ---
@@ -21,10 +21,14 @@ skills-lock.json
 
 # --- Internal strategy & working documents (NEVER publish) ---
 CLAUDE.md
+AGENTS.md
 POSITIONING.md
 DESIGN.md
 product.md
 TODOS.md
+copywriting-guide*.md
+SEO-suggestion-homepage.md
+SEO-*.md
 
 # --- Internal source material (pitch / branding / sitemap / USP) ---
 *.pdf
