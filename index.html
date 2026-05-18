@@ -3,20 +3,64 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Back Office Factory: scale without scaling your headcount</title>
-<meta name="description" content="The back office that runs our own digital businesses (bookkeeping, customer support, order and document processing, data, payroll), delivered by real people and AI agents you hire by the hour. A real number, early. No long contracts.">
+<title>Back Office Team for Ecommerce &amp; Digital Businesses | Back Office Factory</title>
+<meta name="description" content="Scale your digital business without hiring full-time back-office staff. BOF runs bookkeeping, support, order processing, payroll and admin by the hour.">
 <meta name="theme-color" content="#FBF7F0">
 
+<!-- LAUNCH BLOCKER: noindex stays until the placeholder trust artefacts
+     (price-honesty quote, named case studies, UK contact, data-protection
+     wording, cert status) are replaced with real approved content. Indexing
+     the page with visible "Placeholder" flags damages trust + E-E-A-T.
+     Remove this single line to go live. Tracked in CLAUDE.md ship blockers. -->
+<meta name="robots" content="noindex,follow">
+
+<link rel="canonical" href="https://backofficefactory.com/">
+
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://backofficefactory.com/">
 <meta property="og:title" content="Back Office Factory: scale without scaling headcount">
-<meta property="og:description" content="The back office that runs our own digital businesses, delivered by real people and AI agents you hire by the hour. No long contracts. A real number, early.">
+<meta property="og:description" content="The back office for growing digital businesses, delivered by a team of real people and AI agents you hire by the hour. No long contracts. A real number, early.">
 <meta property="og:locale" content="en_GB">
+<!-- TODO (launch): add a real 1200x630 social card, then uncomment:
+<meta property="og:image" content="https://backofficefactory.com/social-card.jpg">
+<meta property="og:image:alt" content="Back Office Factory — back-office team for growing digital businesses">
+<meta name="twitter:image" content="https://backofficefactory.com/social-card.jpg">
+and switch twitter:card below to summary_large_image. -->
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Back Office Team for Ecommerce &amp; Digital Businesses">
+<meta name="twitter:description" content="Bookkeeping, support, order processing, payroll and admin by people and AI agents, hired by the hour.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://backofficefactory.com/#organization",
+      "name": "Back Office Factory",
+      "url": "https://backofficefactory.com/",
+      "description": "Back-office team that runs growing digital and ecommerce businesses: bookkeeping, customer support, order and document processing, payroll and operations admin, delivered by real people and AI agents on one workflow, hired by the hour.",
+      "foundingDate": "2006"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://backofficefactory.com/#website",
+      "url": "https://backofficefactory.com/",
+      "name": "Back Office Factory",
+      "publisher": { "@id": "https://backofficefactory.com/#organization" }
+    }
+  ]
+}
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500&display=swap" rel="stylesheet">
+<!-- Inline favicon (no network request, kills the /favicon.ico 404) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23E8A33D'/%3E%3Ctext x='16' y='22' font-family='Verdana,sans-serif' font-size='17' font-weight='700' text-anchor='middle' fill='%231F1A14'%3EB%3C/text%3E%3C/svg%3E">
 
 <style>
   :root{
@@ -43,14 +87,30 @@
 
     --r-btn:14px; --r-card:18px; --r-block:24px; --r-mark:11px;
     --ease:cubic-bezier(.22,1,.36,1); /* ease-out-quint */
+
+    /* Metric-matched fallback stacks (capsize-computed) — eliminate the
+       web-font swap reflow that produced live CLS 0.037. */
+    --ff-body:"DM Sans","DM Sans Fallback",Arial,system-ui,-apple-system,sans-serif;
+    --ff-display:"Cabinet Grotesk","Cabinet Grotesk Fallback","DM Sans","DM Sans Fallback",Arial,sans-serif;
   }
 
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
 
+  /* Fallback faces sized to the real fonts so text occupies identical space
+     before and after swap (ascent/descent/size-adjust via @capsizecss). */
+  @font-face{
+    font-family:"DM Sans Fallback";src:local('Arial'),local('ArialMT');
+    ascent-override:86.3739%;descent-override:26.9918%;line-gap-override:0%;size-adjust:114.8495%;
+  }
+  @font-face{
+    font-family:"Cabinet Grotesk Fallback";src:local('Arial'),local('ArialMT');
+    ascent-override:86.7666%;descent-override:27.9249%;line-gap-override:8.9759%;size-adjust:100.269%;
+  }
+
   body{
     background:var(--bg);color:var(--ink);
-    font-family:"DM Sans",system-ui,-apple-system,sans-serif;
+    font-family:var(--ff-body);
     font-size:17px;line-height:1.6;font-optical-sizing:auto;
     font-kerning:normal;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
     /* subtle paper grain, per DESIGN.md decoration level */
@@ -59,7 +119,7 @@
   }
 
   h1,h2,h3,.disp{
-    font-family:"Cabinet Grotesk","DM Sans",sans-serif;font-weight:800;
+    font-family:var(--ff-display);font-weight:800;
     line-height:1.05;letter-spacing:-.02em;text-wrap:balance;
   }
   p{text-wrap:pretty}
@@ -83,10 +143,13 @@
   }
   .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
   .flag{
-    display:inline-block;font-family:"DM Sans";font-size:11px;font-weight:700;
+    display:inline-block;font-family:var(--ff-body);font-size:11px;font-weight:700;
     letter-spacing:.06em;text-transform:uppercase;color:var(--accent-ink);
     background:rgba(232,163,61,.16);padding:4px 10px;border-radius:999px;vertical-align:middle;
   }
+  /* On the dark green footer the deep-ochre ink fails AA; use light ground-fg
+     on a neutral-dark pill (composite contrast >7:1, keeps the flag semantic). */
+  footer .flag{color:var(--ground-fg);background:rgba(0,0,0,.24)}
 
   /* ---- Shared atoms ---- */
   .eyebrow{
@@ -100,7 +163,7 @@
   }
   .btn{
     display:inline-flex;align-items:center;gap:8px;
-    font-family:"DM Sans";font-weight:700;font-size:17px;line-height:1;
+    font-family:var(--ff-body);font-weight:700;font-size:17px;line-height:1;
     padding:16px 28px;border-radius:var(--r-btn);text-decoration:none;
     border:0;cursor:pointer;transition:transform .15s var(--ease),background .15s var(--ease);
   }
@@ -125,10 +188,10 @@
     transition:border-color .2s var(--ease),background .2s var(--ease)}
   .nav-shell[data-stuck="true"]{border-bottom-color:var(--rule);background:rgba(251,247,240,.94)}
   nav{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px 0}
-  .logo{display:flex;align-items:center;gap:12px;font-family:"Cabinet Grotesk";
+  .logo{display:flex;align-items:center;gap:12px;font-family:var(--ff-display);
     font-weight:800;font-size:20px;text-decoration:none;letter-spacing:-.01em}
   .mark{width:42px;height:42px;background:var(--ink);color:var(--bg);border-radius:var(--r-mark);
-    display:grid;place-items:center;font-family:"Cabinet Grotesk";font-weight:800;
+    display:grid;place-items:center;font-family:var(--ff-display);font-weight:800;
     font-size:15px;letter-spacing:-.03em;flex:none}
   .navlinks{display:flex;gap:30px;align-items:center;font-weight:500;font-size:15px}
   .navlinks a{text-decoration:none;opacity:.82;transition:opacity .15s var(--ease)}
@@ -157,7 +220,7 @@
   .hero .dog b{color:var(--accent-ink)}
   .cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
   .meta{display:flex;gap:40px;margin-top:56px;flex-wrap:wrap}
-  .meta dt{font-family:"Cabinet Grotesk";font-weight:800;font-size:28px;letter-spacing:-.02em}
+  .meta dt{font-family:var(--ff-display);font-weight:800;font-size:28px;letter-spacing:-.02em}
   .meta dd{color:var(--muted);font-size:14px;margin-top:4px;max-width:24ch}
 
   /* ---- One workforce ---- */
@@ -168,6 +231,15 @@
   .tag{font-size:13px;font-weight:700;color:var(--ground);background:rgba(30,61,50,.1);
     padding:5px 11px;border-radius:8px;display:inline-block;margin-bottom:18px}
 
+  /* ---- Services (SEO service map) ---- */
+  .svc{display:grid;grid-template-columns:1fr 1fr;gap:0 48px;margin-top:40px;list-style:none}
+  .svc li{padding:18px 0;border-bottom:1px solid var(--rule);
+    display:flex;gap:14px;align-items:flex-start}
+  .svc .mk{color:var(--accent-ink);font-weight:800;flex:none;line-height:1.55}
+  .svc b{font-family:var(--ff-display);font-weight:700;font-size:18px;
+    letter-spacing:-.01em;display:block;margin-bottom:3px}
+  .svc .d{color:var(--ink);opacity:.78;font-size:15px;line-height:1.5}
+
   /* ---- Proof (ground block) ---- */
   .proof{background:var(--ground);color:var(--ground-fg);border-radius:var(--r-block);
     padding:clamp(40px,5vw,60px)}
@@ -175,7 +247,7 @@
   /* light-on-dark compensation: line-height + tracking + weight */
   .proof h2{color:#fff;font-size:clamp(28px,4vw,44px);max-width:18ch;line-height:1.12}
   .brands{display:flex;gap:14px 34px;flex-wrap:wrap;margin-top:30px;
-    font-family:"Cabinet Grotesk";font-weight:700;font-size:22px;opacity:.95}
+    font-family:var(--ff-display);font-weight:700;font-size:22px;opacity:.95}
   .proof .nc{margin-top:24px;font-size:17px;line-height:1.65;letter-spacing:.005em;
     opacity:.9;max-width:56ch}
 
@@ -192,7 +264,7 @@
   /* Quote: rebuilt WITHOUT the banned side-stripe border. Tinted block + oversized mark. */
   .testimonial{background:rgba(232,163,61,.08);border:1px solid var(--rule);
     border-radius:var(--r-card);padding:32px 32px 28px;position:relative;align-self:center}
-  .testimonial .qmark{font-family:"Cabinet Grotesk";font-weight:800;font-size:56px;
+  .testimonial .qmark{font-family:var(--ff-display);font-weight:800;font-size:56px;
     line-height:.6;color:var(--accent);display:block;margin-bottom:8px}
   .testimonial blockquote{font-size:19px;line-height:1.5;font-style:italic}
   .testimonial figcaption{margin-top:16px;font-size:14px;color:var(--muted);
@@ -211,7 +283,7 @@
   .step{position:relative;padding-left:64px}
   .step::before{counter-increment:step;content:counter(step);
     position:absolute;left:0;top:-4px;width:44px;height:44px;border-radius:var(--r-mark);
-    background:var(--ink);color:var(--bg);font-family:"Cabinet Grotesk";font-weight:800;
+    background:var(--ink);color:var(--bg);font-family:var(--ff-display);font-weight:800;
     font-size:18px;display:grid;place-items:center}
   .step h3{font-size:20px;margin-bottom:8px}
   .step p{color:var(--ink);opacity:.78;font-size:16px}
@@ -220,7 +292,7 @@
   .cases{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:20px}
   .case{background:var(--surface);border:1px solid var(--rule);
     border-radius:var(--r-card);padding:32px;display:flex;flex-direction:column;gap:14px}
-  .case .metric{font-family:"Cabinet Grotesk";font-weight:800;font-size:34px;
+  .case .metric{font-family:var(--ff-display);font-weight:800;font-size:34px;
     letter-spacing:-.02em;font-variant-numeric:tabular-nums}
   .case blockquote{font-size:16px;line-height:1.55;opacity:.86;flex:1}
   .case figcaption{font-size:14px;color:var(--muted);font-weight:600}
@@ -244,7 +316,7 @@
   .label-row label{margin-bottom:0}
   .optional{font-size:12px;font-weight:600;color:var(--muted)}
   .field input,.field textarea{
-    width:100%;font-family:"DM Sans";font-size:16px;padding:13px 14px;
+    width:100%;font-family:var(--ff-body);font-size:16px;padding:13px 14px;
     border:1px solid var(--rule);border-radius:10px;background:var(--bg);color:var(--ink);
     transition:border-color .15s var(--ease),background .15s var(--ease),box-shadow .15s var(--ease)}
   .field textarea{resize:vertical;min-height:84px;line-height:1.5}
@@ -268,11 +340,40 @@
   .eform-done{display:none;text-align:center;padding:20px 8px}
   .eform-done .tick{width:54px;height:54px;border-radius:50%;background:rgba(30,61,50,.12);
     color:var(--ground);display:grid;place-items:center;margin:0 auto 16px;
-    font-family:"Cabinet Grotesk";font-weight:800;font-size:26px}
+    font-family:var(--ff-display);font-weight:800;font-size:26px}
   .eform-done h3{font-size:22px;margin-bottom:8px}
   .eform-done p{color:var(--muted);font-size:15px;max-width:38ch;margin:0 auto}
   .eform[data-sent="true"] form{display:none}
   .eform[data-sent="true"] .eform-done{display:block}
+
+  /* ---- FAQ ---- */
+  .faq{margin-top:40px;border-top:1px solid var(--rule)}
+  .qa{border-bottom:1px solid var(--rule)}
+  .qa summary{list-style:none;cursor:pointer;padding:24px 4px;
+    display:grid;grid-template-columns:1fr 20px;column-gap:24px;row-gap:6px;
+    align-items:start}
+  .qa summary::-webkit-details-marker{display:none}
+  .qa summary .q{grid-column:1;grid-row:1;
+    font-family:var(--ff-display);font-weight:700;
+    font-size:clamp(18px,2.2vw,21px);line-height:1.3;color:var(--ink);
+    transition:color .15s var(--ease)}
+  .qa summary:hover .q{color:var(--accent-ink)}
+  .qa .peek{grid-column:1;grid-row:2;font-weight:400;font-size:15px;
+    line-height:1.5;color:var(--muted);
+    display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;overflow:hidden}
+  .qa[open] .peek{display:none}
+  .qa[open] summary{padding-bottom:6px}
+  .qa summary::after{content:"";grid-column:2;grid-row:1;
+    width:20px;height:20px;margin-top:3px;
+    background:var(--accent-ink);
+    -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M12 5v14M5 12h14'/%3E%3C/svg%3E") center/contain no-repeat;
+            mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M12 5v14M5 12h14'/%3E%3C/svg%3E") center/contain no-repeat;
+    transition:transform .2s var(--ease)}
+  .qa[open] summary::after{transform:rotate(45deg)}
+  .qa .a{padding:0 4px 26px;max-width:64ch;color:var(--ink);opacity:.82;
+    font-size:17px;line-height:1.6}
+  .qa .a p+p{margin-top:12px}
+  .qa .a a{font-weight:600;color:var(--accent-ink);text-underline-offset:3px}
 
   /* ---- Footer ---- */
   footer{background:var(--ground);color:var(--ground-fg);border:0}
@@ -281,7 +382,7 @@
   .foot .logo{color:var(--ground-fg)}
   .foot .mark{background:var(--ground-fg);color:var(--ground)}
   .foot p{opacity:.82;font-size:15px;margin-top:16px;max-width:36ch;line-height:1.6}
-  .foot h4{font-family:"DM Sans";font-size:13px;font-weight:700;letter-spacing:.08em;
+  .foot h3{font-family:var(--ff-body);font-size:13px;font-weight:700;letter-spacing:.08em;
     text-transform:uppercase;opacity:.62;margin-bottom:16px}
   .foot ul{list-style:none;display:flex;flex-direction:column;gap:11px}
   .foot a{text-decoration:none;opacity:.85;font-size:15px}
@@ -319,7 +420,7 @@
     .nav-shell .wordmark{display:none}
     .mobile{display:block}
     .hero{padding:44px 0 72px}
-    .grid2,.neg,.steps,.cases{grid-template-columns:1fr}
+    .grid2,.neg,.steps,.cases,.svc{grid-template-columns:1fr}
     .meta{gap:28px 40px;margin-top:40px}
     .foot{grid-template-columns:1fr;gap:32px}
     section{padding:var(--s-14) 0}
@@ -345,9 +446,11 @@
 
       <div class="navlinks">
         <a href="#workforce">One workforce</a>
+        <a href="#services">Services</a>
         <a href="#pricing">Pricing</a>
         <a href="#proof">Proof</a>
         <a href="#how">How it works</a>
+        <a href="#faq">FAQ</a>
       </div>
 
       <div class="nav-cta">
@@ -362,9 +465,11 @@
           </summary>
           <div class="menu">
             <a href="#workforce">One workforce</a>
+            <a href="#services">Services</a>
             <a href="#pricing">Pricing</a>
             <a href="#proof">Proof</a>
             <a href="#how">How it works</a>
+            <a href="#faq">FAQ</a>
             <a href="#estimate" class="btn btn-primary">Get your estimate</a>
           </div>
         </details>
@@ -380,12 +485,11 @@
     <header class="hero">
       <span class="pill">Back office for growing digital businesses</span>
       <h1>Scale your business without scaling your headcount.</h1>
-      <p class="sub">The back office that runs our own digital businesses, bookkeeping, customer
-        support, order and document processing, data, payroll, the operational work that keeps a
-        business running, delivered by a team of real people and AI agents you hire by the hour.
-        No long contracts. Walk away anytime.</p>
-      <p class="dog">We run <b>TicketsToDo, VoucherCodes and DCMnetwork</b> on this exact team.
-        Now it can run yours.</p>
+      <p class="sub">Bookkeeping, customer support, payroll, operations admin, order and document
+        processing, and the repetitive back-office work that keeps a business running, handled by a
+        team of real people and AI agents working in the same workflow.</p>
+      <p class="dog">The same team runs <b>TicketsToDo, VoucherCodes.ae, DCMnetwork</b> and more.
+        We do not take on businesses that compete with us or you.</p>
       <div class="cta-row">
         <a href="#estimate" class="btn btn-primary">Get your estimate
           <span aria-hidden="true">&rarr;</span></a>
@@ -415,6 +519,8 @@
     <div class="wrap">
       <p class="eyebrow">One workforce</p>
       <h2 class="sec-h" id="workforce-h" style="max-width:16ch">Real people and real AI agents, on the same workflow.</h2>
+      <p class="deck">Some work needs judgement. Some needs speed and repetition. We run both
+        through one workflow, so you get the right mix without managing another AI tool yourself.</p>
       <div class="grid2">
         <article class="card">
           <span class="tag">People</span>
@@ -429,18 +535,53 @@
             does the job best, never a science project you have to babysit.</p>
         </article>
       </div>
+      <p class="deck" style="margin-top:28px;max-width:62ch">When work repeats, we build systems
+        around it and the intelligence sits in the workflow, not in a tool you operate, so
+        reconciliation, refund handling, order exceptions and support triage get faster without
+        losing judgement.</p>
     </div>
   </section>
 
-  <!-- 3. PROOF / WHY US -->
+  <!-- 3. SERVICES (service map for users + crawlers) -->
+  <section id="services" aria-labelledby="services-h">
+    <div class="wrap">
+      <p class="eyebrow">What we run</p>
+      <h2 class="sec-h" id="services-h" style="max-width:20ch">The back-office work that keeps a digital business moving.</h2>
+      <p class="deck">The repetitive operational work that starts slowing an ecommerce or digital
+        business down as it grows, handled by real people and AI agents on one workflow.</p>
+      <ul class="svc">
+        <li><span class="mk" aria-hidden="true">&check;</span><span>
+          <b>Bookkeeping</b><span class="d">Day-to-day books kept current and clean.</span></span></li>
+        <li><span class="mk" aria-hidden="true">&check;</span><span>
+          <b>Customer support &amp; inbox triage</b><span class="d">Tickets and inboxes handled, the right things escalated.</span></span></li>
+        <li><span class="mk" aria-hidden="true">&check;</span><span>
+          <b>Order processing &amp; returns</b><span class="d">Orders, exceptions and returns moved through cleanly.</span></span></li>
+        <li><span class="mk" aria-hidden="true">&check;</span><span>
+          <b>Document processing</b><span class="d">The paperwork, data entry and filing that piles up.</span></span></li>
+        <li><span class="mk" aria-hidden="true">&check;</span><span>
+          <b>Payroll admin</b><span class="d">Payroll prepared and kept on schedule.</span></span></li>
+        <li><span class="mk" aria-hidden="true">&check;</span><span>
+          <b>Reconciliation &amp; data cleanup</b><span class="d">Numbers matched and messy data tidied.</span></span></li>
+        <li><span class="mk" aria-hidden="true">&check;</span><span>
+          <b>Supplier coordination</b><span class="d">Chasing, scheduling and the back-and-forth handled.</span></span></li>
+        <li><span class="mk" aria-hidden="true">&check;</span><span>
+          <b>Repetitive operations admin</b><span class="d">The recurring work that quietly eats your week.</span></span></li>
+      </ul>
+      <p class="deck" style="margin-top:28px;max-width:62ch">If it is operational and repetitive,
+        it is probably something we run. If it sits outside operational delivery, strategy,
+        creative or sales, we will tell you straight rather than stretch.</p>
+    </div>
+  </section>
+
+  <!-- 4. PROOF / WHY US -->
   <section id="proof" aria-labelledby="proof-h">
     <div class="wrap">
       <div class="proof">
         <p class="eyebrow">Why us</p>
-        <h2 id="proof-h">We are a product company. We run our own digital businesses on this team.</h2>
-        <p class="brands">TicketsToDo · VoucherCodes · DCMnetwork</p>
+        <h2 id="proof-h">We run our own digital businesses on this exact team.</h2>
+        <p class="brands">TicketsToDo · VoucherCodes.ae · DCMnetwork · and more</p>
         <p class="nc">The same operation that holds our own products to a high bar runs your back
-          office to that same bar. And we do not take on businesses that compete with our own.
+          office to that same bar. We do not take on businesses that compete with us or you.
           Your work stays yours.</p>
       </div>
     </div>
@@ -452,7 +593,7 @@
       <p class="eyebrow">How we work and what it costs</p>
       <div class="price-block">
         <div>
-          <h2 class="vframe" id="pricing-h">Premium work, priced fairly.</h2>
+          <h2 class="vframe" id="pricing-h">Quality work, priced fairly.</h2>
           <p class="lede">Product-grade quality at honest, reasonable prices, structured so it is
             profitable for you too, not just us.</p>
           <ul class="price-list">
@@ -484,7 +625,7 @@
       <h2 class="sec-h" id="not-h" style="max-width:20ch">A real ops team, people and agents, you hire by the hour.</h2>
       <ul class="neg">
         <li>Not another full-time hire you cannot justify yet</li>
-        <li>Not a generic VA agency with no context</li>
+        <li>Not a generic VA agency with no operational context</li>
         <li>Not an AI tool you still have to operate yourself</li>
       </ul>
       <p class="neg-us">A back office that runs growing digital businesses, including our own.</p>
@@ -509,12 +650,13 @@
         </div>
         <div class="step">
           <h3>A pod starts the work</h3>
-          <p>Trained operators and AI agents pick it up on the same workflow, accountable from
-            day one.</p>
+          <p>Trained operators and AI agents pick it up on one workflow. When tasks repeat, we
+            build systems around them so they get faster without losing judgement.</p>
         </div>
         <div class="step">
           <h3>Scale up or down</h3>
-          <p>By the hour, as the business needs it. No long contracts. Walk away anytime.</p>
+          <p>By the hour, as the business needs it, with the repeated work reviewed and improved
+            as we go. No long contracts. Walk away anytime.</p>
         </div>
       </div>
     </div>
@@ -532,30 +674,134 @@
       <div class="cases">
         <figure class="case">
           <span class="sector">E-commerce</span>
-          <p class="metric">38% faster</p>
-          <blockquote>Order and returns processing went from a daily backlog to same-day, without
-            us hiring a single extra person.</blockquote>
-          <figcaption>Ops lead, DTC homeware brand</figcaption>
+          <p class="metric">Metric to confirm</p>
+          <blockquote>[Client name], e-commerce. BOF ran order and returns processing. Result
+            and a real named quote confirmed before launch.</blockquote>
+          <figcaption><span class="flag" title="Required launch trust artefact">Placeholder &middot; real named case study required</span></figcaption>
         </figure>
         <figure class="case">
           <span class="sector">Marketplace</span>
-          <p class="metric">2 days &rarr; 3 hrs</p>
-          <blockquote>Customer support response time dropped sharply, and the team finally got off
-            the inbox and back onto growth.</blockquote>
-          <figcaption>Founder, online marketplace</figcaption>
+          <p class="metric">Metric to confirm</p>
+          <blockquote>[Client name], marketplace. BOF ran customer support and inbox triage.
+            Result and a real named quote confirmed before launch.</blockquote>
+          <figcaption><span class="flag" title="Required launch trust artefact">Placeholder &middot; real named case study required</span></figcaption>
         </figure>
         <figure class="case">
           <span class="sector">Digital services</span>
-          <p class="metric">£0 in new hires</p>
-          <blockquote>We doubled order volume through a peak season on the same headcount,
-            scaling the pod by the hour instead.</blockquote>
-          <figcaption>Operations director, subscription business</figcaption>
+          <p class="metric">Metric to confirm</p>
+          <blockquote>[Client name], digital services. BOF ran reconciliation and order
+            processing through peak. Result and a real named quote confirmed before launch.</blockquote>
+          <figcaption><span class="flag" title="Required launch trust artefact">Placeholder &middot; real named case study required</span></figcaption>
         </figure>
       </div>
     </div>
   </section>
 
-  <!-- 8. ESTIMATE FLOW -->
+  <!-- 8. FAQ -->
+  <section id="faq" aria-labelledby="faq-h">
+    <div class="wrap">
+      <p class="eyebrow">Questions</p>
+      <h2 class="sec-h" id="faq-h" style="max-width:16ch">The things growing teams ask us first.</h2>
+      <div class="faq">
+        <details class="qa">
+          <summary>
+            <span class="q">Will you work with my competitors?</span>
+            <span class="peek">No. We run our own digital businesses, so we never take on anyone who competes with you.</span>
+          </summary>
+          <div class="a">
+            <p>No. We run our own digital businesses on this exact team, TicketsToDo,
+              VoucherCodes.ae, DCMnetwork and more, so we hold a firm line: we do not take on
+              businesses that compete with us or you. Your work, your data and your edge stay
+              yours.</p>
+          </div>
+        </details>
+        <details class="qa">
+          <summary>
+            <span class="q">What do you actually take off my plate?</span>
+            <span class="peek">The repetitive operational work that starts slowing a business down as it grows.</span>
+          </summary>
+          <div class="a">
+            <p>The repetitive operational work that starts slowing a business down as it grows:
+              bookkeeping, customer support, payroll, order and document processing, data cleanup,
+              reconciliation, supplier coordination and support triage, the admin that keeps
+              things moving.</p>
+            <p>We are deliberately not a strategy, creative or management-consulting firm. If
+              something sits outside operational delivery, we will tell you straight rather than
+              stretch.</p>
+          </div>
+        </details>
+        <details class="qa">
+          <summary>
+            <span class="q">How does the people-and-AI part actually work?</span>
+            <span class="peek">One workflow: people handle judgement, AI agents handle speed and repetition.</span>
+          </summary>
+          <div class="a">
+            <p>One workflow. Some work needs judgement, so a trained person does it. Some work
+              needs speed and repetition, so an AI agent does it. You get whichever does the job
+              best, and you never have to operate or babysit the AI yourself.</p>
+          </div>
+        </details>
+        <details class="qa">
+          <summary>
+            <span class="q">What does it cost?</span>
+            <span class="peek">Quality work, priced fairly, by the hour, with a real number early.</span>
+          </summary>
+          <div class="a">
+            <p>Quality work, priced fairly. You are billed by the hour and only pay for work
+              delivered, with no long contracts, no lock-in, no hidden fees and no surprise
+              invoices. You get a real indicative range early, then a firm quote after a short
+              conversation.</p>
+            <p><a href="#estimate">Get your estimate &rarr;</a> A real number, early. No
+              runaround.</p>
+          </div>
+        </details>
+        <details class="qa">
+          <summary>
+            <span class="q">Am I tied into a long contract?</span>
+            <span class="peek">No. You hire by the hour and can walk away anytime.</span>
+          </summary>
+          <div class="a">
+            <p>No. You hire by the hour and scale up or down as the business needs it. No long
+              contracts. Walk away anytime.</p>
+          </div>
+        </details>
+        <details class="qa">
+          <summary>
+            <span class="q">How do we get started?</span>
+            <span class="peek">Tell us what you need; we map the work and a pod picks it up.</span>
+          </summary>
+          <div class="a">
+            <p>Tell us roughly what you need. We map the work, give you an honest indicative
+              range, then a small pod of people and AI agents picks it up on one workflow. When
+              tasks repeat, we build systems around them so they get faster over time.</p>
+          </div>
+        </details>
+        <details class="qa">
+          <summary>
+            <span class="q">How do you handle our data?</span>
+            <span class="peek">We handle your data carefully and under UK data-protection law.</span>
+          </summary>
+          <div class="a">
+            <p>We handle your data carefully and under UK data-protection law.
+              <span class="flag" title="Required launch trust artefact">Placeholder &middot; confirm exact data-protection wording</span></p>
+          </div>
+        </details>
+        <details class="qa">
+          <summary>
+            <span class="q">Are you a startup we are betting on?</span>
+            <span class="peek">No. We have been operating since 2006, battle-tested, not a startup experiment.</span>
+          </summary>
+          <div class="a">
+            <p>No. We have been operating since 2006, battle-tested, not a startup experiment.
+              The same operation that runs our own products to a high bar runs your back office
+              to that same bar.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. ESTIMATE FLOW -->
   <section id="estimate" aria-labelledby="estimate-h">
     <div class="wrap">
       <div class="estimate">
@@ -565,7 +811,7 @@
           <p class="blurb">Tell us roughly what you need and we will come back with an honest
             indicative range, then a firm quote after a short conversation. No obligation, no
             sales theatre.</p>
-          <p class="reassure">Premium work, priced fairly, profitable for you too. By the hour,
+          <p class="reassure">Quality work, priced fairly, profitable for you too. By the hour,
             no lock-in.</p>
         </div>
 
@@ -633,7 +879,7 @@
 
 </main>
 
-<!-- 9. FOOTER -->
+<!-- 10. FOOTER -->
 <footer aria-labelledby="footer-h">
   <h2 class="vh" id="footer-h">Back Office Factory</h2>
   <div class="wrap">
@@ -646,22 +892,26 @@
           and AI agents, on the same workflow, hired by the hour.</p>
       </div>
       <div>
-        <h4>Company</h4>
+        <h3>Company</h3>
         <ul>
           <li><a href="#workforce">One workforce</a></li>
+          <li><a href="#services">Services</a></li>
           <li><a href="#proof">Proof</a></li>
           <li><a href="#how">How it works</a></li>
+          <li><a href="#faq">FAQ</a></li>
           <li><a href="#estimate">Get your estimate</a></li>
         </ul>
       </div>
       <div>
-        <h4>Contact</h4>
+        <h3>Contact</h3>
         <ul>
-          <li><a href="mailto:hello@backofficefactory.com">hello@backofficefactory.com</a></li>
           <li>United Kingdom
-            <span class="flag" title="Required launch trust artefact">Placeholder &middot; UK contact details required</span>
+            <span class="flag" title="Required launch trust artefact">Placeholder &middot; UK contact route to be confirmed (no email)</span>
           </li>
-          <li>GDPR compliant. Certification status published honestly
+          <li>We handle your data carefully and under UK data-protection law
+            <span class="flag" title="Required launch trust artefact">Placeholder &middot; confirm exact data-protection wording</span>
+          </li>
+          <li>Security and certification status to be confirmed
             <span class="flag" title="Required launch trust artefact">Placeholder &middot; confirm real cert status</span>
           </li>
         </ul>
