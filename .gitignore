@@ -1,0 +1,36 @@
+# =============================================================================
+#  BOF — public repo hygiene
+#
+#  This is a PUBLIC repo (github.com/dcmjlt/bof-web). Only the deployable
+#  static site + deploy config is tracked. Everything strategic, internal,
+#  or working stays local-only.
+#
+#  Tracked (intentionally): index.html, netlify.toml,
+#  netlify/functions/**, README.md, .gitignore
+# =============================================================================
+
+# --- OS / editor noise ---
+.DS_Store
+*.swp
+
+# --- Local tooling / agent state (not part of the published site) ---
+.gstack/
+.claude/
+.agents/
+skills-lock.json
+
+# --- Internal strategy & working documents (NEVER publish) ---
+CLAUDE.md
+POSITIONING.md
+DESIGN.md
+product.md
+TODOS.md
+
+# --- Internal source material (pitch / branding / sitemap / USP) ---
+*.pdf
+
+# --- Designer share material & logo sources (working assets) ---
+mockup-share/
+
+# --- Print / stand assets (generated working artefacts) ---
+print/

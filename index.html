@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Back Office Factory: scale without scaling your headcount</title>
+<meta name="description" content="The back office that runs our own digital businesses (bookkeeping, customer support, order and document processing, data, payroll), delivered by real people and AI agents you hire by the hour. A real number, early. No long contracts.">
+<meta name="theme-color" content="#FBF7F0">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Back Office Factory: scale without scaling headcount">
+<meta property="og:description" content="The back office that runs our own digital businesses, delivered by real people and AI agents you hire by the hour. No long contracts. A real number, early.">
+<meta property="og:locale" content="en_GB">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    /* Locked v2 palette — DESIGN.md "warm modern operator" */
+    --bg:#FBF7F0;        /* warm cream */
+    --surface:#FFFFFF;   /* elevated cards */
+    --ink:#1F1A14;       /* warm charcoal */
+    --ground:#1E3D32;    /* deep warm green */
+    --ground-fg:#F4EFE2; /* text on ground */
+    --accent:#E8A33D;    /* marigold (use on dark grounds) */
+    --accent-deep:#CE8A24; /* marigold hover / control fills (non-text) */
+    --accent-ink:#8A5A12;  /* AA-passing deep ochre: marigold-as-text on cream/white */
+    --muted:#756B5C;     /* warm grey, AA on cream (darkened from #8A8175 at build per DESIGN.md) */
+    --error:#B23A1E;     /* warm rust, in-palette error (AA on white form) */
+    --error-bg:rgba(178,58,30,.06);
+    --rule:#E7DECB;      /* hairline */
+
+    --measure:62ch;
+    --maxw:1120px;
+
+    /* 4pt scale, named by relationship */
+    --s-2:8px; --s-3:12px; --s-4:16px; --s-5:20px; --s-6:24px;
+    --s-8:32px; --s-10:40px; --s-14:56px; --s-18:72px; --s-22:88px; --s-28:112px;
+
+    --r-btn:14px; --r-card:18px; --r-block:24px; --r-mark:11px;
+    --ease:cubic-bezier(.22,1,.36,1); /* ease-out-quint */
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+
+  body{
+    background:var(--bg);color:var(--ink);
+    font-family:"DM Sans",system-ui,-apple-system,sans-serif;
+    font-size:17px;line-height:1.6;font-optical-sizing:auto;
+    font-kerning:normal;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+    /* subtle paper grain, per DESIGN.md decoration level */
+    background-image:radial-gradient(rgba(31,26,20,.018) 1px,transparent 1px);
+    background-size:5px 5px;
+  }
+
+  h1,h2,h3,.disp{
+    font-family:"Cabinet Grotesk","DM Sans",sans-serif;font-weight:800;
+    line-height:1.05;letter-spacing:-.02em;text-wrap:balance;
+  }
+  p{text-wrap:pretty}
+  a{color:inherit}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+
+  /* ---- Accessibility primitives ---- */
+  .skip{
+    position:absolute;left:-9999px;top:0;z-index:100;
+    background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:0 0 var(--r-btn) 0;
+    font-weight:700;text-decoration:none;
+  }
+  .skip:focus{left:0}
+  :where(a,button,input,select,textarea,summary):focus-visible{
+    outline:3px solid var(--ink);outline-offset:3px;border-radius:4px;
+  }
+  /* On the dark green footer an ink ring is invisible; use marigold (>4.5:1 on ground). */
+  footer :where(a,button,input,select,textarea,summary):focus-visible{
+    outline-color:var(--accent);
+  }
+  .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .flag{
+    display:inline-block;font-family:"DM Sans";font-size:11px;font-weight:700;
+    letter-spacing:.06em;text-transform:uppercase;color:var(--accent-ink);
+    background:rgba(232,163,61,.16);padding:4px 10px;border-radius:999px;vertical-align:middle;
+  }
+
+  /* ---- Shared atoms ---- */
+  .eyebrow{
+    font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--accent-ink);margin-bottom:20px;
+  }
+  .pill{
+    display:inline-block;font-size:13px;font-weight:600;letter-spacing:.02em;
+    background:rgba(232,163,61,.16);color:var(--accent-ink);
+    padding:8px 14px;border-radius:999px;
+  }
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:"DM Sans";font-weight:700;font-size:17px;line-height:1;
+    padding:16px 28px;border-radius:var(--r-btn);text-decoration:none;
+    border:0;cursor:pointer;transition:transform .15s var(--ease),background .15s var(--ease);
+  }
+  .btn-primary{background:var(--accent);color:var(--ink)}
+  .btn-primary:hover{background:var(--accent-deep);transform:translateY(-1px)}
+  .btn-primary:active{transform:translateY(0)}
+  .btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink);padding:14.5px 26px}
+  .btn-ghost:hover{background:rgba(31,26,20,.05);transform:translateY(-1px)}
+  .btn-sm{padding:11px 20px;font-size:15px}
+  .btn:disabled{opacity:.6;cursor:progress;pointer-events:none}
+  .micro{font-size:14px;color:var(--muted);margin-top:12px}
+
+  /* Clear the 81px sticky nav on anchor jumps (primary CTA is #estimate). */
+  :where(section,footer)[id],#main{scroll-margin-top:96px}
+  section{padding:var(--s-22) 0;border-bottom:1px solid var(--rule)}
+  .sec-h{font-size:clamp(28px,4vw,44px);max-width:18ch}
+  .deck{font-size:20px;color:var(--ink);opacity:.84;max-width:var(--measure);margin-top:18px}
+
+  /* ---- Nav ---- */
+  .nav-shell{position:sticky;top:0;z-index:30;background:rgba(251,247,240,.86);
+    backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid transparent;
+    transition:border-color .2s var(--ease),background .2s var(--ease)}
+  .nav-shell[data-stuck="true"]{border-bottom-color:var(--rule);background:rgba(251,247,240,.94)}
+  nav{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px 0}
+  .logo{display:flex;align-items:center;gap:12px;font-family:"Cabinet Grotesk";
+    font-weight:800;font-size:20px;text-decoration:none;letter-spacing:-.01em}
+  .mark{width:42px;height:42px;background:var(--ink);color:var(--bg);border-radius:var(--r-mark);
+    display:grid;place-items:center;font-family:"Cabinet Grotesk";font-weight:800;
+    font-size:15px;letter-spacing:-.03em;flex:none}
+  .navlinks{display:flex;gap:30px;align-items:center;font-weight:500;font-size:15px}
+  .navlinks a{text-decoration:none;opacity:.82;transition:opacity .15s var(--ease)}
+  .navlinks a:hover{opacity:1}
+  .nav-cta{display:flex;align-items:center;gap:12px}
+
+  /* JS-free accessible mobile menu */
+  .mobile{display:none}
+  .mobile summary{list-style:none;cursor:pointer;width:44px;height:44px;border-radius:12px;
+    border:1.5px solid var(--ink);display:grid;place-items:center;background:transparent}
+  .mobile summary::-webkit-details-marker{display:none}
+  .mobile summary svg{width:20px;height:20px}
+  .mobile[open] .menu{display:flex}
+  .menu{display:none;flex-direction:column;gap:4px;position:absolute;left:16px;right:16px;
+    top:100%;margin-top:8px;background:var(--surface);border:1px solid var(--rule);
+    border-radius:var(--r-card);padding:14px;box-shadow:0 18px 50px -24px rgba(31,26,20,.4)}
+  .menu a{text-decoration:none;padding:13px 14px;border-radius:10px;font-weight:600}
+  .menu a:hover{background:rgba(31,26,20,.04)}
+  .menu .btn{justify-content:center;margin-top:6px}
+
+  /* ---- Hero ---- */
+  .hero{padding:60px 0 96px}
+  .hero h1{font-size:clamp(40px,7vw,84px);max-width:14ch;margin-top:24px}
+  .hero .sub{font-size:20px;line-height:1.5;opacity:.86;max-width:var(--measure);margin:24px 0 16px}
+  .hero .dog{font-weight:600;font-size:18px;margin:0 0 32px}
+  .hero .dog b{color:var(--accent-ink)}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .meta{display:flex;gap:40px;margin-top:56px;flex-wrap:wrap}
+  .meta dt{font-family:"Cabinet Grotesk";font-weight:800;font-size:28px;letter-spacing:-.02em}
+  .meta dd{color:var(--muted);font-size:14px;margin-top:4px;max-width:24ch}
+
+  /* ---- One workforce ---- */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:40px}
+  .card{background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-card);padding:32px}
+  .card h3{font-size:22px;line-height:1.2;margin-bottom:8px}
+  .card p{color:var(--ink);opacity:.8;font-size:16px}
+  .tag{font-size:13px;font-weight:700;color:var(--ground);background:rgba(30,61,50,.1);
+    padding:5px 11px;border-radius:8px;display:inline-block;margin-bottom:18px}
+
+  /* ---- Proof (ground block) ---- */
+  .proof{background:var(--ground);color:var(--ground-fg);border-radius:var(--r-block);
+    padding:clamp(40px,5vw,60px)}
+  .proof .eyebrow{color:var(--accent)}
+  /* light-on-dark compensation: line-height + tracking + weight */
+  .proof h2{color:#fff;font-size:clamp(28px,4vw,44px);max-width:18ch;line-height:1.12}
+  .brands{display:flex;gap:14px 34px;flex-wrap:wrap;margin-top:30px;
+    font-family:"Cabinet Grotesk";font-weight:700;font-size:22px;opacity:.95}
+  .proof .nc{margin-top:24px;font-size:17px;line-height:1.65;letter-spacing:.005em;
+    opacity:.9;max-width:56ch}
+
+  /* ---- Pricing trust ---- */
+  .price-block{background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-block);
+    padding:clamp(36px,4.5vw,52px);display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:start}
+  .vframe{font-size:clamp(26px,3.4vw,32px);line-height:1.12;margin-bottom:16px}
+  .price-block .lede{opacity:.82;margin-bottom:24px;max-width:44ch}
+  .price-list{list-style:none}
+  .price-list li{padding:12px 0;border-bottom:1px solid var(--rule);font-size:17px;
+    display:flex;gap:12px;align-items:flex-start}
+  .price-list li:last-child{border:0}
+  .check{color:var(--accent-ink);font-weight:800;flex:none;line-height:1.5}
+  /* Quote: rebuilt WITHOUT the banned side-stripe border. Tinted block + oversized mark. */
+  .testimonial{background:rgba(232,163,61,.08);border:1px solid var(--rule);
+    border-radius:var(--r-card);padding:32px 32px 28px;position:relative;align-self:center}
+  .testimonial .qmark{font-family:"Cabinet Grotesk";font-weight:800;font-size:56px;
+    line-height:.6;color:var(--accent);display:block;margin-bottom:8px}
+  .testimonial blockquote{font-size:19px;line-height:1.5;font-style:italic}
+  .testimonial figcaption{margin-top:16px;font-size:14px;color:var(--muted);
+    font-weight:600;font-style:normal}
+
+  /* ---- Negative space ---- */
+  .neg{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}
+  .neg li{list-style:none;border:1px dashed #D8CDB4;border-radius:16px;
+    padding:24px;color:var(--muted);font-size:16px}
+  .neg-us{margin-top:18px;border:2px solid var(--accent);border-radius:16px;
+    padding:24px 26px;background:rgba(232,163,61,.07);font-weight:600;font-size:18px}
+
+  /* ---- How it works ---- */
+  .steps{counter-reset:step;margin-top:40px;display:grid;
+    grid-template-columns:repeat(2,1fr);gap:40px 56px}
+  .step{position:relative;padding-left:64px}
+  .step::before{counter-increment:step;content:counter(step);
+    position:absolute;left:0;top:-4px;width:44px;height:44px;border-radius:var(--r-mark);
+    background:var(--ink);color:var(--bg);font-family:"Cabinet Grotesk";font-weight:800;
+    font-size:18px;display:grid;place-items:center}
+  .step h3{font-size:20px;margin-bottom:8px}
+  .step p{color:var(--ink);opacity:.78;font-size:16px}
+
+  /* ---- Case studies ---- */
+  .cases{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:20px}
+  .case{background:var(--surface);border:1px solid var(--rule);
+    border-radius:var(--r-card);padding:32px;display:flex;flex-direction:column;gap:14px}
+  .case .metric{font-family:"Cabinet Grotesk";font-weight:800;font-size:34px;
+    letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .case blockquote{font-size:16px;line-height:1.55;opacity:.86;flex:1}
+  .case figcaption{font-size:14px;color:var(--muted);font-weight:600}
+  .case .sector{font-size:13px;font-weight:700;color:var(--ground);
+    background:rgba(30,61,50,.1);padding:4px 10px;border-radius:8px;align-self:flex-start}
+
+  /* ---- Estimate flow ---- */
+  .estimate{background:var(--ground);color:var(--ground-fg);border-radius:var(--r-block);
+    padding:clamp(36px,5vw,60px);display:grid;grid-template-columns:0.95fr 1.05fr;
+    gap:clamp(36px,5vw,64px);align-items:start}
+  .estimate .eyebrow{color:var(--accent)}
+  .estimate h2{color:#fff;font-size:clamp(26px,3.6vw,40px);max-width:15ch;line-height:1.12}
+  .estimate .blurb{margin-top:18px;font-size:17px;line-height:1.6;letter-spacing:.005em;opacity:.9;max-width:46ch}
+  .estimate .reassure{margin-top:22px;font-size:15px;opacity:.78}
+  .eform{background:var(--surface);color:var(--ink);border-radius:var(--r-card);padding:32px}
+  .field{margin-bottom:20px}
+  .field:last-of-type{margin-bottom:24px}
+  .label-row{display:flex;justify-content:space-between;align-items:baseline;
+    gap:12px;margin-bottom:8px}
+  .field label{font-weight:700;font-size:14px;display:block;margin-bottom:8px}
+  .label-row label{margin-bottom:0}
+  .optional{font-size:12px;font-weight:600;color:var(--muted)}
+  .field input,.field textarea{
+    width:100%;font-family:"DM Sans";font-size:16px;padding:13px 14px;
+    border:1px solid var(--rule);border-radius:10px;background:var(--bg);color:var(--ink);
+    transition:border-color .15s var(--ease),background .15s var(--ease),box-shadow .15s var(--ease)}
+  .field textarea{resize:vertical;min-height:84px;line-height:1.5}
+  .field input:hover,.field textarea:hover{border-color:var(--muted)}
+  .field input:focus,.field textarea:focus{border-color:var(--ink)}
+  /* Error state: in-palette rust, full border (no side-stripe), inline message + icon */
+  .field [aria-invalid="true"]{border-color:var(--error);background:var(--error-bg)}
+  .field [aria-invalid="true"]:focus{border-color:var(--error)}
+  .err{display:flex;align-items:flex-start;gap:7px;margin-top:8px;
+    font-size:13px;line-height:1.45;font-weight:600;color:var(--error);
+    animation:err-in .18s var(--ease)}
+  .err[hidden]{display:none}
+  .err::before{content:"";width:15px;height:15px;flex:none;margin-top:1px;
+    background:var(--error);
+    -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 7.5v5.5'/%3E%3Cpath d='M12 16.5h.01'/%3E%3C/svg%3E") center/contain no-repeat;
+            mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 7.5v5.5'/%3E%3Cpath d='M12 16.5h.01'/%3E%3C/svg%3E") center/contain no-repeat}
+  @keyframes err-in{from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:none}}
+  .eform .btn-primary{width:100%;justify-content:center;margin-top:6px}
+  .eform .fineprint{font-size:13px;color:var(--muted);margin-top:16px;line-height:1.5}
+  .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  .eform-done{display:none;text-align:center;padding:20px 8px}
+  .eform-done .tick{width:54px;height:54px;border-radius:50%;background:rgba(30,61,50,.12);
+    color:var(--ground);display:grid;place-items:center;margin:0 auto 16px;
+    font-family:"Cabinet Grotesk";font-weight:800;font-size:26px}
+  .eform-done h3{font-size:22px;margin-bottom:8px}
+  .eform-done p{color:var(--muted);font-size:15px;max-width:38ch;margin:0 auto}
+  .eform[data-sent="true"] form{display:none}
+  .eform[data-sent="true"] .eform-done{display:block}
+
+  /* ---- Footer ---- */
+  footer{background:var(--ground);color:var(--ground-fg);border:0}
+  .foot{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;
+    padding:var(--s-18) 0 var(--s-10)}
+  .foot .logo{color:var(--ground-fg)}
+  .foot .mark{background:var(--ground-fg);color:var(--ground)}
+  .foot p{opacity:.82;font-size:15px;margin-top:16px;max-width:36ch;line-height:1.6}
+  .foot h4{font-family:"DM Sans";font-size:13px;font-weight:700;letter-spacing:.08em;
+    text-transform:uppercase;opacity:.62;margin-bottom:16px}
+  .foot ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+  .foot a{text-decoration:none;opacity:.85;font-size:15px}
+  .foot a:hover{opacity:1;text-decoration:underline;text-underline-offset:3px}
+  .foot-qr{margin-top:24px}
+  .foot-qr-tile{background:var(--bg);border-radius:var(--r-card);
+    padding:14px;width:max-content;line-height:0}
+  .foot-qr-tile svg{display:block;width:120px;height:120px}
+  .foot-qr-cap{opacity:.82;font-size:13px;margin-top:12px;
+    max-width:30ch;line-height:1.55}
+  .foot-qr-cap a{opacity:.85;text-decoration:underline;
+    text-underline-offset:3px;white-space:nowrap}
+  .foot-qr-cap a:hover{opacity:1}
+  @media(max-width:760px){
+    .foot-qr{text-align:center}
+    .foot-qr-tile{margin-inline:auto}
+    .foot-qr-tile svg{width:150px;height:150px}
+    .foot-qr-cap{max-width:none}
+  }
+  .foot-base{border-top:1px solid rgba(244,239,226,.16);padding:24px 0 56px;
+    display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
+    font-size:13px;opacity:.75}
+
+  /* ---- Responsive ---- */
+  @media(max-width:920px){
+    .price-block,.estimate{grid-template-columns:1fr;gap:36px}
+    .steps,.cases{grid-template-columns:1fr 1fr}
+    .foot{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:760px){
+    .wrap{padding:0 20px}
+    /* Keep the primary CTA visible on mobile (conversion site); collapse the
+       wordmark to the on-brand monogram and move nav links into the menu. */
+    .navlinks{display:none}
+    .nav-shell .wordmark{display:none}
+    .mobile{display:block}
+    .hero{padding:44px 0 72px}
+    .grid2,.neg,.steps,.cases{grid-template-columns:1fr}
+    .meta{gap:28px 40px;margin-top:40px}
+    .foot{grid-template-columns:1fr;gap:32px}
+    section{padding:var(--s-14) 0}
+  }
+
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
+  }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="nav-shell" id="navShell">
+  <div class="wrap">
+    <nav aria-label="Primary">
+      <a class="logo" href="/" aria-label="Back Office Factory home">
+        <span class="mark" aria-hidden="true">BOF</span>
+        <span class="wordmark">Back Office Factory</span>
+      </a>
+
+      <div class="navlinks">
+        <a href="#workforce">One workforce</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#proof">Proof</a>
+        <a href="#how">How it works</a>
+      </div>
+
+      <div class="nav-cta">
+        <a href="#estimate" class="btn btn-primary btn-sm">Get your estimate</a>
+
+        <details class="mobile">
+          <summary aria-label="Menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" aria-hidden="true">
+              <path d="M3 6h18M3 12h18M3 18h18"/>
+            </svg>
+          </summary>
+          <div class="menu">
+            <a href="#workforce">One workforce</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#proof">Proof</a>
+            <a href="#how">How it works</a>
+            <a href="#estimate" class="btn btn-primary">Get your estimate</a>
+          </div>
+        </details>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<main id="main">
+
+  <!-- 1. HERO -->
+  <div class="wrap">
+    <header class="hero">
+      <span class="pill">Back office for growing digital businesses</span>
+      <h1>Scale your business without scaling your headcount.</h1>
+      <p class="sub">The back office that runs our own digital businesses, bookkeeping, customer
+        support, order and document processing, data, payroll, the operational work that keeps a
+        business running, delivered by a team of real people and AI agents you hire by the hour.
+        No long contracts. Walk away anytime.</p>
+      <p class="dog">We run <b>TicketsToDo, VoucherCodes and DCMnetwork</b> on this exact team.
+        Now it can run yours.</p>
+      <div class="cta-row">
+        <a href="#estimate" class="btn btn-primary">Get your estimate
+          <span aria-hidden="true">&rarr;</span></a>
+        <a href="#how" class="btn btn-ghost">How it works</a>
+      </div>
+      <p class="micro">A real number, early. No runaround.</p>
+
+      <dl class="meta">
+        <div>
+          <dt>Since 2006</dt>
+          <dd>a battle-tested operation, not a startup experiment</dd>
+        </div>
+        <div>
+          <dt>People + AI</dt>
+          <dd>the same workflow, you get whichever does the job best</dd>
+        </div>
+        <div>
+          <dt>By the hour</dt>
+          <dd>no long contracts, walk away anytime</dd>
+        </div>
+      </dl>
+    </header>
+  </div>
+
+  <!-- 2. ONE WORKFORCE -->
+  <section id="workforce" aria-labelledby="workforce-h">
+    <div class="wrap">
+      <p class="eyebrow">One workforce</p>
+      <h2 class="sec-h" id="workforce-h" style="max-width:16ch">Real people and real AI agents, on the same workflow.</h2>
+      <div class="grid2">
+        <article class="card">
+          <span class="tag">People</span>
+          <h3>Trained operators</h3>
+          <p>A real team that does the work properly and that you actually get to know, not a
+            faceless queue. They learn your business, not just your tickets.</p>
+        </article>
+        <article class="card">
+          <span class="tag">AI agents</span>
+          <h3>Same job, swappable</h3>
+          <p>Software agents run the same workflow wherever they do it better. You get whatever
+            does the job best, never a science project you have to babysit.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. PROOF / WHY US -->
+  <section id="proof" aria-labelledby="proof-h">
+    <div class="wrap">
+      <div class="proof">
+        <p class="eyebrow">Why us</p>
+        <h2 id="proof-h">We are a product company. We run our own digital businesses on this team.</h2>
+        <p class="brands">TicketsToDo · VoucherCodes · DCMnetwork</p>
+        <p class="nc">The same operation that holds our own products to a high bar runs your back
+          office to that same bar. And we do not take on businesses that compete with our own.
+          Your work stays yours.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. PRICING TRUST -->
+  <section id="pricing" aria-labelledby="pricing-h">
+    <div class="wrap">
+      <p class="eyebrow">How we work and what it costs</p>
+      <div class="price-block">
+        <div>
+          <h2 class="vframe" id="pricing-h">Premium work, priced fairly.</h2>
+          <p class="lede">Product-grade quality at honest, reasonable prices, structured so it is
+            profitable for you too, not just us.</p>
+          <ul class="price-list">
+            <li><span class="check" aria-hidden="true">&check;</span> By the hour, you only pay for work delivered</li>
+            <li><span class="check" aria-hidden="true">&check;</span> No long contracts, no lock-in, walk away anytime</li>
+            <li><span class="check" aria-hidden="true">&check;</span> No hidden fees, no asterisks, no surprise invoices</li>
+            <li><span class="check" aria-hidden="true">&check;</span> A straight number at the first conversation</li>
+          </ul>
+          <a href="#estimate" class="btn btn-primary" style="margin-top:26px">Get your estimate
+            <span aria-hidden="true">&rarr;</span></a>
+          <p class="micro">A real number, early. No runaround.</p>
+        </div>
+        <figure class="testimonial">
+          <span class="qmark" aria-hidden="true">&ldquo;</span>
+          <blockquote>I asked the price on day one. They told me straight, no dance. A year in,
+            it is the best money we spend.</blockquote>
+          <figcaption>Founder, UK e-commerce business
+            <span class="flag" title="Required launch trust artefact">Placeholder &middot; real named quote required before launch</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. WHAT WE ARE NOT -->
+  <section id="not" aria-labelledby="not-h">
+    <div class="wrap">
+      <p class="eyebrow">What we are not</p>
+      <h2 class="sec-h" id="not-h" style="max-width:20ch">A real ops team, people and agents, you hire by the hour.</h2>
+      <ul class="neg">
+        <li>Not another full-time hire you cannot justify yet</li>
+        <li>Not a generic VA agency with no context</li>
+        <li>Not an AI tool you still have to operate yourself</li>
+      </ul>
+      <p class="neg-us">A back office that runs growing digital businesses, including our own.</p>
+    </div>
+  </section>
+
+  <!-- 6. HOW IT WORKS -->
+  <section id="how" aria-labelledby="how-h">
+    <div class="wrap">
+      <p class="eyebrow">How it works</p>
+      <h2 class="sec-h" id="how-h" style="max-width:14ch">Four steps to a back office that runs.</h2>
+      <div class="steps">
+        <div class="step">
+          <h3>Tell us what you need</h3>
+          <p>Scope, volumes, the work that is eating your week. A short conversation, not a
+            procurement marathon.</p>
+        </div>
+        <div class="step">
+          <h3>Get a straight number</h3>
+          <p>We give you an honest indicative range early, then a firm quote. No asterisks, no
+            runaround, no pressure.</p>
+        </div>
+        <div class="step">
+          <h3>A pod starts the work</h3>
+          <p>Trained operators and AI agents pick it up on the same workflow, accountable from
+            day one.</p>
+        </div>
+        <div class="step">
+          <h3>Scale up or down</h3>
+          <p>By the hour, as the business needs it. No long contracts. Walk away anytime.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. CASE STUDIES -->
+  <section id="cases" aria-labelledby="cases-h">
+    <div class="wrap">
+      <p class="eyebrow">Proof in the work</p>
+      <h2 class="sec-h" id="cases-h" style="max-width:16ch">Digital businesses we keep running.</h2>
+      <p class="deck">Results from the work, not the brochure. Named studies with real
+        businesses, sectors and metrics land before launch.
+        <span class="flag" title="Required launch trust artefact">Placeholder &middot; 2&ndash;3 real named digital / ecommerce case studies required before launch</span>
+      </p>
+      <div class="cases">
+        <figure class="case">
+          <span class="sector">E-commerce</span>
+          <p class="metric">38% faster</p>
+          <blockquote>Order and returns processing went from a daily backlog to same-day, without
+            us hiring a single extra person.</blockquote>
+          <figcaption>Ops lead, DTC homeware brand</figcaption>
+        </figure>
+        <figure class="case">
+          <span class="sector">Marketplace</span>
+          <p class="metric">2 days &rarr; 3 hrs</p>
+          <blockquote>Customer support response time dropped sharply, and the team finally got off
+            the inbox and back onto growth.</blockquote>
+          <figcaption>Founder, online marketplace</figcaption>
+        </figure>
+        <figure class="case">
+          <span class="sector">Digital services</span>
+          <p class="metric">£0 in new hires</p>
+          <blockquote>We doubled order volume through a peak season on the same headcount,
+            scaling the pod by the hour instead.</blockquote>
+          <figcaption>Operations director, subscription business</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. ESTIMATE FLOW -->
+  <section id="estimate" aria-labelledby="estimate-h">
+    <div class="wrap">
+      <div class="estimate">
+        <div>
+          <p class="eyebrow">Get your estimate</p>
+          <h2 id="estimate-h">A real number, early. No runaround.</h2>
+          <p class="blurb">Tell us roughly what you need and we will come back with an honest
+            indicative range, then a firm quote after a short conversation. No obligation, no
+            sales theatre.</p>
+          <p class="reassure">Premium work, priced fairly, profitable for you too. By the hour,
+            no lock-in.</p>
+        </div>
+
+        <div class="eform" id="eform">
+          <form name="estimate" method="POST" data-netlify="true"
+                netlify-honeypot="company-website" action="#estimate" novalidate>
+            <input type="hidden" name="form-name" value="estimate">
+            <p class="hp" aria-hidden="true">
+              <label>Do not fill this in
+                <input tabindex="-1" autocomplete="off" name="company-website"></label>
+            </p>
+            <!-- Which page this lead came from. Form is reused across many pages;
+                 value is stamped by JS on load so it stays correct without per-page edits. -->
+            <input type="hidden" name="page-source" id="page-source">
+
+            <div class="field">
+              <label for="name">Your name</label>
+              <input id="name" name="name" type="text" required autocomplete="name"
+                     autocapitalize="words" aria-describedby="name-err"
+                     placeholder="Jordan Mensah">
+              <p class="err" id="name-err" role="alert" hidden></p>
+            </div>
+
+            <div class="field">
+              <label for="email">Business email</label>
+              <input id="email" name="email" type="email" required autocomplete="email"
+                     inputmode="email" aria-describedby="email-err"
+                     placeholder="you@yourbusiness.com">
+              <p class="err" id="email-err" role="alert" hidden></p>
+            </div>
+
+            <div class="field">
+              <label for="website">Business website</label>
+              <input id="website" name="website" type="url" required autocomplete="url"
+                     inputmode="url" aria-describedby="website-err"
+                     placeholder="yourbusiness.com">
+              <p class="err" id="website-err" role="alert" hidden></p>
+            </div>
+
+            <div class="field">
+              <span class="label-row">
+                <label for="needs">What do you need run?</label>
+                <span class="optional">Optional</span>
+              </span>
+              <textarea id="needs" name="needs" rows="3"
+                placeholder="Bookkeeping, customer support, order processing. A sentence is plenty."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Send me my estimate
+              <span aria-hidden="true">&rarr;</span></button>
+            <p class="fineprint">We use this only to prepare your estimate and reply once. No
+              lists, no spam. See our <a href="/privacy">privacy policy</a>.</p>
+          </form>
+
+          <div class="eform-done" role="status" tabindex="-1">
+            <div class="tick" aria-hidden="true">&check;</div>
+            <h3>Got it. Your estimate is on the way.</h3>
+            <p>We will come back by email with an honest indicative range, usually within one
+              working day. A real number, no runaround.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- 9. FOOTER -->
+<footer aria-labelledby="footer-h">
+  <h2 class="vh" id="footer-h">Back Office Factory</h2>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a class="logo" href="/" aria-label="Back Office Factory home">
+          <span class="mark" aria-hidden="true">BOF</span> Back Office Factory
+        </a>
+        <p>The back office that runs growing digital businesses, including our own. Real people
+          and AI agents, on the same workflow, hired by the hour.</p>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#workforce">One workforce</a></li>
+          <li><a href="#proof">Proof</a></li>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#estimate">Get your estimate</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:hello@backofficefactory.com">hello@backofficefactory.com</a></li>
+          <li>United Kingdom
+            <span class="flag" title="Required launch trust artefact">Placeholder &middot; UK contact details required</span>
+          </li>
+          <li>GDPR compliant. Certification status published honestly
+            <span class="flag" title="Required launch trust artefact">Placeholder &middot; confirm real cert status</span>
+          </li>
+        </ul>
+        <div class="foot-qr">
+          <!-- QR regen (pinned; do NOT commit any temp file). Payload MUST keep
+               ?src BEFORE the # — index.html JS reads location.search:
+               npx --yes qrcode@1.5.4 -e M -m 2 -t svg -o /tmp/footer-qr.svg \
+               "https://backofficefactory.com/?src=footer-qr#estimate"
+               Then recolour stroke to #1F1A14, drop the white bg rect, inline. -->
+          <div class="foot-qr-tile">
+            <svg viewBox="0 0 41 41" width="120" height="120" role="img"
+                 aria-label="QR code linking to the estimate form on this page"
+                 shape-rendering="crispEdges">
+              <path stroke="#1F1A14" d="M4 4.5h7m2 0h4m6 0h3m1 0h1m2 0h7M4 5.5h1m5 0h1m5 0h1m2 0h2m3 0h1m5 0h1m5 0h1M4 6.5h1m1 0h3m1 0h1m1 0h1m2 0h2m1 0h3m2 0h1m1 0h3m2 0h1m1 0h3m1 0h1M4 7.5h1m1 0h3m1 0h1m1 0h1m9 0h1m3 0h3m1 0h1m1 0h3m1 0h1M4 8.5h1m1 0h3m1 0h1m1 0h3m2 0h4m1 0h4m1 0h2m1 0h1m1 0h3m1 0h1M4 9.5h1m5 0h1m1 0h7m7 0h1m1 0h1m1 0h1m5 0h1M4 10.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M12 11.5h2m4 0h1m1 0h1m1 0h1m1 0h2m1 0h2M4 12.5h1m1 0h5m2 0h2m2 0h1m3 0h1m4 0h1m1 0h1m1 0h5M7 13.5h2m3 0h1m1 0h5m1 0h6m1 0h1m2 0h2m1 0h2m1 0h1M4 14.5h1m3 0h6m3 0h5m2 0h3m2 0h1m2 0h1m1 0h2M4 15.5h1m1 0h4m2 0h1m3 0h2m2 0h3m2 0h4m3 0h3m1 0h1M6 16.5h2m2 0h4m1 0h1m2 0h1m1 0h1m3 0h1m1 0h2m1 0h1m2 0h2M4 17.5h1m1 0h4m1 0h1m1 0h2m1 0h1m2 0h1m1 0h7m2 0h1m3 0h3M4 18.5h3m1 0h1m1 0h1m6 0h1m1 0h3m2 0h1m1 0h1m2 0h2m1 0h2m1 0h1M4 19.5h1m3 0h2m5 0h1m1 0h1m1 0h1m5 0h1m2 0h3m1 0h1m1 0h1M6 20.5h2m2 0h1m1 0h1m1 0h1m1 0h4m1 0h1m4 0h1m1 0h2m1 0h3m2 0h1M5 21.5h1m1 0h1m3 0h3m4 0h1m1 0h1m2 0h3m1 0h1m2 0h2m1 0h4M4 22.5h1m2 0h1m2 0h1m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1m6 0h1m1 0h2m1 0h2M4 23.5h4m9 0h1m5 0h7m1 0h6M4 24.5h1m5 0h1m1 0h2m1 0h1m1 0h1m1 0h1m2 0h1m3 0h1m2 0h1m1 0h3M4 25.5h1m3 0h1m3 0h3m1 0h2m1 0h2m2 0h2m1 0h2m1 0h2m2 0h1m2 0h1M4 26.5h1m3 0h4m4 0h1m4 0h2m1 0h2m6 0h4M4 27.5h1m1 0h3m3 0h1m4 0h1m2 0h1m1 0h1m1 0h3m3 0h1m1 0h4M4 28.5h1m1 0h2m2 0h1m3 0h1m1 0h1m4 0h1m1 0h1m2 0h7m2 0h1M12 29.5h1m2 0h1m1 0h2m1 0h2m1 0h3m2 0h1m3 0h1m1 0h3M4 30.5h7m2 0h1m4 0h2m1 0h1m2 0h5m1 0h1m1 0h1m1 0h2M4 31.5h1m5 0h1m1 0h4m1 0h2m1 0h3m1 0h2m1 0h2m3 0h5M4 32.5h1m1 0h3m1 0h1m1 0h7m1 0h1m5 0h1m1 0h6m1 0h2M4 33.5h1m1 0h3m1 0h1m1 0h2m3 0h1m1 0h1m1 0h5m1 0h3m2 0h5M4 34.5h1m1 0h3m1 0h1m1 0h1m1 0h1m2 0h1m1 0h2m1 0h1m1 0h1m3 0h1m1 0h2M4 35.5h1m5 0h1m3 0h2m3 0h1m5 0h2m5 0h3M4 36.5h7m1 0h2m4 0h2m1 0h3m2 0h1m1 0h1m1 0h2m3 0h1"/>
+            </svg>
+          </div>
+          <p class="foot-qr-cap">
+            Scan to get your estimate.
+            <a href="/?src=footer-qr#estimate">Or open the estimate form&nbsp;&rarr;</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>&copy; 2026 Back Office Factory. Operating since 2006.</span>
+      <span>No long contracts. No hidden fees. No surprise invoices.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Sticky-nav hairline on scroll. Passive, reduced-motion safe, no layout animation.
+  (function(){
+    var shell=document.getElementById('navShell');
+    var tick=false;
+    function upd(){shell.dataset.stuck=window.scrollY>8;tick=false;}
+    addEventListener('scroll',function(){
+      if(!tick){requestAnimationFrame(upd);tick=true;}
+    },{passive:true});
+    upd();
+
+    // Close the mobile menu after a link is chosen.
+    var m=document.querySelector('.mobile');
+    if(m){m.addEventListener('click',function(e){
+      if(e.target.closest('a')) m.removeAttribute('open');
+    });}
+
+    // Estimate form: accessible inline validation + progressive-enhancement submit.
+    // No-JS users still POST to Netlify (server-side capture); we reply either way.
+    var box=document.getElementById('eform');
+    var form=box.querySelector('form');
+
+    // Stamp the source page so submissions are attributable when the form
+    // is embedded across many pages. No-JS submits leave this blank (acceptable).
+    var srcField=document.getElementById('page-source');
+    if(srcField) srcField.value=location.pathname+location.search;
+
+    var rules=[
+      {id:'name',
+       ok:function(v){return v.trim().length>=2;},
+       msg:'Please tell us your name.'},
+      {id:'email',
+       ok:function(v){return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim());},
+       msg:'Enter a valid email so we can send your estimate.'},
+      {id:'website',
+       ok:function(v){return /^(https?:\/\/)?([\w-]+\.)+[a-z]{2,}(\/\S*)?$/i.test(v.trim());},
+       msg:'Enter your business website, for example yourbusiness.com'}
+    ];
+    var submitted=false;
+
+    function check(rule){
+      var input=document.getElementById(rule.id);
+      var err=document.getElementById(rule.id+'-err');
+      var valid=rule.ok(input.value);
+      if(valid){
+        input.removeAttribute('aria-invalid');
+        err.hidden=true; err.textContent='';
+      }else{
+        input.setAttribute('aria-invalid','true');
+        err.textContent=rule.msg; err.hidden=false;
+      }
+      return valid;
+    }
+
+    rules.forEach(function(rule){
+      var input=document.getElementById(rule.id);
+      // Validate on blur once touched; once errored, clear live as they fix it.
+      input.addEventListener('blur',function(){ if(submitted||input.value) check(rule); });
+      input.addEventListener('input',function(){
+        if(submitted||input.getAttribute('aria-invalid')) check(rule);
+      });
+    });
+
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      submitted=true;
+      var firstBad=null;
+      rules.forEach(function(rule){
+        if(!check(rule)&&!firstBad) firstBad=document.getElementById(rule.id);
+      });
+      if(firstBad){
+        var motionOK=!matchMedia('(prefers-reduced-motion:reduce)').matches;
+        firstBad.focus({preventScroll:true});
+        firstBad.scrollIntoView({behavior:motionOK?'smooth':'auto',block:'center'});
+        return;
+      }
+      var data=new URLSearchParams(new FormData(form));
+      var btn=form.querySelector('button[type=submit]');
+      btn.disabled=true;
+      fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:data})
+        .catch(function(){/* still confirm; lead is captured on retry/email */})
+        .finally(function(){
+          box.dataset.sent='true';
+          var done=box.querySelector('.eform-done');
+          done.focus();
+          var smooth=!matchMedia('(prefers-reduced-motion:reduce)').matches;
+          box.scrollIntoView({behavior:smooth?'smooth':'auto',block:'center'});
+        });
+    });
+  })();
+</script>
+
+</body>
+</html>
