@@ -57,6 +57,21 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 
+/* Cabinet Grotesk self-hosted (same-origin + preload + display:optional eliminates
+   font-swap CLS). Fontshare's CDN forces font-display:swap which produced live CLS
+   on the hero h1 — moving to self-hosted lets us set display:optional ourselves. */
+@font-face{
+  font-family:"Cabinet Grotesk";src:url("/assets/fonts/cabinet-grotesk-500.woff2") format("woff2");
+  font-weight:500;font-style:normal;font-display:optional;
+}
+@font-face{
+  font-family:"Cabinet Grotesk";src:url("/assets/fonts/cabinet-grotesk-700.woff2") format("woff2");
+  font-weight:700;font-style:normal;font-display:optional;
+}
+@font-face{
+  font-family:"Cabinet Grotesk";src:url("/assets/fonts/cabinet-grotesk-800.woff2") format("woff2");
+  font-weight:800;font-style:normal;font-display:optional;
+}
 @font-face{
   font-family:"DM Sans Fallback";src:local('Arial'),local('ArialMT');
   ascent-override:86.3739%;descent-override:26.9918%;line-gap-override:0%;size-adjust:114.8495%;
