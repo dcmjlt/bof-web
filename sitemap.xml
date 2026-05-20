@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 26 indexable URLs. All pages serve index,follow as of 2026-05-20.
+<!-- 26 URLs. Mixed robots state (2026-05-20): 23 pages index,follow + 3 pages
+     (homepage, about, privacy) noindex,follow until launch-blocker body-copy
+     placeholders resolve. Noindex pages remain in the sitemap so Search Console
+     sees the full structure; per-page robots meta is authoritative. See TODOS.md §1.
      Submit to Search Console: https://search.google.com/search-console (BOF property). -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://backofficefactory.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
