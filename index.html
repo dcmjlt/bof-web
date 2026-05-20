@@ -490,7 +490,15 @@ and switch twitter:card below to summary_large_image. -->
     .nav-shell .wordmark{display:none}
     .mobile{display:block}
     .hero{padding:44px 0 72px}
-    .grid2,.neg,.steps,.cases,.svc{grid-template-columns:1fr}
+    /* .grid2.lead listed explicitly: the 920px rule above sets it to 1fr 1fr
+       with higher specificity than bare .grid2, so .grid2 alone wouldn't beat
+       it on mobile. Without this the workforce people+AI cards stay
+       two-column at 375 (~165px each) and overflow at 320. */
+    .grid2,.grid2.lead,.neg,.steps,.cases,.svc{grid-template-columns:1fr}
+    /* Mobile nav CTA: bump .btn-sm vertical padding so the primary conversion
+       button clears the 44px tap-target minimum (default .btn-sm is 37px tall;
+       15px padding + 15px line gives 45px, a 1px margin over the iOS spec). */
+    .nav-cta .btn-sm{padding-top:15px;padding-bottom:15px}
     .meta{gap:14px 28px;margin-top:36px;padding-top:20px}
     .foot{grid-template-columns:1fr;gap:32px}
     .foot-dir{grid-template-columns:1fr;gap:0;padding-bottom:var(--s-8)}
@@ -573,7 +581,7 @@ and switch twitter:card below to summary_large_image. -->
         processing, and the repetitive back-office work that keeps a business running, handled by a
         team of real people and AI agents working in the same workflow.</p>
       <p class="dog">The same team runs <b>TicketsToDo, VoucherCodes.ae, DCMnetwork</b> and more.
-        We do not take on businesses that compete with us or you.</p>
+        We do not take on business that competes with us or you.</p>
       <div class="cta-row">
         <a href="#estimate" class="btn btn-primary">Get your estimate
           <span aria-hidden="true">&rarr;</span></a>
@@ -660,9 +668,9 @@ and switch twitter:card below to summary_large_image. -->
         <a href="/hire/real-estate-data-specialist/" style="color:var(--accent-ink)">real estate data</a>,
         <a href="/services/ai-automation/" style="color:var(--accent-ink)">AI automation</a>,
         <a href="/services/digital-transformation/" style="color:var(--accent-ink)">digital transformation</a>.
-      <p class="deck" style="margin-top:28px;max-width:62ch">If it is operational and repetitive,
-        it is probably something we run. If it sits outside operational delivery, strategy,
-        creative or sales, we will tell you straight rather than stretch.</p>
+      <p class="deck" style="margin-top:28px;max-width:62ch">If the work is operational and
+        repetitive, we probably run it. If it sits outside that, strategy, creative or sales,
+        we will tell you straight rather than stretch.</p>
     </div>
   </section>
 
@@ -674,7 +682,7 @@ and switch twitter:card below to summary_large_image. -->
         <h2 id="proof-h">We run our own digital businesses on this exact team.</h2>
         <p class="brands">TicketsToDo · VoucherCodes.ae · DCMnetwork · and more</p>
         <p class="nc">The same operation that holds our own products to a high bar runs your back
-          office to that same bar. We do not take on businesses that compete with us or you.
+          office to that same bar. We do not take on business that competes with us or you.
           Your work stays yours.</p>
       </div>
     </div>
@@ -794,7 +802,7 @@ and switch twitter:card below to summary_large_image. -->
   <section id="faq" aria-labelledby="faq-h">
     <div class="wrap">
       <p class="eyebrow">Questions</p>
-      <h2 class="sec-h" id="faq-h" style="max-width:16ch">The things growing teams ask us first.</h2>
+      <h2 class="sec-h" id="faq-h" style="max-width:18ch">What growing teams ask us first.</h2>
       <div class="faq">
         <details class="qa">
           <summary>
@@ -804,7 +812,7 @@ and switch twitter:card below to summary_large_image. -->
           <div class="a">
             <p>No. We run our own digital businesses on this exact team, TicketsToDo,
               VoucherCodes.ae, DCMnetwork and more, so we hold a firm line: we do not take on
-              businesses that compete with us or you. Your work, your data and your edge stay
+              business that competes with us or you. Your work, your data and your edge stay
               yours.</p>
           </div>
         </details>
@@ -944,7 +952,7 @@ and switch twitter:card below to summary_large_image. -->
 
             <div class="field">
               <span class="label-row">
-                <label for="needs">What do you need run?</label>
+                <label for="needs">What needs running?</label>
                 <span class="optional">Optional</span>
               </span>
               <textarea id="needs" name="needs" rows="3"

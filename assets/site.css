@@ -360,7 +360,15 @@ footer{background:var(--ground);color:var(--ground-fg);border:0}
   .nav-shell .wordmark{display:none}
   .mobile{display:block}
   .hero{padding:32px 0 72px}
-  .grid2,.neg,.steps,.svc,.price-list{grid-template-columns:1fr}
+  /* .grid2.lead listed explicitly: the 920px rule above sets it to 1fr 1fr
+     with higher specificity than bare .grid2, so .grid2 alone wouldn't beat it
+     on mobile. Without this the lead variant stays two-column under 760
+     and the people+AI cards squash to ~165px each at 375 / overflow at 320. */
+  .grid2,.grid2.lead,.neg,.steps,.svc,.price-list{grid-template-columns:1fr}
+  /* Mobile nav CTA: bump .btn-sm vertical padding so the primary conversion
+     button clears the 44px tap-target minimum (default .btn-sm is 37px tall;
+     15px padding + 15px line gives 45px, a 1px margin over the iOS spec). */
+  .nav-cta .btn-sm{padding-top:15px;padding-bottom:15px}
   .meta{gap:14px 28px;margin-top:36px;padding-top:20px}
   .foot{grid-template-columns:1fr;gap:32px}
   .foot-dir{grid-template-columns:1fr;gap:0;padding-bottom:var(--s-8)}

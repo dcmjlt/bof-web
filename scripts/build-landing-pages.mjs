@@ -147,7 +147,7 @@ const TEMPLATE = `<!DOCTYPE html>
       <h1>{{H1}}</h1>
       <p class="sub">{{HERO_SUB}}</p>
       <p class="dog">The same team runs <b>TicketsToDo, VoucherCodes.ae, DCMnetwork</b> and more.
-        We do not take on businesses that compete with us or you.</p>
+        We do not take on business that competes with us or you.</p>
       <div class="cta-row">
         <a href="/?src={{SRC}}#estimate" class="btn btn-primary">Get your estimate
           <span aria-hidden="true">&rarr;</span></a>
@@ -171,9 +171,7 @@ const TEMPLATE = `<!DOCTYPE html>
       <ul class="svc">
 {{SCOPE_LIST}}
       </ul>
-      <p class="deck" style="margin-top:28px;max-width:62ch">If it is operational and repetitive,
-        it is probably something we run. If it sits outside operational delivery, we will tell
-        you straight rather than stretch.</p>
+      <p class="deck" style="margin-top:28px;max-width:62ch">If the work is operational and repetitive, we probably run it. If it sits outside that, we will tell you straight rather than stretch.</p>
     </div>
   </section>
 
@@ -207,7 +205,7 @@ const TEMPLATE = `<!DOCTYPE html>
         <h2 id="proof-h">{{PROOF_H}}</h2>
         <p class="brands">TicketsToDo &middot; VoucherCodes.ae &middot; DCMnetwork &middot; and more</p>
         <p class="nc">The same operation that holds our own products to a high bar runs your
-          {{PROOF_WHAT}} to that same bar. We do not take on businesses that compete with us or
+          {{PROOF_WHAT}} to that same bar. We do not take on business that competes with us or
           you. Your work and your data stay yours.</p>
       </div>
     </div>
@@ -246,7 +244,7 @@ const TEMPLATE = `<!DOCTYPE html>
           <div class="a">
             <p>No. We run our own digital businesses on this exact team, TicketsToDo,
               VoucherCodes.ae, DCMnetwork and more, so we hold a firm line: we do not take on
-              businesses that compete with us or you. Your work, your data and your edge stay
+              business that competes with us or you. Your work, your data and your edge stay
               yours.</p>
           </div>
         </details>
@@ -291,7 +289,7 @@ const TEMPLATE = `<!DOCTYPE html>
       <div class="estimate">
         <p class="eyebrow">Get your estimate</p>
         <h2 id="cta-h">A real number, early. No runaround.</h2>
-        <p class="blurb">Tell us roughly what you need run and we will come back with an honest
+        <p class="blurb">Tell us roughly what needs running and we will come back with an honest
           indicative range, then a firm quote after a short conversation. No obligation, no
           sales theatre.</p>
         <p class="reassure">Quality work, priced fairly, profitable for you too. By the hour,
