@@ -1,16 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Single-page site for now. Authoritative page IA + build order:
-     BOF-Sitemap-Suggested.pdf, reconciled in memory project_site_ia_build_order
-     (17-page Phase-1 build: /hire/{role} x11 -> /services/{cat} x5 -> /about).
-     Add each URL here only AS IT SHIPS and once its `noindex` is removed;
-     listing noindex URLs triggers a Search Console "Submitted URL marked
-     noindex" warning. Do NOT submit this sitemap until the homepage
-     `noindex` is removed. -->
+<!-- LAUNCH BLOCKER: All page-level robots are noindex until the placeholder
+     trust artefacts ship (price-honesty quote, named case studies, UK contact,
+     data-protection wording, cert status). Do NOT submit this sitemap to
+     Search Console until those land + the page-level `noindex` is removed;
+     submitting noindex URLs triggers a "Submitted URL marked noindex" warning.
+     Tracked in CLAUDE.md ship blockers + memory project_site_ia_build_order. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://backofficefactory.com/</loc>
-    <lastmod>2026-05-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
+  <url><loc>https://backofficefactory.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://backofficefactory.com/about/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <url><loc>https://backofficefactory.com/services/ai-automation/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://backofficefactory.com/services/back-office-automation/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://backofficefactory.com/services/customer-support/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://backofficefactory.com/services/digital-transformation/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://backofficefactory.com/services/finance-and-accounting/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+
+  <url><loc>https://backofficefactory.com/hire/bookkeeper/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://backofficefactory.com/hire/accounts-specialist/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://backofficefactory.com/hire/payroll-specialist/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://backofficefactory.com/hire/customer-support-specialist/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://backofficefactory.com/hire/ecommerce-support-specialist/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://backofficefactory.com/hire/order-processing-specialist/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://backofficefactory.com/hire/document-processing-specialist/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://backofficefactory.com/hire/data-entry-specialist/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://backofficefactory.com/hire/virtual-assistant/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://backofficefactory.com/hire/administration-assistant/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://backofficefactory.com/hire/real-estate-data-specialist/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+  <url><loc>https://backofficefactory.com/ai-back-office/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://backofficefactory.com/shopify-back-office/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://backofficefactory.com/amazon-seller-back-office/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://backofficefactory.com/uk/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
+  <url><loc>https://backofficefactory.com/compare/vs-full-time-hire/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://backofficefactory.com/compare/vs-va-agency/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://backofficefactory.com/compare/vs-ai-tool/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <url><loc>https://backofficefactory.com/privacy.html</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
 </urlset>

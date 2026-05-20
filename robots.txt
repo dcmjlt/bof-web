@@ -5,5 +5,8 @@
 
 User-agent: *
 Allow: /
+Disallow: /functions/
+Disallow: /scripts/
+Disallow: /print/
 
 Sitemap: https://backofficefactory.com/sitemap.xml

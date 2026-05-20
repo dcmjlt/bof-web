@@ -3,33 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Back Office Team for Ecommerce &amp; Digital Businesses | Back Office Factory</title>
-<meta name="description" content="Scale your digital business without hiring full-time back-office staff. BOF runs bookkeeping, support, order processing, payroll and admin by the hour.">
+<title>Back Office Team for Ecommerce &amp; Digital Businesses | BOF</title>
+<meta name="description" content="Scale your digital business without hiring full-time back-office staff. People and AI agents handle bookkeeping, support, payroll and orders. By the hour.">
 <meta name="theme-color" content="#FBF7F0">
 
 <!-- LAUNCH BLOCKER: noindex stays until the placeholder trust artefacts
      (price-honesty quote, named case studies, UK contact, data-protection
      wording, cert status) are replaced with real approved content. Indexing
      the page with visible "Placeholder" flags damages trust + E-E-A-T.
-     Remove this single line to go live. Tracked in CLAUDE.md ship blockers. -->
+     Remove this single line and switch to the index,follow directive below
+     to go live. Tracked in CLAUDE.md ship blockers. -->
 <meta name="robots" content="noindex,follow">
+<!-- <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1"> -->
 
 <link rel="canonical" href="https://backofficefactory.com/">
 
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Back Office Factory">
 <meta property="og:url" content="https://backofficefactory.com/">
-<meta property="og:title" content="Back Office Factory: scale without scaling headcount">
-<meta property="og:description" content="The back office for your growing digital business — including our own. People and AI agents on one workflow, hired by the hour. A real number, early.">
+<meta property="og:title" content="Back Office Team for Ecommerce &amp; Digital Businesses">
+<meta property="og:description" content="Scale your digital business without hiring full-time back-office staff. People and AI agents handle bookkeeping, support, payroll and orders. By the hour.">
 <meta property="og:locale" content="en_GB">
-<!-- TODO (launch): add a real 1200x630 social card, then uncomment:
-<meta property="og:image" content="https://backofficefactory.com/social-card.jpg">
+<meta property="og:image" content="https://backofficefactory.com/assets/og/social-card.png">
 <meta property="og:image:alt" content="Back Office Factory — back-office team for growing digital businesses">
-<meta name="twitter:image" content="https://backofficefactory.com/social-card.jpg">
-and switch twitter:card below to summary_large_image. -->
 
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@backofficefactory">
 <meta name="twitter:title" content="Back Office Team for Ecommerce &amp; Digital Businesses">
-<meta name="twitter:description" content="Bookkeeping, support, order processing, payroll and admin by people and AI agents, hired by the hour.">
+<meta name="twitter:description" content="Scale your digital business without hiring full-time back-office staff. People and AI agents handle bookkeeping, support, payroll and orders. By the hour.">
+<meta name="twitter:image" content="https://backofficefactory.com/assets/og/social-card.png">
 
 <script type="application/ld+json">
 {
@@ -39,16 +41,24 @@ and switch twitter:card below to summary_large_image. -->
       "@type": "Organization",
       "@id": "https://backofficefactory.com/#organization",
       "name": "Back Office Factory",
+      "alternateName": "BOF",
       "url": "https://backofficefactory.com/",
-      "description": "Back-office team that runs growing digital and ecommerce businesses: bookkeeping, customer support, order and document processing, payroll and operations admin, delivered by people and AI agents on one workflow, hired by the hour.",
-      "foundingDate": "2006"
+      "description": "The back-office team that runs growing digital businesses — including our own. People and AI agents on one workflow, hired by the hour.",
+      "foundingDate": "2006",
+      "areaServed": [
+        { "@type": "Country", "name": "United Kingdom" },
+        { "@type": "Country", "name": "United States" },
+        { "@type": "Country", "name": "Canada" },
+        { "@type": "Country", "name": "Australia" }
+      ]
     },
     {
       "@type": "WebSite",
       "@id": "https://backofficefactory.com/#website",
       "url": "https://backofficefactory.com/",
       "name": "Back Office Factory",
-      "publisher": { "@id": "https://backofficefactory.com/#organization" }
+      "publisher": { "@id": "https://backofficefactory.com/#organization" },
+      "inLanguage": "en-GB"
     }
   ]
 }
@@ -538,7 +548,7 @@ and switch twitter:card below to summary_large_image. -->
   .foot ul,.foot-dir ul{list-style:none;display:flex;flex-direction:column;gap:11px}
   .foot a,.foot-dir a{text-decoration:none;opacity:.85;font-size:15px}
   .foot a:hover,.foot-dir a:hover{opacity:1;text-decoration:underline;text-underline-offset:3px}
-  .foot-dir{display:grid;grid-template-columns:1fr 1fr 2.2fr;gap:40px;
+  .foot-dir{display:grid;grid-template-columns:repeat(4,1fr) 2fr;gap:32px;
     padding:var(--s-10) 0 var(--s-10);border-top:1px solid var(--ground-fg-rule)}
   .foot-dir .foot-cols{display:grid;grid-template-columns:1fr 1fr;gap:11px 32px}
   .foot-dir details{display:contents}
@@ -779,6 +789,11 @@ and switch twitter:card below to summary_large_image. -->
       <p class="pull">If the work is operational and repetitive, we probably run it. If it sits
         outside that &mdash; strategy, creative or sales &mdash; we will tell you straight rather
         than stretch.</p>
+      <p class="deck" style="max-width:62ch">Working on Shopify or selling on Amazon? See our
+        <a href="/shopify-back-office/" style="color:var(--accent-ink)">Shopify back office</a>
+        and <a href="/amazon-seller-back-office/" style="color:var(--accent-ink)">Amazon seller back office</a>
+        pages. Building an <a href="/ai-back-office/" style="color:var(--accent-ink)">AI back office</a>
+        &mdash; people for the judgement, AI agents for the volume.</p>
       <ul class="svc">
         <li><span class="mk" aria-hidden="true">&check;</span><span>
           <a href="/services/finance-and-accounting/"><b>Bookkeeping</b></a><span class="d">Books kept current. Not a panicked reconstruction at month-end.</span></span></li>
@@ -842,17 +857,17 @@ and switch twitter:card below to summary_large_image. -->
       <h2 class="sec-h" id="not-h" style="max-width:22ch">The three things you&rsquo;ve already tried &mdash; and why this is different.</h2>
       <ul class="neg-rows">
         <li>
-          <p class="neg-no">Not another full-time hire you can&rsquo;t justify yet.</p>
+          <p class="neg-no"><a href="/compare/vs-full-time-hire/">Not another full-time hire you can&rsquo;t justify yet.</a></p>
           <p class="neg-yes">A senior ops hire is &pound;60&ndash;80k loaded. You don&rsquo;t need a
             full-timer &mdash; you need the work done.</p>
         </li>
         <li>
-          <p class="neg-no">Not a generic VA agency with no operational context.</p>
+          <p class="neg-no"><a href="/compare/vs-va-agency/">Not a generic VA agency with no operational context.</a></p>
           <p class="neg-yes">VAs follow a brief. We run an operation, with the playbook we built
             running our own.</p>
         </li>
         <li>
-          <p class="neg-no">Not an AI tool you still have to operate yourself.</p>
+          <p class="neg-no"><a href="/compare/vs-ai-tool/">Not an AI tool you still have to operate yourself.</a></p>
           <p class="neg-yes">AI tools are software you buy. We&rsquo;re the team that runs the
             work &mdash; the AI is part of how we do it, not something you adopt.</p>
         </li>
@@ -1215,6 +1230,27 @@ and switch twitter:card below to summary_large_image. -->
             <li><a href="/services/back-office-automation/">Back-office automation</a></li>
             <li><a href="/services/ai-automation/">AI automation</a></li>
             <li><a href="/services/digital-transformation/">Digital transformation</a></li>
+          </ul>
+        </details>
+      </div>
+      <div>
+        <details open>
+          <summary><h3>By vertical / region</h3></summary>
+          <ul>
+            <li><a href="/ai-back-office/">AI back office</a></li>
+            <li><a href="/shopify-back-office/">Shopify back office</a></li>
+            <li><a href="/amazon-seller-back-office/">Amazon seller back office</a></li>
+            <li><a href="/uk/">UK back office</a></li>
+          </ul>
+        </details>
+      </div>
+      <div>
+        <details open>
+          <summary><h3>Compare</h3></summary>
+          <ul>
+            <li><a href="/compare/vs-full-time-hire/">vs full-time hire</a></li>
+            <li><a href="/compare/vs-va-agency/">vs VA agency</a></li>
+            <li><a href="/compare/vs-ai-tool/">vs AI tool</a></li>
           </ul>
         </details>
       </div>

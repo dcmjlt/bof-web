@@ -372,7 +372,7 @@ footer{background:var(--ground);color:var(--ground-fg);border:0}
 .foot ul,.foot-dir ul{list-style:none;display:flex;flex-direction:column;gap:11px}
 .foot a,.foot-dir a{text-decoration:none;opacity:.85;font-size:15px}
 .foot a:hover,.foot-dir a:hover{opacity:1;text-decoration:underline;text-underline-offset:3px}
-.foot-dir{display:grid;grid-template-columns:1fr 1fr 2.2fr;gap:40px;
+.foot-dir{display:grid;grid-template-columns:repeat(4,1fr) 2fr;gap:32px;
   padding:var(--s-10) 0 var(--s-10);border-top:1px solid var(--ground-fg-rule)}
 .foot-dir .foot-cols{display:grid;grid-template-columns:1fr 1fr;gap:11px 32px}
 .foot-dir details{display:contents}
