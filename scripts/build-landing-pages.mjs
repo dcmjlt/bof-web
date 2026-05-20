@@ -83,8 +83,17 @@ const TEMPLATE = `<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
-<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500&display=swap" rel="stylesheet">
+<!-- Non-blocking webfont CSS: preload as style + media-toggle swap on load.
+     Capsize fallback faces in site.css eliminate font-swap CLS, so first paint
+     is instant with the fallback and the real font swaps in transparently. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" media="print" onload="this.media='all'">
+<link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500&display=swap" media="print" onload="this.media='all'">
+<noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap">
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500&display=swap">
+</noscript>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23E8A33D'/%3E%3Ctext x='16' y='22' font-family='Verdana,sans-serif' font-size='17' font-weight='700' text-anchor='middle' fill='%231F1A14'%3EB%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="/assets/site.css">
 </head>
@@ -146,7 +155,7 @@ const TEMPLATE = `<!DOCTYPE html>
       <span class="pill">{{PILL}}</span>
       <h1>{{H1}}</h1>
       <p class="sub">{{HERO_SUB}}</p>
-      <p class="dog">The same team runs <b>TicketsToDo, VoucherCodes.ae, DCMnetwork</b> and more.
+      <p class="dog">The same team runs <b><a class="brand-link" href="https://www.ticketstodo.com/" target="_blank" rel="noopener external">TicketsToDo</a>, <a class="brand-link" href="https://vouchercodes.ae/" target="_blank" rel="noopener external">VoucherCodes.ae</a>, <a class="brand-link" href="https://www.dcmnetwork.com/" target="_blank" rel="noopener external">DCMnetwork</a></b> and more.
         We do not take on business that competes with us or you.</p>
       <div class="cta-row">
         <a href="/?src={{SRC}}#estimate" class="btn btn-primary">Get your estimate
@@ -181,7 +190,7 @@ const TEMPLATE = `<!DOCTYPE html>
       <h2 class="sec-h" id="wf-h" style="max-width:18ch">Real people and real AI agents, on the same workflow.</h2>
       <p class="deck">Some work needs judgement. Some is high-volume and repetitive. We run both
         through one workflow, so you get the right mix without managing another AI tool yourself.</p>
-      <div class="grid2">
+      <div class="grid2 lead">
         <article class="card">
           <span class="tag">People</span>
           <h3>Trained operators</h3>
@@ -203,7 +212,7 @@ const TEMPLATE = `<!DOCTYPE html>
       <div class="proof">
         <p class="eyebrow">Why us</p>
         <h2 id="proof-h">{{PROOF_H}}</h2>
-        <p class="brands">TicketsToDo &middot; VoucherCodes.ae &middot; DCMnetwork &middot; and more</p>
+        <p class="brands"><a class="brand-link" href="https://www.ticketstodo.com/" target="_blank" rel="noopener external">TicketsToDo</a> &middot; <a class="brand-link" href="https://vouchercodes.ae/" target="_blank" rel="noopener external">VoucherCodes.ae</a> &middot; <a class="brand-link" href="https://www.dcmnetwork.com/" target="_blank" rel="noopener external">DCMnetwork</a> &middot; and more</p>
         <p class="nc">The same operation that holds our own products to a high bar runs your
           {{PROOF_WHAT}} to that same bar. We do not take on business that competes with us or
           you. Your work and your data stay yours.</p>
@@ -242,8 +251,8 @@ const TEMPLATE = `<!DOCTYPE html>
             <span class="peek">No. We run our own digital businesses, so we never take on anyone who competes with you.</span>
           </summary>
           <div class="a">
-            <p>No. We run our own digital businesses on this exact team, TicketsToDo,
-              VoucherCodes.ae, DCMnetwork and more, so we hold a firm line: we do not take on
+            <p>No. We run our own digital businesses on this exact team, <a class="brand-link" href="https://www.ticketstodo.com/" target="_blank" rel="noopener external">TicketsToDo</a>,
+              <a class="brand-link" href="https://vouchercodes.ae/" target="_blank" rel="noopener external">VoucherCodes.ae</a>, <a class="brand-link" href="https://www.dcmnetwork.com/" target="_blank" rel="noopener external">DCMnetwork</a> and more, so we hold a firm line: we do not take on
               business that competes with us or you. Your work, your data and your edge stay
               yours.</p>
           </div>
@@ -281,25 +290,6 @@ const TEMPLATE = `<!DOCTYPE html>
       <ul class="rel">
 {{REL_LIST}}
       </ul>
-    </div>
-  </section>
-
-  <section aria-labelledby="cta-h">
-    <div class="wrap">
-      <div class="estimate">
-        <p class="eyebrow">Get your estimate</p>
-        <h2 id="cta-h">A real number, early. No runaround.</h2>
-        <p class="blurb">Tell us roughly what needs running and we will come back with an honest
-          indicative range, then a firm quote after a short conversation. No obligation, no
-          sales theatre.</p>
-        <p class="reassure">Quality work, priced fairly, profitable for you too. By the hour,
-          no lock-in.</p>
-        <div class="cta-row">
-          <a href="/?src={{SRC}}#estimate" class="btn btn-primary">Get your estimate
-            <span aria-hidden="true">&rarr;</span></a>
-          <a href="/#how" class="btn btn-ghost">How it works</a>
-        </div>
-      </div>
     </div>
   </section>
 

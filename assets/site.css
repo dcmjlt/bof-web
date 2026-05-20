@@ -135,6 +135,27 @@ footer .flag{color:var(--ground-fg);background:rgba(0,0,0,.24)}
 .btn:disabled{opacity:.6;cursor:progress;pointer-events:none}
 .micro{font-size:14px;color:var(--muted);margin-top:12px}
 
+/* Portfolio brand link: inherits parent color at rest so it reads as prose;
+   on hover, picks up the warm accent + a hairline underline + a small "↗"
+   that fades in. The names are real outbound businesses — the affordance
+   exists so curious buyers can verify the dogfood claim. */
+.brand-link{color:inherit;text-decoration:none;
+  border-bottom:1px solid transparent;
+  transition:color .15s var(--ease),border-color .15s var(--ease)}
+.brand-link:hover,.brand-link:focus-visible{
+  color:var(--accent-ink);border-bottom-color:currentColor}
+.brand-link::after{content:"↗";font-size:.78em;
+  display:inline-block;overflow:hidden;vertical-align:baseline;
+  max-width:0;opacity:0;margin-left:0;transform:translateY(-1px);
+  transition:max-width .15s var(--ease),opacity .15s var(--ease),
+             margin-left .15s var(--ease)}
+.brand-link:hover::after,.brand-link:focus-visible::after{
+  max-width:1em;opacity:.75;margin-left:3px}
+/* On the dark green proof block (and dark footer), deep-ochre fails contrast.
+   Swap to marigold so the hover signal is actually visible. */
+.proof .brand-link:hover,.proof .brand-link:focus-visible,
+footer .brand-link:hover,footer .brand-link:focus-visible{color:var(--accent)}
+
 :where(section,footer)[id],#main{scroll-margin-top:96px}
 section{padding:var(--s-22) 0;border-bottom:1px solid var(--rule)}
 /* Rhythm overrides: pair the proof + pricing-trust sections (both trust artefacts;
@@ -186,10 +207,23 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:20px;paddi
 
 /* ---- Hero ---- */
 .hero{padding:40px 0 96px}
-.hero h1{font-size:clamp(40px,7vw,84px);max-width:16ch;margin-top:24px}
+/* line-height 1.15 (loosened from inherited 1.05) so the "y" descender in
+   "your business" / "your headcount." has room to live without crossing
+   into any inline highlight pill on the line between. */
+.hero h1{font-size:clamp(40px,7vw,84px);max-width:16ch;margin-top:24px;
+  line-height:1.15}
 .hero .sub{font-size:20px;line-height:1.5;opacity:.86;max-width:var(--measure);margin:24px 0 16px}
 .hero .dog{font-weight:600;font-size:18px;margin:0 0 32px}
 .hero .dog b{color:var(--accent-ink)}
+/* H1 pivot-word highlight: same tinted-marigold + ochre treatment as the
+   hero pill (background var(--accent-tint), text var(--accent-ink)).
+   Padding em-relative so the highlight scales with the headline; pill
+   radius preserved (border-radius:999px → fully-rounded ends).
+   box-decoration-break:clone keeps the highlight intact if the word
+   ever wraps to a new line. */
+.hero h1 .hl{background:var(--accent-tint);color:var(--accent-ink);
+  padding:0 .35em;border-radius:999px;
+  -webkit-box-decoration-break:clone;box-decoration-break:clone}
 .cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
 /* Strapline row, not three metric tiles. Hairline divider above separates the
    facts from the CTA. dt is an editorial label (tracked uppercase, eyebrow-family);
@@ -227,7 +261,11 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:20px;paddi
   padding:clamp(40px,5vw,60px)}
 .proof .eyebrow{color:var(--accent)}
 .proof h2{color:var(--surface);font-size:clamp(28px,4vw,44px);max-width:18ch;line-height:1.12}
-.brands{display:flex;gap:14px 34px;flex-wrap:wrap;margin-top:30px;
+/* Natural inline flow: each name + literal "·" sits next to its neighbour
+   with normal whitespace. (Was display:flex with a gap that did nothing
+   when the row was one text node — and broke into oversized gaps once
+   the names became individual <a> children.) */
+.brands{margin-top:30px;line-height:1.55;
   font-family:var(--ff-display);font-weight:700;font-size:22px;opacity:.95}
 .proof .nc{margin-top:24px;font-size:17px;line-height:1.65;letter-spacing:.005em;
   opacity:.9;max-width:56ch}

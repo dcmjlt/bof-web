@@ -204,6 +204,27 @@ and switch twitter:card below to summary_large_image. -->
   .btn:disabled{opacity:.6;cursor:progress;pointer-events:none}
   .micro{font-size:14px;color:var(--muted);margin-top:12px}
 
+  /* Portfolio brand link: inherits parent color at rest so it reads as prose;
+     on hover, picks up the warm accent + a hairline underline + a small "↗"
+     that fades in. The names are real outbound businesses — the affordance
+     exists so curious buyers can verify the dogfood claim. */
+  .brand-link{color:inherit;text-decoration:none;
+    border-bottom:1px solid transparent;
+    transition:color .15s var(--ease),border-color .15s var(--ease)}
+  .brand-link:hover,.brand-link:focus-visible{
+    color:var(--accent-ink);border-bottom-color:currentColor}
+  .brand-link::after{content:"↗";font-size:.78em;
+    display:inline-block;overflow:hidden;vertical-align:baseline;
+    max-width:0;opacity:0;margin-left:0;transform:translateY(-1px);
+    transition:max-width .15s var(--ease),opacity .15s var(--ease),
+               margin-left .15s var(--ease)}
+  .brand-link:hover::after,.brand-link:focus-visible::after{
+    max-width:1em;opacity:.75;margin-left:3px}
+  /* On the dark green proof block (and dark footer), deep-ochre fails contrast.
+     Swap to marigold so the hover signal is actually visible. */
+  .proof .brand-link:hover,.proof .brand-link:focus-visible,
+  footer .brand-link:hover,footer .brand-link:focus-visible{color:var(--accent)}
+
   /* Clear the 81px sticky nav on anchor jumps (primary CTA is #estimate). */
   :where(section,footer)[id],#main{scroll-margin-top:96px}
   section{padding:var(--s-22) 0;border-bottom:1px solid var(--rule)}
@@ -250,10 +271,23 @@ and switch twitter:card below to summary_large_image. -->
 
   /* ---- Hero ---- */
   .hero{padding:60px 0 96px}
-  .hero h1{font-size:clamp(40px,7vw,84px);max-width:14ch;margin-top:24px}
+  /* line-height 1.15 (loosened from inherited 1.05) so the "y" descender in
+     "your business" / "your headcount." has room to live without crossing
+     into the highlighted "without" pill on the line between. */
+  .hero h1{font-size:clamp(40px,7vw,84px);max-width:14ch;margin-top:24px;
+    line-height:1.15}
   .hero .sub{font-size:20px;line-height:1.5;opacity:.86;max-width:var(--measure);margin:24px 0 16px}
   .hero .dog{font-weight:600;font-size:18px;margin:0 0 32px}
   .hero .dog b{color:var(--accent-ink)}
+  /* H1 pivot-word highlight: same tinted-marigold + ochre treatment as the
+     hero pill (background var(--accent-tint), text var(--accent-ink)).
+     Padding em-relative so the highlight scales with the headline; pill
+     radius preserved (border-radius:999px → fully-rounded ends).
+     box-decoration-break:clone keeps the highlight intact if the word
+     ever wraps to a new line. */
+  .hero h1 .hl{background:var(--accent-tint);color:var(--accent-ink);
+    padding:0 .35em;border-radius:999px;
+    -webkit-box-decoration-break:clone;box-decoration-break:clone}
   .cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
   /* Strapline row, not three metric tiles. Hairline divider above separates the
      facts from the CTA. dt is an editorial label (tracked uppercase, eyebrow-family);
@@ -293,7 +327,11 @@ and switch twitter:card below to summary_large_image. -->
   .proof .eyebrow{color:var(--accent)}
   /* light-on-dark compensation: line-height + tracking + weight */
   .proof h2{color:var(--surface);font-size:clamp(28px,4vw,44px);max-width:18ch;line-height:1.12}
-  .brands{display:flex;gap:14px 34px;flex-wrap:wrap;margin-top:30px;
+  /* Natural inline flow: each name + literal "·" sits next to its neighbour
+     with normal whitespace. (Was display:flex with a gap that did nothing
+     when the row was one text node — and broke into oversized gaps once
+     the names became individual <a> children.) */
+  .brands{margin-top:30px;line-height:1.55;
     font-family:var(--ff-display);font-weight:700;font-size:22px;opacity:.95}
   .proof .nc{margin-top:24px;font-size:17px;line-height:1.65;letter-spacing:.005em;
     opacity:.9;max-width:56ch}
@@ -308,11 +346,10 @@ and switch twitter:card below to summary_large_image. -->
     display:flex;gap:12px;align-items:flex-start}
   .price-list li:last-child{border:0}
   .check{color:var(--accent-ink);font-weight:800;flex:none;line-height:1.5}
-  /* Quote: rebuilt WITHOUT the banned side-stripe border. Tinted block + oversized mark. */
+  /* Quote: rebuilt WITHOUT the banned side-stripe border. Tinted block carries it;
+     the italic prose is the design move (decorative quote-mark distilled out 2026-05-20). */
   .testimonial{background:var(--accent-tint-soft);border:1px solid var(--rule);
-    border-radius:var(--r-card);padding:32px 32px 28px;position:relative;align-self:center}
-  .testimonial .qmark{font-family:var(--ff-display);font-weight:800;font-size:56px;
-    line-height:.6;color:var(--accent);display:block;margin-bottom:8px}
+    border-radius:var(--r-card);padding:32px 32px 28px;align-self:center}
   .testimonial blockquote{font-size:19px;line-height:1.5;font-style:italic}
   .testimonial figcaption{margin-top:16px;font-size:14px;color:var(--muted);
     font-weight:600;font-style:normal}
@@ -499,7 +536,21 @@ and switch twitter:card below to summary_large_image. -->
        button clears the 44px tap-target minimum (default .btn-sm is 37px tall;
        15px padding + 15px line gives 45px, a 1px margin over the iOS spec). */
     .nav-cta .btn-sm{padding-top:15px;padding-bottom:15px}
-    .meta{gap:14px 28px;margin-top:36px;padding-top:20px}
+    /* Hero CTA pair stacks full-width on mobile: each tap target spans the
+       column instead of two half-width buttons fighting for thumb space. */
+    .hero .cta-row{flex-direction:column;align-items:stretch}
+    .hero .cta-row .btn{width:100%;justify-content:center}
+    /* Pricing-trust CTA matches the hero pattern on mobile: full-width
+       tap target, centered label. Single button — no stacking needed. */
+    .price-block .btn-primary{width:100%;justify-content:center}
+    /* Estimate flow: stacked container paddings (.estimate 36px + .eform 32px
+       + .btn 28px) collapsed the form button's content area to 143px on a
+       375 viewport, wrapping "Send me my estimate" to two lines. Tighten
+       both card paddings + the form button's own horizontal padding on
+       mobile so the label + arrow sit on one row. */
+    .estimate{padding:28px}
+    .eform{padding:22px}
+    .eform .btn-primary{padding-inline:16px;font-size:16px;gap:6px;white-space:nowrap}
     .foot{grid-template-columns:1fr;gap:32px}
     .foot-dir{grid-template-columns:1fr;gap:0;padding-bottom:var(--s-8)}
     .foot-dir>div{border-top:1px solid var(--ground-fg-rule-soft)}
@@ -576,11 +627,11 @@ and switch twitter:card below to summary_large_image. -->
   <div class="wrap">
     <header class="hero">
       <span class="pill">Back office for growing digital businesses</span>
-      <h1>Scale your business without scaling your headcount.</h1>
+      <h1>Scale your business <span class="hl">without</span> scaling your headcount.</h1>
       <p class="sub">Bookkeeping, customer support, payroll, operations admin, order and document
         processing, and the repetitive back-office work that keeps a business running, handled by a
         team of real people and AI agents working in the same workflow.</p>
-      <p class="dog">The same team runs <b>TicketsToDo, VoucherCodes.ae, DCMnetwork</b> and more.
+      <p class="dog">The same team runs <b><a class="brand-link" href="https://www.ticketstodo.com/" target="_blank" rel="noopener external">TicketsToDo</a>, <a class="brand-link" href="https://vouchercodes.ae/" target="_blank" rel="noopener external">VoucherCodes.ae</a>, <a class="brand-link" href="https://www.dcmnetwork.com/" target="_blank" rel="noopener external">DCMnetwork</a></b> and more.
         We do not take on business that competes with us or you.</p>
       <div class="cta-row">
         <a href="#estimate" class="btn btn-primary">Get your estimate
@@ -680,7 +731,7 @@ and switch twitter:card below to summary_large_image. -->
       <div class="proof">
         <p class="eyebrow">Why us</p>
         <h2 id="proof-h">We run our own digital businesses on this exact team.</h2>
-        <p class="brands">TicketsToDo · VoucherCodes.ae · DCMnetwork · and more</p>
+        <p class="brands"><a class="brand-link" href="https://www.ticketstodo.com/" target="_blank" rel="noopener external">TicketsToDo</a> · <a class="brand-link" href="https://vouchercodes.ae/" target="_blank" rel="noopener external">VoucherCodes.ae</a> · <a class="brand-link" href="https://www.dcmnetwork.com/" target="_blank" rel="noopener external">DCMnetwork</a> · and more</p>
         <p class="nc">The same operation that holds our own products to a high bar runs your back
           office to that same bar. We do not take on business that competes with us or you.
           Your work stays yours.</p>
@@ -708,7 +759,6 @@ and switch twitter:card below to summary_large_image. -->
           <p class="micro">A real number, early. No runaround.</p>
         </div>
         <figure class="testimonial">
-          <span class="qmark" aria-hidden="true">&ldquo;</span>
           <blockquote>I asked the price on day one. They told me straight, no dance. A year in,
             it is the best money we spend.</blockquote>
           <figcaption>Founder, UK e-commerce business
@@ -810,8 +860,8 @@ and switch twitter:card below to summary_large_image. -->
             <span class="peek">No. We run our own digital businesses, so we never take on anyone who competes with you.</span>
           </summary>
           <div class="a">
-            <p>No. We run our own digital businesses on this exact team, TicketsToDo,
-              VoucherCodes.ae, DCMnetwork and more, so we hold a firm line: we do not take on
+            <p>No. We run our own digital businesses on this exact team, <a class="brand-link" href="https://www.ticketstodo.com/" target="_blank" rel="noopener external">TicketsToDo</a>,
+              <a class="brand-link" href="https://vouchercodes.ae/" target="_blank" rel="noopener external">VoucherCodes.ae</a>, <a class="brand-link" href="https://www.dcmnetwork.com/" target="_blank" rel="noopener external">DCMnetwork</a> and more, so we hold a firm line: we do not take on
               business that competes with us or you. Your work, your data and your edge stay
               yours.</p>
           </div>
@@ -968,8 +1018,12 @@ and switch twitter:card below to summary_large_image. -->
           <div class="eform-done" role="status" tabindex="-1">
             <div class="tick" aria-hidden="true">&check;</div>
             <h3>Got it. Your estimate is on the way.</h3>
-            <p>We will come back by email with an honest indicative range, usually within one
-              working day. A real number, no runaround.</p>
+            <!-- ETA line is overwritten at submit time with a precise window
+                 (e.g. "By email, before end of day") based on local hour + day.
+                 The default text is the Mon-Thu morning case, which is the
+                 honest no-JS fallback — never the wrong answer, just less
+                 specific than the JS variant. -->
+            <p id="eform-done-eta">By email, before end of day. A real number, no runaround.</p>
           </div>
         </div>
       </div>
@@ -1171,6 +1225,20 @@ and switch twitter:card below to summary_large_image. -->
         body:data})
         .catch(function(){/* still confirm; ops alarms on failed Slack POST */})
         .finally(function(){
+          // Replace the static SLA with a precise window computed at submit
+          // time (local clock). The buyer gets a real promise, not "within
+          // one working day" theatre. Friday-late + weekend roll to next
+          // working day; afternoon rolls to tomorrow morning.
+          var eta=document.getElementById('eform-done-eta');
+          if(eta){
+            var now=new Date(),d=now.getDay(),h=now.getHours();
+            var rollover=(d===0||d===6)||(d===5&&h>=17);
+            var line=rollover?'By email, first thing on the next working day.':
+                     (h<12)?'By email, before end of day.':
+                     (h<17)?'By email, tomorrow morning.':
+                            'By email, first thing tomorrow morning.';
+            eta.textContent=line+' A real number, no runaround.';
+          }
           box.dataset.sent='true';
           var done=box.querySelector('.eform-done');
           done.focus();
