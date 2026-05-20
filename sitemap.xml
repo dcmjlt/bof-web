@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- LAUNCH BLOCKER: All page-level robots are noindex until the placeholder
-     trust artefacts ship (price-honesty quote, named case studies, UK contact,
-     data-protection wording, cert status). Do NOT submit this sitemap to
-     Search Console until those land + the page-level `noindex` is removed;
-     submitting noindex URLs triggers a "Submitted URL marked noindex" warning.
-     Tracked in CLAUDE.md ship blockers + memory project_site_ia_build_order. -->
+<!-- 26 indexable URLs. All pages serve index,follow as of 2026-05-20.
+     Submit to Search Console: https://search.google.com/search-console (BOF property). -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://backofficefactory.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
   <url><loc>https://backofficefactory.com/about/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
