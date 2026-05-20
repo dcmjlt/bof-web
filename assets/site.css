@@ -3,7 +3,12 @@
    to the locked, performance-tuned homepage system. index.html keeps its own inline
    copy (CLS-tuned, zero render-blocking request on the primary conversion page);
    the 17 SEO landing pages link this file so the locked design lives in 2 places,
-   not 18. If DESIGN.md changes, update BOTH this file and index.html's <style>. */
+   not 18. If DESIGN.md changes, update BOTH this file and index.html's <style>.
+
+   Enforcement: scripts/check-design-sync.mjs is wired into .github/workflows/
+   design-sync.yml. It compares CSS custom properties + a sentinel-rule set
+   across the two files and fails CI on drift. Run locally with
+   `node scripts/check-design-sync.mjs` before pushing. */
 
 :root{
   /* Locked v2 palette — DESIGN.md "warm modern operator" */
@@ -19,6 +24,22 @@
   --error:#B23A1E;     /* warm rust, in-palette error (AA on white form) */
   --error-bg:rgba(178,58,30,.06);
   --rule:#E7DECB;      /* hairline */
+  --rule-soft:#D8CDB4; /* secondary hairline (cream-shaded), dashed borders */
+
+  /* Alpha-variants of the brand palette. Use these instead of inline rgba so
+     a future palette shift updates one place, not ten. Audit cleanup 2026-05-20. */
+  --accent-tint:rgba(232,163,61,.16);          /* pill, flag */
+  --accent-tint-soft:rgba(232,163,61,.08);     /* testimonial wash */
+  --accent-tint-softer:rgba(232,163,61,.07);   /* neg-us "this is us" fill */
+  --ground-tint:rgba(30,61,50,.1);             /* sector tags, .tag */
+  --ground-tint-soft:rgba(30,61,50,.12);       /* estimate-done tick */
+  --ink-tint-soft:rgba(31,26,20,.05);          /* ghost-btn hover, photo placeholder */
+  --ink-tint-softer:rgba(31,26,20,.04);        /* menu-item hover */
+  --ground-fg-rule:rgba(244,239,226,.16);      /* dividers on ground footer */
+  --ground-fg-rule-soft:rgba(244,239,226,.12); /* mobile footer dividers */
+  --ground-fg-tint:rgba(244,239,226,.1);       /* btn-ghost hover on ground */
+  --bg-nav:rgba(251,247,240,.86);              /* sticky nav at rest */
+  --bg-nav-stuck:rgba(251,247,240,.94);        /* sticky nav after scroll */
 
   --measure:62ch;
   --maxw:1120px;
@@ -58,6 +79,11 @@ h1,h2,h3,.disp{
   font-family:var(--ff-display);font-weight:800;
   line-height:1.05;letter-spacing:-.02em;text-wrap:balance;
 }
+/* Letter-spacing per size: tighter at huge display, looser at smaller display.
+   Cabinet Grotesk reads heavier as it scales up; tightening preserves the
+   designed letter fit. */
+.hero h1{letter-spacing:-.025em}
+h3{letter-spacing:-.015em}
 p{text-wrap:pretty}
 a{color:inherit}
 
@@ -80,7 +106,7 @@ footer :where(a,button,input,select,textarea,summary):focus-visible{
 .flag{
   display:inline-block;font-family:var(--ff-body);font-size:11px;font-weight:700;
   letter-spacing:.06em;text-transform:uppercase;color:var(--accent-ink);
-  background:rgba(232,163,61,.16);padding:4px 10px;border-radius:999px;vertical-align:middle;
+  background:var(--accent-tint);padding:4px 10px;border-radius:999px;vertical-align:middle;
 }
 footer .flag{color:var(--ground-fg);background:rgba(0,0,0,.24)}
 
@@ -91,7 +117,7 @@ footer .flag{color:var(--ground-fg);background:rgba(0,0,0,.24)}
 }
 .pill{
   display:inline-block;font-size:13px;font-weight:600;letter-spacing:.02em;
-  background:rgba(232,163,61,.16);color:var(--accent-ink);
+  background:var(--accent-tint);color:var(--accent-ink);
   padding:8px 14px;border-radius:999px;
 }
 .btn{
@@ -104,21 +130,28 @@ footer .flag{color:var(--ground-fg);background:rgba(0,0,0,.24)}
 .btn-primary:hover{background:var(--accent-deep);transform:translateY(-1px)}
 .btn-primary:active{transform:translateY(0)}
 .btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink);padding:14.5px 26px}
-.btn-ghost:hover{background:rgba(31,26,20,.05);transform:translateY(-1px)}
+.btn-ghost:hover{background:var(--ink-tint-soft);transform:translateY(-1px)}
 .btn-sm{padding:11px 20px;font-size:15px}
 .btn:disabled{opacity:.6;cursor:progress;pointer-events:none}
 .micro{font-size:14px;color:var(--muted);margin-top:12px}
 
 :where(section,footer)[id],#main{scroll-margin-top:96px}
 section{padding:var(--s-22) 0;border-bottom:1px solid var(--rule)}
-.sec-h{font-size:clamp(28px,4vw,44px);max-width:18ch}
+/* Rhythm overrides: pair the proof + pricing-trust sections (both trust artefacts;
+   should feel like one move, not two stops); give the estimate CTA more breathing
+   room above so arrival feels emphasised. */
+section#proof{padding-bottom:var(--s-18)}
+section#pricing{padding-top:var(--s-18)}
+section#estimate{padding-top:calc(var(--s-22) + 16px)}
+.sec-h{font-size:clamp(28px,4vw,44px);max-width:18ch;line-height:1.1}
 .deck{font-size:20px;color:var(--ink);opacity:.84;max-width:var(--measure);margin-top:18px}
 
 /* ---- Nav ---- */
-.nav-shell{position:sticky;top:0;z-index:30;background:rgba(251,247,240,.86);
+.nav-shell{position:sticky;top:0;z-index:30;background:var(--bg-nav);
+  -webkit-backdrop-filter:saturate(140%) blur(8px);
   backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid transparent;
   transition:border-color .2s var(--ease),background .2s var(--ease)}
-.nav-shell[data-stuck="true"]{border-bottom-color:var(--rule);background:rgba(251,247,240,.94)}
+.nav-shell[data-stuck="true"]{border-bottom-color:var(--rule);background:var(--bg-nav-stuck)}
 nav{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px 0}
 .logo{display:flex;align-items:center;gap:12px;font-family:var(--ff-display);
   font-weight:800;font-size:20px;text-decoration:none;letter-spacing:-.01em}
@@ -140,7 +173,7 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:20px;paddi
   top:100%;margin-top:8px;background:var(--surface);border:1px solid var(--rule);
   border-radius:var(--r-card);padding:14px;box-shadow:0 18px 50px -24px rgba(31,26,20,.4)}
 .menu a{text-decoration:none;padding:13px 14px;border-radius:10px;font-weight:600}
-.menu a:hover{background:rgba(31,26,20,.04)}
+.menu a:hover{background:var(--ink-tint-softer)}
 .menu .btn{justify-content:center;margin-top:6px}
 
 /* ---- Breadcrumb (landing-page wayfinding) ---- */
@@ -158,16 +191,26 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:20px;paddi
 .hero .dog{font-weight:600;font-size:18px;margin:0 0 32px}
 .hero .dog b{color:var(--accent-ink)}
 .cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
-.meta{display:flex;gap:40px;margin-top:56px;flex-wrap:wrap}
-.meta dt{font-family:var(--ff-display);font-weight:800;font-size:28px;letter-spacing:-.02em}
-.meta dd{color:var(--muted);font-size:14px;margin-top:4px;max-width:24ch}
+/* Strapline row, not three metric tiles. Hairline divider above separates the
+   facts from the CTA. dt is an editorial label (tracked uppercase, eyebrow-family);
+   dd carries the load-bearing sentence underneath. */
+.meta{display:flex;gap:20px 36px;margin-top:48px;padding-top:24px;
+  border-top:1px solid var(--rule);flex-wrap:wrap}
+.meta dt{font-family:var(--ff-body);font-weight:700;font-size:12px;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink)}
+.meta dd{color:var(--ink);font-size:15px;margin-top:4px;max-width:28ch;
+  line-height:1.5;opacity:.86}
 
 /* ---- Two-card (people + AI) ---- */
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:40px}
+/* Lead variant: first card carries more weight. Use only for asymmetric content
+   like the workforce "people lead, AI augments" frame, not for grids of
+   equal-weight items (e.g. about's commitments grid). */
+.grid2.lead{grid-template-columns:1.2fr .8fr}
 .card{background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-card);padding:32px}
 .card h3{font-size:22px;line-height:1.2;margin-bottom:8px}
 .card p{color:var(--ink);opacity:.8;font-size:16px}
-.tag{font-size:13px;font-weight:700;color:var(--ground);background:rgba(30,61,50,.1);
+.tag{font-size:13px;font-weight:700;color:var(--ground);background:var(--ground-tint);
   padding:5px 11px;border-radius:8px;display:inline-block;margin-bottom:18px}
 
 /* ---- Service / scope list ---- */
@@ -183,7 +226,7 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:20px;paddi
 .proof{background:var(--ground);color:var(--ground-fg);border-radius:var(--r-block);
   padding:clamp(40px,5vw,60px)}
 .proof .eyebrow{color:var(--accent)}
-.proof h2{color:#fff;font-size:clamp(28px,4vw,44px);max-width:18ch;line-height:1.12}
+.proof h2{color:var(--surface);font-size:clamp(28px,4vw,44px);max-width:18ch;line-height:1.12}
 .brands{display:flex;gap:14px 34px;flex-wrap:wrap;margin-top:30px;
   font-family:var(--ff-display);font-weight:700;font-size:22px;opacity:.95}
 .proof .nc{margin-top:24px;font-size:17px;line-height:1.65;letter-spacing:.005em;
@@ -201,10 +244,10 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:20px;paddi
 
 /* ---- Negative space ---- */
 .neg{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}
-.neg li{list-style:none;border:1px dashed #D8CDB4;border-radius:16px;
+.neg li{list-style:none;border:1px dashed var(--rule-soft);border-radius:16px;
   padding:24px;color:var(--muted);font-size:16px}
 .neg-us{margin-top:18px;border:2px solid var(--accent);border-radius:16px;
-  padding:24px 26px;background:rgba(232,163,61,.07);font-weight:600;font-size:18px}
+  padding:24px 26px;background:var(--accent-tint-softer);font-weight:600;font-size:18px}
 
 /* ---- Steps ---- */
 .steps{counter-reset:step;margin-top:40px;display:grid;
@@ -217,27 +260,38 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:20px;paddi
 .step h3{font-size:20px;margin-bottom:8px}
 .step p{color:var(--ink);opacity:.78;font-size:16px}
 
-/* ---- Related links ---- */
-.rel{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px;list-style:none}
-.rel a{display:block;background:var(--surface);border:1px solid var(--rule);
-  border-radius:var(--r-card);padding:22px 24px;text-decoration:none;
-  transition:transform .15s var(--ease),border-color .15s var(--ease)}
-.rel a:hover{transform:translateY(-2px);border-color:var(--muted)}
-.rel b{font-family:var(--ff-display);font-weight:700;font-size:18px;
-  display:block;margin-bottom:6px;letter-spacing:-.01em}
-.rel span{font-size:14px;color:var(--muted);line-height:1.5}
+/* ---- Related links ----
+   Auxiliary nav, not feature cards. Typographic list with marigold arrows and
+   hairline rules: reads as "look at these too", not "pick a tile". Was a 3-up
+   card grid; broke the identical-card-grid anti-pattern (impeccable/layout). */
+.rel{display:flex;flex-direction:column;margin-top:36px;list-style:none;
+  border-top:1px solid var(--rule)}
+.rel li{border-bottom:1px solid var(--rule)}
+.rel a{display:flex;align-items:baseline;gap:20px;padding:20px 4px;
+  text-decoration:none;transition:background .15s var(--ease)}
+.rel a:hover{background:var(--ink-tint-softer)}
+.rel a::before{content:"\2192";color:var(--accent-ink);font-weight:800;
+  font-size:18px;line-height:1.2;flex:none;align-self:center}
+.rel b{font-family:var(--ff-display);font-weight:700;font-size:19px;
+  letter-spacing:-.01em;color:var(--ink);flex:none}
+.rel span{font-size:14px;color:var(--muted);line-height:1.5;
+  margin-left:auto;text-align:right;max-width:48ch}
+@media(max-width:760px){
+  .rel a{flex-wrap:wrap;align-items:flex-start;gap:6px 14px}
+  .rel span{margin-left:32px;text-align:left;flex-basis:100%;max-width:none}
+}
 
 /* ---- Estimate CTA band ---- */
 .estimate{background:var(--ground);color:var(--ground-fg);border-radius:var(--r-block);
   padding:clamp(36px,5vw,60px);display:grid;grid-template-columns:1fr;
   gap:clamp(24px,3vw,32px);align-items:start}
 .estimate .eyebrow{color:var(--accent)}
-.estimate h2{color:#fff;font-size:clamp(26px,3.6vw,40px);max-width:20ch;line-height:1.12}
+.estimate h2{color:var(--surface);font-size:clamp(26px,3.6vw,40px);max-width:20ch;line-height:1.12}
 .estimate .blurb{margin-top:6px;font-size:17px;line-height:1.6;letter-spacing:.005em;opacity:.9;max-width:60ch}
 .estimate .reassure{font-size:15px;opacity:.78}
 .estimate .cta-row{margin-top:8px}
 .estimate .btn-ghost{color:var(--ground-fg);border-color:var(--ground-fg)}
-.estimate .btn-ghost:hover{background:rgba(244,239,226,.1)}
+.estimate .btn-ghost:hover{background:var(--ground-fg-tint)}
 
 /* ---- FAQ (peek pattern — feedback_faq_peek_pattern) ---- */
 .faq{margin-top:40px;border-top:1px solid var(--rule)}
@@ -251,7 +305,7 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:20px;paddi
   font-size:clamp(18px,2.2vw,21px);line-height:1.3;color:var(--ink);
   transition:color .15s var(--ease)}
 .qa summary:hover .q{color:var(--accent-ink)}
-.qa .peek{grid-column:1;grid-row:2;font-weight:400;font-size:15px;
+.qa .peek{grid-column:1;grid-row:2;font-weight:400;font-size:16px;
   line-height:1.5;color:var(--muted);
   display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;overflow:hidden}
 .qa[open] .peek{display:none}
@@ -281,20 +335,21 @@ footer{background:var(--ground);color:var(--ground-fg);border:0}
 .foot a,.foot-dir a{text-decoration:none;opacity:.85;font-size:15px}
 .foot a:hover,.foot-dir a:hover{opacity:1;text-decoration:underline;text-underline-offset:3px}
 .foot-dir{display:grid;grid-template-columns:1fr 1fr 2.2fr;gap:40px;
-  padding:var(--s-10) 0 var(--s-10);border-top:1px solid rgba(244,239,226,.16)}
+  padding:var(--s-10) 0 var(--s-10);border-top:1px solid var(--ground-fg-rule)}
 .foot-dir .foot-cols{display:grid;grid-template-columns:1fr 1fr;gap:11px 32px}
 .foot-dir details{display:contents}
 .foot-dir summary{display:block;list-style:none}
 .foot-dir summary::-webkit-details-marker{display:none}
 .foot-dir summary h3{cursor:default}
-.foot-base{border-top:1px solid rgba(244,239,226,.16);padding:24px 0 56px;
+.foot-base{border-top:1px solid var(--ground-fg-rule);padding:24px 0 56px;
   display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
   font-size:13px;opacity:.75}
 
 /* ---- Responsive ---- */
 @media(max-width:920px){
   .steps{grid-template-columns:1fr 1fr}
-  .rel{grid-template-columns:1fr 1fr}
+  /* Tablet: drop the .lead asymmetry to even halves so neither card cramps. */
+  .grid2.lead{grid-template-columns:1fr 1fr}
   .foot{grid-template-columns:1fr}
   .foot-dir{grid-template-columns:1fr 1fr}
   .foot-dir .foot-roles{grid-column:1 / -1}
@@ -305,11 +360,11 @@ footer{background:var(--ground);color:var(--ground-fg);border:0}
   .nav-shell .wordmark{display:none}
   .mobile{display:block}
   .hero{padding:32px 0 72px}
-  .grid2,.neg,.steps,.svc,.rel,.price-list{grid-template-columns:1fr}
-  .meta{gap:28px 40px;margin-top:40px}
+  .grid2,.neg,.steps,.svc,.price-list{grid-template-columns:1fr}
+  .meta{gap:14px 28px;margin-top:36px;padding-top:20px}
   .foot{grid-template-columns:1fr;gap:32px}
   .foot-dir{grid-template-columns:1fr;gap:0;padding-bottom:var(--s-8)}
-  .foot-dir>div{border-top:1px solid rgba(244,239,226,.12)}
+  .foot-dir>div{border-top:1px solid var(--ground-fg-rule-soft)}
   .foot-dir details{display:block}
   .foot-dir summary{display:flex;align-items:center;justify-content:space-between;
     cursor:pointer;padding:18px 0}

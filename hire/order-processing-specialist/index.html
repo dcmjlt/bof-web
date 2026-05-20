@@ -61,8 +61,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
-<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500&display=swap" rel="stylesheet">
+<!-- Non-blocking webfont CSS: preload as style + media-toggle swap on load.
+     Capsize fallback faces in site.css eliminate font-swap CLS, so first paint
+     is instant with the fallback and the real font swaps in transparently. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" media="print" onload="this.media='all'">
+<link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500&display=swap" media="print" onload="this.media='all'">
+<noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap">
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500&display=swap">
+</noscript>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23E8A33D'/%3E%3Ctext x='16' y='22' font-family='Verdana,sans-serif' font-size='17' font-weight='700' text-anchor='middle' fill='%231F1A14'%3EB%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="/assets/site.css">
 </head>
@@ -172,7 +181,7 @@
       <h2 class="sec-h" id="wf-h" style="max-width:18ch">Real people and real AI agents, on the same workflow.</h2>
       <p class="deck">Some work needs judgement. Some is high-volume and repetitive. We run both
         through one workflow, so you get the right mix without managing another AI tool yourself.</p>
-      <div class="grid2">
+      <div class="grid2 lead">
         <article class="card">
           <span class="tag">People</span>
           <h3>Trained operators</h3>

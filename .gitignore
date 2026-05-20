@@ -33,6 +33,9 @@ SEO-*.md
 # --- Internal source material (pitch / branding / sitemap / USP) ---
 *.pdf
 
+# --- Internal client feedback (never publish) ---
+back-office-factory-feedback.txt
+
 # --- Designer share material & logo sources (working assets) ---
 mockup-share/
 

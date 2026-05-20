@@ -1,0 +1,25 @@
+name: Design system sync
+
+# Why this exists: the locked v2 design system lives in TWO places — index.html's
+# inline <style> (kept inline for first-paint CLS on the primary conversion page)
+# and assets/site.css (linked by the 17 SEO landing pages + /about). They must
+# stay in step, or a fix to the homepage will silently miss everywhere else.
+# This workflow runs scripts/check-design-sync.mjs on every push and PR; if the
+# tokens or sentinel rules drift, the check fails and the PR is blocked.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  check:
+    name: index.html <style> ↔ assets/site.css
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: node scripts/check-design-sync.mjs

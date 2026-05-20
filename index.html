@@ -57,8 +57,17 @@ and switch twitter:card below to summary_large_image. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
-<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500&display=swap" rel="stylesheet">
+<!-- Non-blocking webfont CSS: preload as style + media-toggle swap on load.
+     Capsize fallback faces above eliminate font-swap CLS, so first paint is
+     instant with the fallback and the real font swaps in transparently. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" media="print" onload="this.media='all'">
+<link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500&display=swap" media="print" onload="this.media='all'">
+<noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap">
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500&display=swap">
+</noscript>
 <!-- Inline favicon (no network request, kills the /favicon.ico 404) -->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23E8A33D'/%3E%3Ctext x='16' y='22' font-family='Verdana,sans-serif' font-size='17' font-weight='700' text-anchor='middle' fill='%231F1A14'%3EB%3C/text%3E%3C/svg%3E">
 
@@ -77,6 +86,22 @@ and switch twitter:card below to summary_large_image. -->
     --error:#B23A1E;     /* warm rust, in-palette error (AA on white form) */
     --error-bg:rgba(178,58,30,.06);
     --rule:#E7DECB;      /* hairline */
+    --rule-soft:#D8CDB4; /* secondary hairline (cream-shaded), dashed borders */
+
+    /* Alpha-variants of the brand palette. Use these instead of inline rgba so
+       a future palette shift updates one place, not ten. Audit cleanup 2026-05-20. */
+    --accent-tint:rgba(232,163,61,.16);          /* pill, flag */
+    --accent-tint-soft:rgba(232,163,61,.08);     /* testimonial wash */
+    --accent-tint-softer:rgba(232,163,61,.07);   /* neg-us "this is us" fill */
+    --ground-tint:rgba(30,61,50,.1);             /* sector tags, .tag */
+    --ground-tint-soft:rgba(30,61,50,.12);       /* estimate-done tick */
+    --ink-tint-soft:rgba(31,26,20,.05);          /* ghost-btn hover */
+    --ink-tint-softer:rgba(31,26,20,.04);        /* menu-item hover */
+    --ground-fg-rule:rgba(244,239,226,.16);      /* dividers on ground footer */
+    --ground-fg-rule-soft:rgba(244,239,226,.12); /* mobile footer dividers */
+    --ground-fg-tint:rgba(244,239,226,.1);       /* btn-ghost hover on ground (SEO pages only; mirrored here to keep token sets identical per scripts/check-design-sync.mjs) */
+    --bg-nav:rgba(251,247,240,.86);              /* sticky nav at rest */
+    --bg-nav-stuck:rgba(251,247,240,.94);        /* sticky nav after scroll */
 
     --measure:62ch;
     --maxw:1120px;
@@ -122,6 +147,9 @@ and switch twitter:card below to summary_large_image. -->
     font-family:var(--ff-display);font-weight:800;
     line-height:1.05;letter-spacing:-.02em;text-wrap:balance;
   }
+  /* Letter-spacing per size: tighter at huge display, looser at smaller display. */
+  .hero h1{letter-spacing:-.025em}
+  h3{letter-spacing:-.015em}
   p{text-wrap:pretty}
   a{color:inherit}
 
@@ -145,7 +173,7 @@ and switch twitter:card below to summary_large_image. -->
   .flag{
     display:inline-block;font-family:var(--ff-body);font-size:11px;font-weight:700;
     letter-spacing:.06em;text-transform:uppercase;color:var(--accent-ink);
-    background:rgba(232,163,61,.16);padding:4px 10px;border-radius:999px;vertical-align:middle;
+    background:var(--accent-tint);padding:4px 10px;border-radius:999px;vertical-align:middle;
   }
   /* On the dark green footer the deep-ochre ink fails AA; use light ground-fg
      on a neutral-dark pill (composite contrast >7:1, keeps the flag semantic). */
@@ -158,7 +186,7 @@ and switch twitter:card below to summary_large_image. -->
   }
   .pill{
     display:inline-block;font-size:13px;font-weight:600;letter-spacing:.02em;
-    background:rgba(232,163,61,.16);color:var(--accent-ink);
+    background:var(--accent-tint);color:var(--accent-ink);
     padding:8px 14px;border-radius:999px;
   }
   .btn{
@@ -171,7 +199,7 @@ and switch twitter:card below to summary_large_image. -->
   .btn-primary:hover{background:var(--accent-deep);transform:translateY(-1px)}
   .btn-primary:active{transform:translateY(0)}
   .btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink);padding:14.5px 26px}
-  .btn-ghost:hover{background:rgba(31,26,20,.05);transform:translateY(-1px)}
+  .btn-ghost:hover{background:var(--ink-tint-soft);transform:translateY(-1px)}
   .btn-sm{padding:11px 20px;font-size:15px}
   .btn:disabled{opacity:.6;cursor:progress;pointer-events:none}
   .micro{font-size:14px;color:var(--muted);margin-top:12px}
@@ -179,14 +207,22 @@ and switch twitter:card below to summary_large_image. -->
   /* Clear the 81px sticky nav on anchor jumps (primary CTA is #estimate). */
   :where(section,footer)[id],#main{scroll-margin-top:96px}
   section{padding:var(--s-22) 0;border-bottom:1px solid var(--rule)}
-  .sec-h{font-size:clamp(28px,4vw,44px);max-width:18ch}
+  /* Rhythm overrides: pair proof + pricing-trust (one trust move, not two stops);
+     punchier negative-space section (it's a punchline, should feel punchy);
+     more arrival room before estimate. */
+  section#proof{padding-bottom:var(--s-18)}
+  section#pricing{padding-top:var(--s-18)}
+  section#not{padding:var(--s-18) 0}
+  section#estimate{padding-top:calc(var(--s-22) + 16px)}
+  .sec-h{font-size:clamp(28px,4vw,44px);max-width:18ch;line-height:1.1}
   .deck{font-size:20px;color:var(--ink);opacity:.84;max-width:var(--measure);margin-top:18px}
 
   /* ---- Nav ---- */
-  .nav-shell{position:sticky;top:0;z-index:30;background:rgba(251,247,240,.86);
+  .nav-shell{position:sticky;top:0;z-index:30;background:var(--bg-nav);
+    -webkit-backdrop-filter:saturate(140%) blur(8px);
     backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid transparent;
     transition:border-color .2s var(--ease),background .2s var(--ease)}
-  .nav-shell[data-stuck="true"]{border-bottom-color:var(--rule);background:rgba(251,247,240,.94)}
+  .nav-shell[data-stuck="true"]{border-bottom-color:var(--rule);background:var(--bg-nav-stuck)}
   nav{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px 0}
   .logo{display:flex;align-items:center;gap:12px;font-family:var(--ff-display);
     font-weight:800;font-size:20px;text-decoration:none;letter-spacing:-.01em}
@@ -209,7 +245,7 @@ and switch twitter:card below to summary_large_image. -->
     top:100%;margin-top:8px;background:var(--surface);border:1px solid var(--rule);
     border-radius:var(--r-card);padding:14px;box-shadow:0 18px 50px -24px rgba(31,26,20,.4)}
   .menu a{text-decoration:none;padding:13px 14px;border-radius:10px;font-weight:600}
-  .menu a:hover{background:rgba(31,26,20,.04)}
+  .menu a:hover{background:var(--ink-tint-softer)}
   .menu .btn{justify-content:center;margin-top:6px}
 
   /* ---- Hero ---- */
@@ -219,16 +255,25 @@ and switch twitter:card below to summary_large_image. -->
   .hero .dog{font-weight:600;font-size:18px;margin:0 0 32px}
   .hero .dog b{color:var(--accent-ink)}
   .cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
-  .meta{display:flex;gap:40px;margin-top:56px;flex-wrap:wrap}
-  .meta dt{font-family:var(--ff-display);font-weight:800;font-size:28px;letter-spacing:-.02em}
-  .meta dd{color:var(--muted);font-size:14px;margin-top:4px;max-width:24ch}
+  /* Strapline row, not three metric tiles. Hairline divider above separates the
+     facts from the CTA. dt is an editorial label (tracked uppercase, eyebrow-family);
+     dd carries the load-bearing sentence underneath. */
+  .meta{display:flex;gap:20px 36px;margin-top:48px;padding-top:24px;
+    border-top:1px solid var(--rule);flex-wrap:wrap}
+  .meta dt{font-family:var(--ff-body);font-weight:700;font-size:12px;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink)}
+  .meta dd{color:var(--ink);font-size:15px;margin-top:4px;max-width:28ch;
+    line-height:1.5;opacity:.86}
 
   /* ---- One workforce ---- */
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:40px}
+  /* Lead variant: first card carries more weight. Use for asymmetric content
+     (workforce "people lead, AI augments"); not for grids of equal-weight items. */
+  .grid2.lead{grid-template-columns:1.2fr .8fr}
   .card{background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-card);padding:32px}
   .card h3{font-size:22px;line-height:1.2;margin-bottom:8px}
   .card p{color:var(--ink);opacity:.8;font-size:16px}
-  .tag{font-size:13px;font-weight:700;color:var(--ground);background:rgba(30,61,50,.1);
+  .tag{font-size:13px;font-weight:700;color:var(--ground);background:var(--ground-tint);
     padding:5px 11px;border-radius:8px;display:inline-block;margin-bottom:18px}
 
   /* ---- Services (SEO service map) ---- */
@@ -247,7 +292,7 @@ and switch twitter:card below to summary_large_image. -->
     padding:clamp(40px,5vw,60px)}
   .proof .eyebrow{color:var(--accent)}
   /* light-on-dark compensation: line-height + tracking + weight */
-  .proof h2{color:#fff;font-size:clamp(28px,4vw,44px);max-width:18ch;line-height:1.12}
+  .proof h2{color:var(--surface);font-size:clamp(28px,4vw,44px);max-width:18ch;line-height:1.12}
   .brands{display:flex;gap:14px 34px;flex-wrap:wrap;margin-top:30px;
     font-family:var(--ff-display);font-weight:700;font-size:22px;opacity:.95}
   .proof .nc{margin-top:24px;font-size:17px;line-height:1.65;letter-spacing:.005em;
@@ -264,7 +309,7 @@ and switch twitter:card below to summary_large_image. -->
   .price-list li:last-child{border:0}
   .check{color:var(--accent-ink);font-weight:800;flex:none;line-height:1.5}
   /* Quote: rebuilt WITHOUT the banned side-stripe border. Tinted block + oversized mark. */
-  .testimonial{background:rgba(232,163,61,.08);border:1px solid var(--rule);
+  .testimonial{background:var(--accent-tint-soft);border:1px solid var(--rule);
     border-radius:var(--r-card);padding:32px 32px 28px;position:relative;align-self:center}
   .testimonial .qmark{font-family:var(--ff-display);font-weight:800;font-size:56px;
     line-height:.6;color:var(--accent);display:block;margin-bottom:8px}
@@ -274,10 +319,10 @@ and switch twitter:card below to summary_large_image. -->
 
   /* ---- Negative space ---- */
   .neg{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}
-  .neg li{list-style:none;border:1px dashed #D8CDB4;border-radius:16px;
+  .neg li{list-style:none;border:1px dashed var(--rule-soft);border-radius:16px;
     padding:24px;color:var(--muted);font-size:16px}
   .neg-us{margin-top:18px;border:2px solid var(--accent);border-radius:16px;
-    padding:24px 26px;background:rgba(232,163,61,.07);font-weight:600;font-size:18px}
+    padding:24px 26px;background:var(--accent-tint-softer);font-weight:600;font-size:18px}
 
   /* ---- How it works ---- */
   .steps{counter-reset:step;margin-top:40px;display:grid;
@@ -290,23 +335,33 @@ and switch twitter:card below to summary_large_image. -->
   .step h3{font-size:20px;margin-bottom:8px}
   .step p{color:var(--ink);opacity:.78;font-size:16px}
 
-  /* ---- Case studies ---- */
-  .cases{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:20px}
+  /* ---- Case studies ----
+     Asymmetric grid: one featured case (col 1, spans both rows) leads with an
+     editorial quote treatment; two supporting cases stack in col 2. Breaks
+     the three-identical-cards anti-pattern from impeccable/audit.md. */
+  .cases{display:grid;grid-template-columns:1.7fr 1fr;grid-template-rows:auto auto;
+    gap:24px;margin-top:20px}
   .case{background:var(--surface);border:1px solid var(--rule);
-    border-radius:var(--r-card);padding:32px;display:flex;flex-direction:column;gap:14px}
-  .case .metric{font-family:var(--ff-display);font-weight:800;font-size:34px;
+    border-radius:var(--r-card);padding:28px;display:flex;flex-direction:column;gap:12px}
+  .case .metric{font-family:var(--ff-display);font-weight:800;font-size:30px;
     letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-  .case blockquote{font-size:16px;line-height:1.55;opacity:.86;flex:1}
-  .case figcaption{font-size:14px;color:var(--muted);font-weight:600}
+  .case blockquote{font-size:15px;line-height:1.55;opacity:.86;flex:1}
+  .case figcaption{font-size:13px;color:var(--muted);font-weight:600}
   .case .sector{font-size:13px;font-weight:700;color:var(--ground);
-    background:rgba(30,61,50,.1);padding:4px 10px;border-radius:8px;align-self:flex-start}
+    background:var(--ground-tint);padding:4px 10px;border-radius:8px;align-self:flex-start}
+  .case.is-featured{grid-row:span 2;padding:clamp(36px,4vw,48px);gap:18px;
+    justify-content:space-between}
+  .case.is-featured blockquote{font-size:clamp(18px,2.2vw,22px);line-height:1.45;
+    opacity:.92;font-style:italic}
+  .case.is-featured .metric{font-size:clamp(40px,5vw,56px);margin-top:auto}
+  .case.is-featured figcaption{font-size:14px;margin-top:4px}
 
   /* ---- Estimate flow ---- */
   .estimate{background:var(--ground);color:var(--ground-fg);border-radius:var(--r-block);
     padding:clamp(36px,5vw,60px);display:grid;grid-template-columns:0.95fr 1.05fr;
     gap:clamp(36px,5vw,64px);align-items:start}
   .estimate .eyebrow{color:var(--accent)}
-  .estimate h2{color:#fff;font-size:clamp(26px,3.6vw,40px);max-width:15ch;line-height:1.12}
+  .estimate h2{color:var(--surface);font-size:clamp(26px,3.6vw,40px);max-width:15ch;line-height:1.12}
   .estimate .blurb{margin-top:18px;font-size:17px;line-height:1.6;letter-spacing:.005em;opacity:.9;max-width:46ch}
   .estimate .reassure{margin-top:22px;font-size:15px;opacity:.78}
   .eform{background:var(--surface);color:var(--ink);border-radius:var(--r-card);padding:32px}
@@ -340,7 +395,7 @@ and switch twitter:card below to summary_large_image. -->
   .eform .fineprint{font-size:13px;color:var(--muted);margin-top:16px;line-height:1.5}
   .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
   .eform-done{display:none;text-align:center;padding:20px 8px}
-  .eform-done .tick{width:54px;height:54px;border-radius:50%;background:rgba(30,61,50,.12);
+  .eform-done .tick{width:54px;height:54px;border-radius:50%;background:var(--ground-tint-soft);
     color:var(--ground);display:grid;place-items:center;margin:0 auto 16px;
     font-family:var(--ff-display);font-weight:800;font-size:26px}
   .eform-done h3{font-size:22px;margin-bottom:8px}
@@ -360,7 +415,7 @@ and switch twitter:card below to summary_large_image. -->
     font-size:clamp(18px,2.2vw,21px);line-height:1.3;color:var(--ink);
     transition:color .15s var(--ease)}
   .qa summary:hover .q{color:var(--accent-ink)}
-  .qa .peek{grid-column:1;grid-row:2;font-weight:400;font-size:15px;
+  .qa .peek{grid-column:1;grid-row:2;font-weight:400;font-size:16px;
     line-height:1.5;color:var(--muted);
     display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;overflow:hidden}
   .qa[open] .peek{display:none}
@@ -390,7 +445,7 @@ and switch twitter:card below to summary_large_image. -->
   .foot a,.foot-dir a{text-decoration:none;opacity:.85;font-size:15px}
   .foot a:hover,.foot-dir a:hover{opacity:1;text-decoration:underline;text-underline-offset:3px}
   .foot-dir{display:grid;grid-template-columns:1fr 1fr 2.2fr;gap:40px;
-    padding:var(--s-10) 0 var(--s-10);border-top:1px solid rgba(244,239,226,.16)}
+    padding:var(--s-10) 0 var(--s-10);border-top:1px solid var(--ground-fg-rule)}
   .foot-dir .foot-cols{display:grid;grid-template-columns:1fr 1fr;gap:11px 32px}
   .foot-dir details{display:contents}
   .foot-dir summary{display:block;list-style:none}
@@ -411,7 +466,7 @@ and switch twitter:card below to summary_large_image. -->
     .foot-qr-tile svg{width:150px;height:150px}
     .foot-qr-cap{max-width:none}
   }
-  .foot-base{border-top:1px solid rgba(244,239,226,.16);padding:24px 0 56px;
+  .foot-base{border-top:1px solid var(--ground-fg-rule);padding:24px 0 56px;
     display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
     font-size:13px;opacity:.75}
 
@@ -419,6 +474,10 @@ and switch twitter:card below to summary_large_image. -->
   @media(max-width:920px){
     .price-block,.estimate{grid-template-columns:1fr;gap:36px}
     .steps,.cases{grid-template-columns:1fr 1fr}
+    /* Tablet: featured case becomes a top-row banner, supporting cases share the row below. */
+    .case.is-featured{grid-column:1 / -1;grid-row:auto}
+    /* Tablet: drop .lead asymmetry to even halves so neither card cramps. */
+    .grid2.lead{grid-template-columns:1fr 1fr}
     .foot{grid-template-columns:1fr}
     .foot-dir{grid-template-columns:1fr 1fr}
     .foot-dir .foot-roles{grid-column:1 / -1}
@@ -432,10 +491,10 @@ and switch twitter:card below to summary_large_image. -->
     .mobile{display:block}
     .hero{padding:44px 0 72px}
     .grid2,.neg,.steps,.cases,.svc{grid-template-columns:1fr}
-    .meta{gap:28px 40px;margin-top:40px}
+    .meta{gap:14px 28px;margin-top:36px;padding-top:20px}
     .foot{grid-template-columns:1fr;gap:32px}
     .foot-dir{grid-template-columns:1fr;gap:0;padding-bottom:var(--s-8)}
-    .foot-dir>div{border-top:1px solid rgba(244,239,226,.12)}
+    .foot-dir>div{border-top:1px solid var(--ground-fg-rule-soft)}
     .foot-dir details{display:block}
     .foot-dir summary{display:flex;align-items:center;justify-content:space-between;
       cursor:pointer;padding:18px 0}
@@ -546,7 +605,7 @@ and switch twitter:card below to summary_large_image. -->
       <h2 class="sec-h" id="workforce-h" style="max-width:16ch">Real people and real AI agents, on the same workflow.</h2>
       <p class="deck">Some work needs judgement. Some needs speed and repetition. We run both
         through one workflow, so you get the right mix without managing another AI tool yourself.</p>
-      <div class="grid2">
+      <div class="grid2 lead">
         <article class="card">
           <span class="tag">People</span>
           <h3>Trained operators</h3>
@@ -706,25 +765,25 @@ and switch twitter:card below to summary_large_image. -->
         <span class="flag" title="Required launch trust artefact">Placeholder &middot; 2&ndash;3 real named digital / ecommerce case studies required before launch</span>
       </p>
       <div class="cases">
-        <figure class="case">
+        <figure class="case is-featured">
           <span class="sector">E-commerce</span>
+          <blockquote>[Client name], e-commerce. BOF ran order and returns processing through
+            peak. A real named quote confirmed before launch.</blockquote>
           <p class="metric">Metric to confirm</p>
-          <blockquote>[Client name], e-commerce. BOF ran order and returns processing. Result
-            and a real named quote confirmed before launch.</blockquote>
-          <figcaption><span class="flag" title="Required launch trust artefact">Placeholder &middot; real named case study required</span></figcaption>
+          <figcaption><span class="flag" title="Required launch trust artefact">Placeholder &middot; featured case study required</span></figcaption>
         </figure>
         <figure class="case">
           <span class="sector">Marketplace</span>
           <p class="metric">Metric to confirm</p>
           <blockquote>[Client name], marketplace. BOF ran customer support and inbox triage.
-            Result and a real named quote confirmed before launch.</blockquote>
+            Result confirmed before launch.</blockquote>
           <figcaption><span class="flag" title="Required launch trust artefact">Placeholder &middot; real named case study required</span></figcaption>
         </figure>
         <figure class="case">
           <span class="sector">Digital services</span>
           <p class="metric">Metric to confirm</p>
           <blockquote>[Client name], digital services. BOF ran reconciliation and order
-            processing through peak. Result and a real named quote confirmed before launch.</blockquote>
+            processing. Result confirmed before launch.</blockquote>
           <figcaption><span class="flag" title="Required launch trust artefact">Placeholder &middot; real named case study required</span></figcaption>
         </figure>
       </div>
@@ -853,10 +912,10 @@ and switch twitter:card below to summary_large_image. -->
           <form name="estimate" method="POST" data-netlify="true"
                 netlify-honeypot="company-website" action="#estimate" novalidate>
             <input type="hidden" name="form-name" value="estimate">
-            <p class="hp" aria-hidden="true">
+            <div class="hp" aria-hidden="true" inert>
               <label>Do not fill this in
                 <input tabindex="-1" autocomplete="off" name="company-website"></label>
-            </p>
+            </div>
             <!-- Which page this lead came from. Form is reused across many pages;
                  value is stamped by JS on load so it stays correct without per-page edits. -->
             <input type="hidden" name="page-source" id="page-source">
@@ -924,9 +983,7 @@ and switch twitter:card below to summary_large_image. -->
         </a>
         <p>The back office that runs growing digital businesses, including our own. Real people
           and AI agents, on the same workflow, hired by the hour.</p>
-      </div>
-      <div>
-        <h3>Contact</h3>
+        <h3 style="margin-top:32px">Contact</h3>
         <ul>
           <li>United Kingdom
             <span class="flag" title="Required launch trust artefact">Placeholder &middot; UK contact route to be confirmed (no email)</span>
@@ -938,6 +995,8 @@ and switch twitter:card below to summary_large_image. -->
             <span class="flag" title="Required launch trust artefact">Placeholder &middot; confirm real cert status</span>
           </li>
         </ul>
+      </div>
+      <div>
         <div class="foot-qr">
           <!-- QR regen (pinned; do NOT commit any temp file). Payload MUST keep
                ?src BEFORE the # — index.html JS reads location.search:
