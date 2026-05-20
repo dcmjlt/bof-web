@@ -1,6 +1,5 @@
 // Cloudflare Pages Function: receives the BOF estimate form POST and forwards
-// to a Slack Incoming Webhook. Replaces the prior Netlify Forms -> Slack flow
-// after the migration to direct Cloudflare deploy.
+// to a Slack Incoming Webhook.
 //
 // Setup (one-time, per environment):
 //   Cloudflare dashboard -> Pages project -> Settings -> Environment variables ->

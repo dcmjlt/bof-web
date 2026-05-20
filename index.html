@@ -1094,7 +1094,8 @@ and switch twitter:card below to summary_large_image. -->
     footSync();addEventListener('resize',footSync,{passive:true});
 
     // Estimate form: accessible inline validation + progressive-enhancement submit.
-    // No-JS users still POST to Netlify (server-side capture); we reply either way.
+    // No-JS users POST directly to /api/estimate (Cloudflare Pages Function),
+    // which returns an inline thank-you page. JS users get JSON + inline success.
     var box=document.getElementById('eform');
     var form=box.querySelector('form');
 
