@@ -19,7 +19,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://backofficefactory.com/">
 <meta property="og:title" content="Back Office Factory: scale without scaling headcount">
-<meta property="og:description" content="The back office for growing digital businesses, delivered by a team of real people and AI agents you hire by the hour. No long contracts. A real number, early.">
+<meta property="og:description" content="The back office for your growing digital business — including our own. People and AI agents on one workflow, hired by the hour. A real number, early.">
 <meta property="og:locale" content="en_GB">
 <!-- TODO (launch): add a real 1200x630 social card, then uncomment:
 <meta property="og:image" content="https://backofficefactory.com/social-card.jpg">
@@ -40,7 +40,7 @@ and switch twitter:card below to summary_large_image. -->
       "@id": "https://backofficefactory.com/#organization",
       "name": "Back Office Factory",
       "url": "https://backofficefactory.com/",
-      "description": "Back-office team that runs growing digital and ecommerce businesses: bookkeeping, customer support, order and document processing, payroll and operations admin, delivered by real people and AI agents on one workflow, hired by the hour.",
+      "description": "Back-office team that runs growing digital and ecommerce businesses: bookkeeping, customer support, order and document processing, payroll and operations admin, delivered by people and AI agents on one workflow, hired by the hour.",
       "foundingDate": "2006"
     },
     {
@@ -228,12 +228,12 @@ and switch twitter:card below to summary_large_image. -->
   /* Clear the 81px sticky nav on anchor jumps (primary CTA is #estimate). */
   :where(section,footer)[id],#main{scroll-margin-top:96px}
   section{padding:var(--s-22) 0;border-bottom:1px solid var(--rule)}
-  /* Rhythm overrides: pair proof + pricing-trust (one trust move, not two stops);
-     punchier negative-space section (it's a punchline, should feel punchy);
-     more arrival room before estimate. */
+  /* Rhythm overrides: proof + not + pricing form a contiguous trust block
+     (claim → comparison → terms); compact spacing keeps them feeling like
+     one argument. More arrival room before estimate. */
   section#proof{padding-bottom:var(--s-18)}
-  section#pricing{padding-top:var(--s-18)}
   section#not{padding:var(--s-18) 0}
+  section#pricing{padding-top:var(--s-18)}
   section#estimate{padding-top:calc(var(--s-22) + 16px)}
   .sec-h{font-size:clamp(28px,4vw,44px);max-width:18ch;line-height:1.1}
   .deck{font-size:20px;color:var(--ink);opacity:.84;max-width:var(--measure);margin-top:18px}
@@ -321,6 +321,34 @@ and switch twitter:card below to summary_large_image. -->
   .svc a{color:var(--accent-ink);text-decoration:none}
   .svc a:hover{text-decoration:underline;text-underline-offset:3px}
 
+  /* ---- Pulled callout (voice-principle line, set apart in body grid) ----
+     Display-family, slightly larger than body, with a marigold left rule
+     instead of a side-stripe border (DESIGN.md forbids side-stripes on
+     cards, but this is a typographic pull, not a card — single-token
+     decoration is fine). */
+  .pull{margin-top:36px;padding-left:20px;border-left:3px solid var(--accent);
+    font-family:var(--ff-display);font-weight:500;font-size:clamp(19px,2vw,22px);
+    line-height:1.4;letter-spacing:-.005em;max-width:54ch;color:var(--ink)}
+  @media(max-width:760px){.pull{font-size:18px;padding-left:16px}}
+
+  /* ---- Recognition list (When BOF starts being useful) ----
+     Two-column reading list with hairline rule between columns. Each row is
+     plain prose with a quiet marigold tick — fast to scan, doesn't read as
+     marketing bullets. Closing line sits right-aligned at smaller weight so
+     the whole section finishes on the same beat the buyer was already
+     forming in their head. */
+  .recog{margin-top:40px;display:grid;grid-template-columns:1fr 1fr;
+    gap:0 48px;list-style:none}
+  .recog li{padding:18px 0;border-bottom:1px solid var(--rule);
+    font-size:17px;line-height:1.55;color:var(--ink);position:relative;
+    padding-left:30px}
+  .recog li::before{content:"";position:absolute;left:0;top:24px;width:16px;height:2px;
+    background:var(--accent-ink);border-radius:2px}
+  .recog-close{margin-top:28px;text-align:right;font-size:15px;color:var(--muted);
+    font-style:italic;max-width:62ch;margin-left:auto}
+  @media(max-width:760px){.recog{grid-template-columns:1fr;gap:0}
+    .recog-close{text-align:left}}
+
   /* ---- Proof (ground block) ---- */
   .proof{background:var(--ground);color:var(--ground-fg);border-radius:var(--r-block);
     padding:clamp(40px,5vw,60px)}
@@ -335,6 +363,22 @@ and switch twitter:card below to summary_large_image. -->
     font-family:var(--ff-display);font-weight:700;font-size:22px;opacity:.95}
   .proof .nc{margin-top:24px;font-size:17px;line-height:1.65;letter-spacing:.005em;
     opacity:.9;max-width:56ch}
+  /* One-line italic descriptor beside each portfolio brand: smaller, lighter,
+     body-family, separated from the bold display brand by a thin space.
+     Visually clear that "what this business is" is metadata, not part of the
+     brand name itself. */
+  .brands .brand-d{font-family:var(--ff-body);font-weight:400;
+    font-size:14px;font-style:italic;opacity:.78;letter-spacing:0;
+    margin-left:4px}
+  /* Firm non-compete line: silent-disqualifier, gets its own visual weight.
+     Marigold hairline above, body-text below carries the promise. */
+  .proof .nc-firm{margin-top:20px;padding-top:18px;
+    border-top:1px solid rgba(232,163,61,.32);
+    font-size:17px;line-height:1.6;font-weight:600;
+    color:var(--surface);max-width:54ch}
+  /* Origin one-liner: founder's letter compressed, set apart at smaller size. */
+  .proof .nc-origin{margin-top:18px;font-size:15px;font-style:italic;
+    opacity:.78;max-width:48ch;letter-spacing:.005em}
 
   /* ---- Pricing trust ---- */
   .price-block{background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-block);
@@ -346,6 +390,11 @@ and switch twitter:card below to summary_large_image. -->
     display:flex;gap:12px;align-items:flex-start}
   .price-list li:last-child{border:0}
   .check{color:var(--accent-ink);font-weight:800;flex:none;line-height:1.5}
+  /* One human sentence after the policy bullets — names the failure mode the
+     buyer brings to this section. Italic + muted so it reads as voice, not
+     a new claim. Doesn't drag competitors, just names the pattern. */
+  .recog-line{margin-top:22px;font-size:16px;line-height:1.55;font-style:italic;
+    color:var(--ink);opacity:.78;max-width:46ch}
   /* Quote: rebuilt WITHOUT the banned side-stripe border. Tinted block carries it;
      the italic prose is the design move (decorative quote-mark distilled out 2026-05-20). */
   .testimonial{background:var(--accent-tint-soft);border:1px solid var(--rule);
@@ -354,11 +403,19 @@ and switch twitter:card below to summary_large_image. -->
   .testimonial figcaption{margin-top:16px;font-size:14px;color:var(--muted);
     font-weight:600;font-style:normal}
 
-  /* ---- Negative space ---- */
-  .neg{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}
-  .neg li{list-style:none;border:1px dashed var(--rule-soft);border-radius:16px;
-    padding:24px;color:var(--muted);font-size:16px}
-  .neg-us{margin-top:18px;border:2px solid var(--accent);border-radius:16px;
+  /* ---- Negative space ----
+     Three-row stack of Not/instead pairs. Each row shows the negation
+     prominently (display family, bold) with the "instead" answer beneath
+     in body family at smaller weight. Pattern stops the buyer thinking
+     "OK, what are you then?" — the answer is in place. */
+  .neg-rows{list-style:none;margin-top:36px;display:flex;flex-direction:column;gap:0}
+  .neg-rows li{padding:24px 0;border-bottom:1px solid var(--rule)}
+  .neg-rows li:first-child{padding-top:8px}
+  .neg-rows li:last-child{border-bottom:0;padding-bottom:8px}
+  .neg-no{font-family:var(--ff-display);font-weight:700;font-size:clamp(19px,2.2vw,23px);
+    line-height:1.3;letter-spacing:-.01em;color:var(--ink)}
+  .neg-yes{margin-top:8px;font-size:17px;line-height:1.55;color:var(--ink);opacity:.78;max-width:56ch}
+  .neg-us{margin-top:32px;border:2px solid var(--accent);border-radius:16px;
     padding:24px 26px;background:var(--accent-tint-softer);font-weight:600;font-size:18px}
 
   /* ---- How it works ---- */
@@ -613,7 +670,8 @@ and switch twitter:card below to summary_large_image. -->
             <a href="#proof">Proof</a>
             <a href="#how">How it works</a>
             <a href="#faq">FAQ</a>
-            <a href="#estimate" class="btn btn-primary">Get your estimate</a>
+            <a href="#estimate" class="btn btn-primary">Get your estimate
+              <span aria-hidden="true">&rarr;</span></a>
           </div>
         </details>
       </div>
@@ -628,10 +686,18 @@ and switch twitter:card below to summary_large_image. -->
     <header class="hero">
       <span class="pill">Back office for growing digital businesses</span>
       <h1>Scale your business <span class="hl">without</span> scaling your headcount.</h1>
-      <p class="sub">Bookkeeping, customer support, payroll, operations admin, order and document
-        processing, and the repetitive back-office work that keeps a business running, handled by a
-        team of real people and AI agents working in the same workflow.</p>
-      <p class="dog">The same team runs <b><a class="brand-link" href="https://www.ticketstodo.com/" target="_blank" rel="noopener external">TicketsToDo</a>, <a class="brand-link" href="https://vouchercodes.ae/" target="_blank" rel="noopener external">VoucherCodes.ae</a>, <a class="brand-link" href="https://www.dcmnetwork.com/" target="_blank" rel="noopener external">DCMnetwork</a></b> and more.
+      <p class="sub">Back Office Factory is the back-office team that runs your growing digital
+        business &mdash; including our own. The work that&rsquo;s quietly slowing you down &mdash;
+        bookkeeping, customer support, payroll, order and document processing, the admin that keeps
+        a business moving &mdash; handled by people and AI agents on one workflow, hired by the
+        hour.</p>
+      <p class="dog">The same team runs
+        <b><a class="brand-link" href="https://www.ticketstodo.com/" target="_blank" rel="noopener external">TicketsToDo</a></b>
+        (events ticketing marketplace),
+        <b><a class="brand-link" href="https://vouchercodes.ae/" target="_blank" rel="noopener external">VoucherCodes.ae</a></b>
+        (UAE deals platform) and
+        <b><a class="brand-link" href="https://www.dcmnetwork.com/" target="_blank" rel="noopener external">DCMnetwork</a></b>
+        (digital media network), and more.
         We do not take on business that competes with us or you.</p>
       <div class="cta-row">
         <a href="#estimate" class="btn btn-primary">Get your estimate
@@ -647,7 +713,7 @@ and switch twitter:card below to summary_large_image. -->
         </div>
         <div>
           <dt>People + AI</dt>
-          <dd>the same workflow, you get whichever does the job best</dd>
+          <dd>one workflow, the best mix per task</dd>
         </div>
         <div>
           <dt>By the hour</dt>
@@ -657,31 +723,49 @@ and switch twitter:card below to summary_large_image. -->
     </header>
   </div>
 
+  <!-- 1.5 RECOGNITION — when BOF starts being useful (self-qualifying block) -->
+  <section id="recognise" aria-labelledby="recognise-h">
+    <div class="wrap">
+      <p class="eyebrow">Sound familiar?</p>
+      <h2 class="sec-h" id="recognise-h" style="max-width:22ch">You usually call us when one of these starts being true.</h2>
+      <ul class="recog">
+        <li>You&rsquo;re still doing admin yourself, on weekends, and it&rsquo;s not getting smaller.</li>
+        <li>Support volume is climbing faster than you can hire for it.</li>
+        <li>The same repetitive work keeps depending on the same one person.</li>
+        <li>Hiring full-time still feels too early &mdash; but the ops are slipping.</li>
+        <li>Important things live in spreadsheets, inboxes and someone&rsquo;s head.</li>
+        <li>You tried an AI tool. It created more work than it took off.</li>
+        <li>The business is growing. Operations are becoming the ceiling.</li>
+      </ul>
+      <p class="recog-close">If two or three of those land, that&rsquo;s usually us.</p>
+    </div>
+  </section>
+
   <!-- 2. ONE WORKFORCE -->
   <section id="workforce" aria-labelledby="workforce-h">
     <div class="wrap">
       <p class="eyebrow">One workforce</p>
-      <h2 class="sec-h" id="workforce-h" style="max-width:16ch">Real people and real AI agents, on the same workflow.</h2>
+      <h2 class="sec-h" id="workforce-h" style="max-width:18ch">People and AI agents, on one workflow.</h2>
       <p class="deck">Some work needs judgement. Some needs speed and repetition. We run both
         through one workflow, so you get the right mix without managing another AI tool yourself.</p>
       <div class="grid2 lead">
         <article class="card">
           <span class="tag">People</span>
           <h3>Trained operators</h3>
-          <p>A real team that does the work properly and that you actually get to know, not a
-            faceless queue. They learn your business, not just your tickets.</p>
+          <p>A real team that learns your business, not just your tickets &mdash; and that you
+            actually get to know. Judgement calls handled like an owner would.</p>
         </article>
         <article class="card">
           <span class="tag">AI agents</span>
-          <h3>Same job, swappable</h3>
-          <p>Software agents run the same workflow wherever they do it better. You get whatever
-            does the job best, never a science project you have to babysit.</p>
+          <h3>Built into the workflow</h3>
+          <p>Software agents handle the repetitive, high-volume work. You don&rsquo;t operate them,
+            learn them, or babysit them &mdash; they&rsquo;re part of the workflow, not a tool you
+            adopt.</p>
         </article>
       </div>
       <p class="deck" style="margin-top:28px;max-width:62ch">When work repeats, we build systems
-        around it and the intelligence sits in the workflow, not in a tool you operate, so
-        reconciliation, refund handling, order exceptions and support triage get faster without
-        losing judgement.</p>
+        around it. The intelligence sits in the workflow, not in a tool you operate. Reconciliation,
+        refunds, order exceptions, support triage &mdash; faster without losing judgement.</p>
     </div>
   </section>
 
@@ -691,16 +775,19 @@ and switch twitter:card below to summary_large_image. -->
       <p class="eyebrow">What we run</p>
       <h2 class="sec-h" id="services-h" style="max-width:20ch">The back-office work that keeps a digital business moving.</h2>
       <p class="deck">The repetitive operational work that starts slowing an ecommerce or digital
-        business down as it grows, handled by real people and AI agents on one workflow.</p>
+        business down as it grows, handled by people and AI agents on one workflow.</p>
+      <p class="pull">If the work is operational and repetitive, we probably run it. If it sits
+        outside that &mdash; strategy, creative or sales &mdash; we will tell you straight rather
+        than stretch.</p>
       <ul class="svc">
         <li><span class="mk" aria-hidden="true">&check;</span><span>
-          <a href="/services/finance-and-accounting/"><b>Bookkeeping</b></a><span class="d">Day-to-day books kept current and clean.</span></span></li>
+          <a href="/services/finance-and-accounting/"><b>Bookkeeping</b></a><span class="d">Books kept current. Not a panicked reconstruction at month-end.</span></span></li>
         <li><span class="mk" aria-hidden="true">&check;</span><span>
           <a href="/services/customer-support/"><b>Customer support &amp; inbox triage</b></a><span class="d">Tickets and inboxes handled, the right things escalated.</span></span></li>
         <li><span class="mk" aria-hidden="true">&check;</span><span>
           <a href="/hire/order-processing-specialist/"><b>Order processing &amp; returns</b></a><span class="d">Orders, exceptions and returns moved through cleanly.</span></span></li>
         <li><span class="mk" aria-hidden="true">&check;</span><span>
-          <a href="/hire/document-processing-specialist/"><b>Document processing</b></a><span class="d">The paperwork, data entry and filing that piles up.</span></span></li>
+          <a href="/hire/document-processing-specialist/"><b>Document processing</b></a><span class="d">The paperwork, data entry and filing that quietly piles up.</span></span></li>
         <li><span class="mk" aria-hidden="true">&check;</span><span>
           <a href="/hire/payroll-specialist/"><b>Payroll admin</b></a><span class="d">Payroll prepared and kept on schedule.</span></span></li>
         <li><span class="mk" aria-hidden="true">&check;</span><span>
@@ -719,9 +806,6 @@ and switch twitter:card below to summary_large_image. -->
         <a href="/hire/real-estate-data-specialist/" style="color:var(--accent-ink)">real estate data</a>,
         <a href="/services/ai-automation/" style="color:var(--accent-ink)">AI automation</a>,
         <a href="/services/digital-transformation/" style="color:var(--accent-ink)">digital transformation</a>.
-      <p class="deck" style="margin-top:28px;max-width:62ch">If the work is operational and
-        repetitive, we probably run it. If it sits outside that, strategy, creative or sales,
-        we will tell you straight rather than stretch.</p>
     </div>
   </section>
 
@@ -731,11 +815,49 @@ and switch twitter:card below to summary_large_image. -->
       <div class="proof">
         <p class="eyebrow">Why us</p>
         <h2 id="proof-h">We run our own digital businesses on this exact team.</h2>
-        <p class="brands"><a class="brand-link" href="https://www.ticketstodo.com/" target="_blank" rel="noopener external">TicketsToDo</a> · <a class="brand-link" href="https://vouchercodes.ae/" target="_blank" rel="noopener external">VoucherCodes.ae</a> · <a class="brand-link" href="https://www.dcmnetwork.com/" target="_blank" rel="noopener external">DCMnetwork</a> · and more</p>
-        <p class="nc">The same operation that holds our own products to a high bar runs your back
-          office to that same bar. We do not take on business that competes with us or you.
-          Your work stays yours.</p>
+        <p class="brands">
+          <a class="brand-link" href="https://www.ticketstodo.com/" target="_blank" rel="noopener external">TicketsToDo</a>
+          <span class="brand-d">events ticketing marketplace</span> &middot;
+          <a class="brand-link" href="https://vouchercodes.ae/" target="_blank" rel="noopener external">VoucherCodes.ae</a>
+          <span class="brand-d">UAE deals platform</span> &middot;
+          <a class="brand-link" href="https://www.dcmnetwork.com/" target="_blank" rel="noopener external">DCMnetwork</a>
+          <span class="brand-d">digital media network</span> &middot; and more
+        </p>
+        <p class="nc">Most outsourcing companies have never run a customer business of their own.
+          We do. The same operators and AI agents that keep our products running &mdash; order
+          processing through peak, refund queues on a bad week, reconciliation when month-end is
+          closing &mdash; run your back office on the same workflow.</p>
+        <p class="nc-firm">We do not take on business that competes with us or you. Your work,
+          your data and your edge stay yours.</p>
+        <p class="nc-origin">We learned how to run a back office by needing one. Then we opened
+          it up.</p>
       </div>
+    </div>
+  </section>
+
+  <!-- 4b. WHAT WE ARE NOT (moved above pricing per copy review) -->
+  <section id="not" aria-labelledby="not-h">
+    <div class="wrap">
+      <p class="eyebrow">What we&rsquo;re not</p>
+      <h2 class="sec-h" id="not-h" style="max-width:22ch">The three things you&rsquo;ve already tried &mdash; and why this is different.</h2>
+      <ul class="neg-rows">
+        <li>
+          <p class="neg-no">Not another full-time hire you can&rsquo;t justify yet.</p>
+          <p class="neg-yes">A senior ops hire is &pound;60&ndash;80k loaded. You don&rsquo;t need a
+            full-timer &mdash; you need the work done.</p>
+        </li>
+        <li>
+          <p class="neg-no">Not a generic VA agency with no operational context.</p>
+          <p class="neg-yes">VAs follow a brief. We run an operation, with the playbook we built
+            running our own.</p>
+        </li>
+        <li>
+          <p class="neg-no">Not an AI tool you still have to operate yourself.</p>
+          <p class="neg-yes">AI tools are software you buy. We&rsquo;re the team that runs the
+            work &mdash; the AI is part of how we do it, not something you adopt.</p>
+        </li>
+      </ul>
+      <p class="neg-us">A back-office team &mdash; people and AI agents &mdash; hired by the hour.</p>
     </div>
   </section>
 
@@ -754,9 +876,11 @@ and switch twitter:card below to summary_large_image. -->
             <li><span class="check" aria-hidden="true">&check;</span> No hidden fees, no asterisks, no surprise invoices</li>
             <li><span class="check" aria-hidden="true">&check;</span> A straight number at the first conversation</li>
           </ul>
-          <a href="#estimate" class="btn btn-primary" style="margin-top:26px">Get your estimate
+          <p class="recog-line">If you&rsquo;ve ever asked for a price and gotten a meeting invite
+            instead, you know why this matters.</p>
+          <a href="#estimate" class="btn btn-primary" style="margin-top:22px">Get your estimate
             <span aria-hidden="true">&rarr;</span></a>
-          <p class="micro">A real number, early. No runaround.</p>
+          <p class="micro">Honest math beats clever pricing.</p>
         </div>
         <figure class="testimonial">
           <blockquote>I asked the price on day one. They told me straight, no dance. A year in,
@@ -769,20 +893,6 @@ and switch twitter:card below to summary_large_image. -->
     </div>
   </section>
 
-  <!-- 5. WHAT WE ARE NOT -->
-  <section id="not" aria-labelledby="not-h">
-    <div class="wrap">
-      <p class="eyebrow">What we are not</p>
-      <h2 class="sec-h" id="not-h" style="max-width:20ch">A real ops team, people and agents, you hire by the hour.</h2>
-      <ul class="neg">
-        <li>Not another full-time hire you cannot justify yet</li>
-        <li>Not a generic VA agency with no operational context</li>
-        <li>Not an AI tool you still have to operate yourself</li>
-      </ul>
-      <p class="neg-us">A back office that runs growing digital businesses, including our own.</p>
-    </div>
-  </section>
-
   <!-- 6. HOW IT WORKS -->
   <section id="how" aria-labelledby="how-h">
     <div class="wrap">
@@ -790,9 +900,10 @@ and switch twitter:card below to summary_large_image. -->
       <h2 class="sec-h" id="how-h" style="max-width:14ch">Four steps to a back office that runs.</h2>
       <div class="steps">
         <div class="step">
-          <h3>Tell us what you need</h3>
-          <p>Scope, volumes, the work that is eating your week. A short conversation, not a
-            procurement marathon.</p>
+          <h3>Tell us roughly</h3>
+          <p>Twenty minutes. Scope, volumes, the work that&rsquo;s eating your week. No procurement
+            marathon, no NDA dance, no &ldquo;tell us about your business&rdquo; form that takes an
+            hour.</p>
         </div>
         <div class="step">
           <h3>Get a straight number</h3>
@@ -857,13 +968,15 @@ and switch twitter:card below to summary_large_image. -->
         <details class="qa">
           <summary>
             <span class="q">Will you work with my competitors?</span>
-            <span class="peek">No. We run our own digital businesses, so we never take on anyone who competes with you.</span>
+            <span class="peek">Short answer: no. We run our own digital businesses, so we don't take on anyone who competes with you &mdash; or with us.</span>
           </summary>
           <div class="a">
-            <p>No. We run our own digital businesses on this exact team, <a class="brand-link" href="https://www.ticketstodo.com/" target="_blank" rel="noopener external">TicketsToDo</a>,
-              <a class="brand-link" href="https://vouchercodes.ae/" target="_blank" rel="noopener external">VoucherCodes.ae</a>, <a class="brand-link" href="https://www.dcmnetwork.com/" target="_blank" rel="noopener external">DCMnetwork</a> and more, so we hold a firm line: we do not take on
-              business that competes with us or you. Your work, your data and your edge stay
-              yours.</p>
+            <p><strong>Short answer: no.</strong> We run our own digital businesses on this exact
+              team &mdash; <a class="brand-link" href="https://www.ticketstodo.com/" target="_blank" rel="noopener external">TicketsToDo</a>,
+              <a class="brand-link" href="https://vouchercodes.ae/" target="_blank" rel="noopener external">VoucherCodes.ae</a>,
+              <a class="brand-link" href="https://www.dcmnetwork.com/" target="_blank" rel="noopener external">DCMnetwork</a>
+              and more &mdash; so we hold a firm line: we don&rsquo;t take on anyone who competes
+              with you, or with us. Your work, your data and your edge stay yours.</p>
           </div>
         </details>
         <details class="qa">
@@ -887,9 +1000,9 @@ and switch twitter:card below to summary_large_image. -->
             <span class="peek">One workflow: people handle judgement, AI agents handle speed and repetition.</span>
           </summary>
           <div class="a">
-            <p>One workflow. Some work needs judgement, so a trained person does it. Some work
-              needs speed and repetition, so an AI agent does it. You get whichever does the job
-              best, and you never have to operate or babysit the AI yourself.</p>
+            <p>One workflow. People handle judgement calls &mdash; the cases that need a human read
+              of the situation. AI agents handle speed and repetition &mdash; the work where
+              machines are better. You don&rsquo;t operate the AI, learn it, or babysit it. We do.</p>
           </div>
         </details>
         <details class="qa">
@@ -902,8 +1015,8 @@ and switch twitter:card below to summary_large_image. -->
               delivered, with no long contracts, no lock-in, no hidden fees and no surprise
               invoices. You get a real indicative range early, then a firm quote after a short
               conversation.</p>
-            <p><a href="#estimate">Get your estimate &rarr;</a> A real number, early. No
-              runaround.</p>
+            <p><a href="#estimate">Get your estimate &rarr;</a> Get the figure first, decide
+              after.</p>
           </div>
         </details>
         <details class="qa">
@@ -914,6 +1027,8 @@ and switch twitter:card below to summary_large_image. -->
           <div class="a">
             <p>No. You hire by the hour and scale up or down as the business needs it. No long
               contracts. Walk away anytime.</p>
+            <p>When you leave, we hand back clean records and any access we set up. No exit fee,
+              no notice period, no last-month-of-billing trick.</p>
           </div>
         </details>
         <details class="qa">
@@ -959,11 +1074,9 @@ and switch twitter:card below to summary_large_image. -->
         <div>
           <p class="eyebrow">Get your estimate</p>
           <h2 id="estimate-h">A real number, early. No runaround.</h2>
-          <p class="blurb">Tell us roughly what you need and we will come back with an honest
-            indicative range, then a firm quote after a short conversation. No obligation, no
-            sales theatre.</p>
-          <p class="reassure">Quality work, priced fairly, profitable for you too. By the hour,
-            no lock-in.</p>
+          <p class="blurb">Tell us roughly what you need. We come back with an honest indicative
+            range &mdash; <strong>by email, before end of day</strong> &mdash; then a firm quote
+            after a short conversation. No obligation, no sales theatre.</p>
         </div>
 
         <div class="eform" id="eform">
@@ -1017,13 +1130,14 @@ and switch twitter:card below to summary_large_image. -->
 
           <div class="eform-done" role="status" tabindex="-1">
             <div class="tick" aria-hidden="true">&check;</div>
-            <h3>Got it. Your estimate is on the way.</h3>
+            <h3>Got it.</h3>
             <!-- ETA line is overwritten at submit time with a precise window
-                 (e.g. "By email, before end of day") based on local hour + day.
+                 (e.g. "by email, before end of day") based on local hour + day.
                  The default text is the Mon-Thu morning case, which is the
                  honest no-JS fallback — never the wrong answer, just less
                  specific than the JS variant. -->
-            <p id="eform-done-eta">By email, before end of day. A real number, no runaround.</p>
+            <p id="eform-done-eta">We&rsquo;ll come back to you by email, before end of day. With
+              a number, not a sales sequence.</p>
           </div>
         </div>
       </div>
@@ -1041,8 +1155,8 @@ and switch twitter:card below to summary_large_image. -->
         <a class="logo" href="/" aria-label="Back Office Factory home">
           <span class="mark" aria-hidden="true">BOF</span> Back Office Factory
         </a>
-        <p>The back office that runs growing digital businesses, including our own. Real people
-          and AI agents, on the same workflow, hired by the hour.</p>
+        <p>The back office that runs your growing digital business &mdash; including our own.
+          People and AI agents, on one workflow, hired by the hour.</p>
         <h3 style="margin-top:32px">Contact</h3>
         <ul>
           <li>United Kingdom
@@ -1124,8 +1238,8 @@ and switch twitter:card below to summary_large_image. -->
       </div>
     </nav>
     <div class="foot-base">
-      <span>&copy; 2026 Back Office Factory. Operating since 2006.</span>
-      <span>No long contracts. No hidden fees. No surprise invoices.</span>
+      <span>&copy; 2026 Back Office Factory. Operating since 2006 &mdash; battle-tested, not a startup experiment.</span>
+      <span><strong>A back office built for our own businesses. Now opened up to yours.</strong></span>
     </div>
   </div>
 </footer>
@@ -1233,11 +1347,11 @@ and switch twitter:card below to summary_large_image. -->
           if(eta){
             var now=new Date(),d=now.getDay(),h=now.getHours();
             var rollover=(d===0||d===6)||(d===5&&h>=17);
-            var line=rollover?'By email, first thing on the next working day.':
-                     (h<12)?'By email, before end of day.':
-                     (h<17)?'By email, tomorrow morning.':
-                            'By email, first thing tomorrow morning.';
-            eta.textContent=line+' A real number, no runaround.';
+            var line=rollover?'We’ll come back to you by email, first thing on the next working day.':
+                     (h<12)?'We’ll come back to you by email, before end of day.':
+                     (h<17)?'We’ll come back to you by email, tomorrow morning.':
+                            'We’ll come back to you by email, first thing tomorrow morning.';
+            eta.textContent=line+' With a number, not a sales sequence.';
           }
           box.dataset.sent='true';
           var done=box.querySelector('.eform-done');
