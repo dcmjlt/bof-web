@@ -1,5 +1,0 @@
-# Minimal config. Publish dir / build settings remain as set in the Netlify
-# dashboard (this is a plain static site, no build step). This file only makes
-# the Functions directory explicit so submission-created deploys reliably.
-[functions]
-  directory = "netlify/functions"

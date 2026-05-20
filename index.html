@@ -909,9 +909,7 @@ and switch twitter:card below to summary_large_image. -->
         </div>
 
         <div class="eform" id="eform">
-          <form name="estimate" method="POST" data-netlify="true"
-                netlify-honeypot="company-website" action="#estimate" novalidate>
-            <input type="hidden" name="form-name" value="estimate">
+          <form name="estimate" method="POST" action="/api/estimate" novalidate>
             <div class="hp" aria-hidden="true" inert>
               <label>Do not fill this in
                 <input tabindex="-1" autocomplete="off" name="company-website"></label>
@@ -1157,8 +1155,12 @@ and switch twitter:card below to summary_large_image. -->
       var data=new URLSearchParams(new FormData(form));
       var btn=form.querySelector('button[type=submit]');
       btn.disabled=true;
-      fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:data})
-        .catch(function(){/* still confirm; lead is captured on retry/email */})
+      // POST to the Cloudflare Pages Function (functions/api/estimate.js).
+      // Accept JSON so the function returns { ok: true } instead of HTML.
+      fetch('/api/estimate',{method:'POST',
+        headers:{'Content-Type':'application/x-www-form-urlencoded','Accept':'application/json'},
+        body:data})
+        .catch(function(){/* still confirm; ops alarms on failed Slack POST */})
         .finally(function(){
           box.dataset.sent='true';
           var done=box.querySelector('.eform-done');
