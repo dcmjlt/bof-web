@@ -11,26 +11,27 @@
    `node scripts/check-design-sync.mjs` before pushing. */
 
 :root{
-  /* Locked v2 palette — DESIGN.md "warm modern operator" */
-  --bg:#FBF7F0;        /* warm cream */
-  --surface:#FFFFFF;   /* elevated cards */
+  /* Locked palette — DESIGN.md "warm modern operator" (v2, palette revised 2026-05-22: white · terracotta · green) */
+  --bg:#FFFFFF;        /* white page */
+  --surface:#FAF7F2;   /* faint warm card lift off the white page (cards must not vanish) */
   --ink:#1F1A14;       /* warm charcoal */
   --ground:#1E3D32;    /* deep warm green */
   --ground-fg:#F4EFE2; /* text on ground */
-  --accent:#E8A33D;    /* marigold (use on dark grounds) */
-  --accent-deep:#CE8A24; /* marigold hover / control fills (non-text) */
-  --accent-ink:#8A5A12;  /* AA-passing deep ochre: marigold-as-text on cream/white */
-  --muted:#756B5C;     /* warm grey, AA on cream */
+  --accent:#C2602F;    /* terracotta — pills, eyebrows on light, highlight, links, tint base */
+  --accent-deep:#A64E22; /* deeper terracotta — primary button fill (white label, AA ~5.6:1) */
+  --accent-ink:#9A4A1E;  /* terracotta-as-text on white/cream (AA) */
+  --accent-on-ground:#E89B6A; /* light terracotta — accent shown ON the dark green ground (AA on --ground) */
+  --muted:#6F665A;     /* warm grey, AA on white */
   --error:#B23A1E;     /* warm rust, in-palette error (AA on white form) */
   --error-bg:rgba(178,58,30,.06);
-  --rule:#E7DECB;      /* hairline */
-  --rule-soft:#D8CDB4; /* secondary hairline (cream-shaded), dashed borders */
+  --rule:#EBE6DC;      /* hairline */
+  --rule-soft:#DDD6C8; /* secondary hairline, dashed borders */
 
   /* Alpha-variants of the brand palette. Use these instead of inline rgba so
      a future palette shift updates one place, not ten. Audit cleanup 2026-05-20. */
-  --accent-tint:rgba(232,163,61,.16);          /* pill, flag */
-  --accent-tint-soft:rgba(232,163,61,.08);     /* testimonial wash */
-  --accent-tint-softer:rgba(232,163,61,.07);   /* neg-us "this is us" fill */
+  --accent-tint:rgba(194,96,47,.16);          /* pill, flag */
+  --accent-tint-soft:rgba(194,96,47,.08);     /* testimonial wash */
+  --accent-tint-softer:rgba(194,96,47,.07);   /* neg-us "this is us" fill */
   --ground-tint:rgba(30,61,50,.1);             /* sector tags, .tag */
   --ground-tint-soft:rgba(30,61,50,.12);       /* estimate-done tick */
   --ink-tint-soft:rgba(31,26,20,.05);          /* ghost-btn hover, photo placeholder */
@@ -38,8 +39,8 @@
   --ground-fg-rule:rgba(244,239,226,.16);      /* dividers on ground footer */
   --ground-fg-rule-soft:rgba(244,239,226,.12); /* mobile footer dividers */
   --ground-fg-tint:rgba(244,239,226,.1);       /* btn-ghost hover on ground */
-  --bg-nav:rgba(251,247,240,.86);              /* sticky nav at rest */
-  --bg-nav-stuck:rgba(251,247,240,.94);        /* sticky nav after scroll */
+  --bg-nav:rgba(255,255,255,.86);              /* sticky nav at rest */
+  --bg-nav-stuck:rgba(255,255,255,.94);        /* sticky nav after scroll */
 
   --measure:62ch;
   --maxw:1120px;
@@ -86,8 +87,6 @@ body{
   font-family:var(--ff-body);
   font-size:17px;line-height:1.6;font-optical-sizing:auto;
   font-kerning:normal;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
-  background-image:radial-gradient(rgba(31,26,20,.018) 1px,transparent 1px);
-  background-size:5px 5px;
 }
 
 h1,h2,h3,.disp{
@@ -115,11 +114,11 @@ a{color:inherit}
   outline:3px solid var(--ink);outline-offset:3px;border-radius:4px;
 }
 footer :where(a,button,input,select,textarea,summary):focus-visible{
-  outline-color:var(--accent);
+  outline-color:var(--accent-on-ground);
 }
 .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .flag{
-  display:inline-block;font-family:var(--ff-body);font-size:11px;font-weight:700;
+  display:inline-block;font-family:var(--ff-body);font-size:12px;font-weight:700;
   letter-spacing:.06em;text-transform:uppercase;color:var(--accent-ink);
   background:var(--accent-tint);padding:4px 10px;border-radius:999px;vertical-align:middle;
 }
@@ -141,14 +140,14 @@ footer .flag{color:var(--ground-fg);background:rgba(0,0,0,.24)}
   padding:16px 28px;border-radius:var(--r-btn);text-decoration:none;
   border:0;cursor:pointer;transition:transform .15s var(--ease),background .15s var(--ease);
 }
-.btn-primary{background:var(--accent);color:var(--ink)}
-.btn-primary:hover{background:var(--accent-deep);transform:translateY(-1px)}
+.btn-primary{background:var(--accent-deep);color:#fff}
+.btn-primary:hover{background:#8E4019;transform:translateY(-1px)}
 .btn-primary:active{transform:translateY(0)}
 .btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink);padding:14.5px 26px}
 .btn-ghost:hover{background:var(--ink-tint-soft);transform:translateY(-1px)}
 .btn-sm{padding:11px 20px;font-size:15px}
 .btn:disabled{opacity:.6;cursor:progress;pointer-events:none}
-.micro{font-size:14px;color:var(--muted);margin-top:12px}
+.micro{font-size:15px;color:var(--muted);margin-top:12px}
 
 /* Portfolio brand link: inherits parent color at rest so it reads as prose;
    on hover, picks up the warm accent + a hairline underline + a small "↗"
@@ -169,10 +168,10 @@ footer .flag{color:var(--ground-fg);background:rgba(0,0,0,.24)}
 /* On the dark green proof block (and dark footer), deep-ochre fails contrast.
    Swap to marigold so the hover signal is actually visible. */
 .proof .brand-link:hover,.proof .brand-link:focus-visible,
-footer .brand-link:hover,footer .brand-link:focus-visible{color:var(--accent)}
+footer .brand-link:hover,footer .brand-link:focus-visible{color:var(--accent-on-ground)}
 
 :where(section,footer)[id],#main{scroll-margin-top:96px}
-section{padding:var(--s-22) 0;border-bottom:1px solid var(--rule)}
+section{padding:80px 0;border-bottom:1px solid var(--rule)}
 /* Rhythm overrides: pair the proof + pricing-trust sections (both trust artefacts;
    should feel like one move, not two stops); give the estimate CTA more breathing
    room above so arrival feels emphasised. */
@@ -191,7 +190,14 @@ section#estimate{padding-top:calc(var(--s-22) + 16px)}
 nav{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px 0}
 .logo{display:flex;align-items:center;gap:12px;font-family:var(--ff-display);
   font-weight:800;font-size:20px;text-decoration:none;letter-spacing:-.01em}
-.mark{width:42px;height:42px;background:var(--ink);color:var(--bg);border-radius:var(--r-mark);
+/* Wordmark: "Back Office" stays bold charcoal (the category); "Factory" drops a
+   weight + shifts to warm grey so it reads as the lighter tail of the mark. */
+.wordmark .wm-fac{font-weight:700;color:var(--muted)}
+/* Nav/logo monogram: real BOF mark SVG (charcoal tile + cream BOF). Rendered as the
+   box background; the "BOF" text is kept (transparent) for the footer, where
+   .foot .mark overrides back to a cream tile + green text on the green ground. */
+.mark{width:42px;height:42px;background:url(/assets/bof-mark.svg) center/contain no-repeat;
+  color:transparent;border-radius:var(--r-mark);
   display:grid;place-items:center;font-family:var(--ff-display);font-weight:800;
   font-size:15px;letter-spacing:-.03em;flex:none}
 .navlinks{display:flex;gap:30px;align-items:center;font-weight:500;font-size:15px}
@@ -199,11 +205,37 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:20px;paddi
 .navlinks a:hover{opacity:1}
 .nav-cta{display:flex;align-items:center;gap:12px}
 
+/* Dropdown nav (Services / Hire a role) — hover + focus-within, JS-free. The label
+   is a trigger (button), not a link; the hub is the "Explore all …→" row. */
+.has-sub{position:relative;display:flex;align-items:center}
+.sub-trigger{font:inherit;color:inherit;background:none;border:0;margin:0;padding:0;cursor:pointer;
+  display:inline-flex;align-items:center;gap:5px;opacity:.82;transition:opacity .15s var(--ease)}
+.has-sub:hover .sub-trigger,.has-sub:focus-within .sub-trigger{opacity:1}
+.chev{width:11px;height:11px;transition:transform .2s var(--ease)}
+.has-sub:hover .chev,.has-sub:focus-within .chev{transform:rotate(180deg)}
+.has-sub::after{content:"";position:absolute;left:0;right:0;top:100%;height:16px}
+.submenu{position:absolute;top:calc(100% + 12px);left:0;transform:translateY(-6px);z-index:40;
+  min-width:244px;background:var(--bg);border:1px solid var(--rule);border-radius:14px;
+  box-shadow:0 24px 50px -28px rgba(31,26,20,.5);padding:8px;
+  display:flex;flex-direction:column;gap:2px;
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .15s var(--ease),transform .15s var(--ease)}
+.has-sub:hover .submenu,.has-sub:focus-within .submenu{opacity:1;visibility:visible;
+  pointer-events:auto;transform:translateY(0)}
+.submenu a{padding:9px 12px;border-radius:9px;font-size:15px;font-weight:500;opacity:.85;
+  white-space:nowrap;color:var(--ink);transition:background .12s var(--ease),opacity .12s var(--ease)}
+.submenu a:hover{opacity:1;background:var(--ink-tint-softer)}
+.submenu .sub-all{margin-top:4px;padding-top:12px;border-top:1px solid var(--rule);
+  color:var(--accent-ink);font-weight:600}
+.submenu .sub-all::after{content:"\00a0\2192"}
+
 .mobile{display:none}
-.mobile summary{list-style:none;cursor:pointer;width:44px;height:44px;border-radius:12px;
+/* Scoped to the direct hamburger summary so these don't leak into the nested
+   .m-sub accordion summaries inside the menu. */
+.mobile > summary{list-style:none;cursor:pointer;width:44px;height:44px;border-radius:12px;
   border:1.5px solid var(--ink);display:grid;place-items:center;background:transparent}
-.mobile summary::-webkit-details-marker{display:none}
-.mobile summary svg{width:20px;height:20px}
+.mobile > summary::-webkit-details-marker{display:none}
+.mobile > summary svg{width:20px;height:20px}
 .mobile[open] .menu{display:flex}
 .menu{display:none;flex-direction:column;gap:4px;position:absolute;left:16px;right:16px;
   top:100%;margin-top:8px;background:var(--surface);border:1px solid var(--rule);
@@ -211,9 +243,17 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:20px;paddi
 .menu a{text-decoration:none;padding:13px 14px;border-radius:10px;font-weight:600}
 .menu a:hover{background:var(--ink-tint-softer)}
 .menu .btn{justify-content:center;margin-top:6px}
+/* Mobile submenus: tap-to-expand <details> accordion (Services / Hire a role). */
+.m-sub summary{list-style:none;cursor:pointer;padding:13px 14px;border-radius:10px;font-weight:600;
+  display:flex;align-items:center;justify-content:space-between;gap:10px}
+.m-sub summary::-webkit-details-marker{display:none}
+.m-sub summary:hover{background:var(--ink-tint-softer)}
+.m-sub[open] summary .chev{transform:rotate(180deg)}
+.m-sublist{display:flex;flex-direction:column;gap:2px;padding:2px 0 6px 12px}
+.m-sublist a{font-weight:500;opacity:.9}
 
 /* ---- Breadcrumb (landing-page wayfinding) ---- */
-.crumb{padding:22px 0 0;font-size:14px;color:var(--muted)}
+.crumb{padding:22px 0 0;font-size:15px;color:var(--muted)}
 .crumb ol{list-style:none;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .crumb a{text-decoration:none;opacity:.85}
 .crumb a:hover{opacity:1;text-decoration:underline;text-underline-offset:3px}
@@ -247,7 +287,7 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:20px;paddi
   border-top:1px solid var(--rule);flex-wrap:wrap}
 .meta dt{font-family:var(--ff-body);font-weight:700;font-size:12px;
   letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink)}
-.meta dd{color:var(--ink);font-size:15px;margin-top:4px;max-width:28ch;
+.meta dd{color:var(--ink);font-size:16px;margin-top:4px;max-width:28ch;
   line-height:1.5;opacity:.86}
 
 /* ---- Two-card (people + AI) ---- */
@@ -258,7 +298,7 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:20px;paddi
 .grid2.lead{grid-template-columns:1.2fr .8fr}
 .card{background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-card);padding:32px}
 .card h3{font-size:22px;line-height:1.2;margin-bottom:8px}
-.card p{color:var(--ink);opacity:.8;font-size:16px}
+.card p{color:var(--ink);opacity:.8;font-size:17px}
 .tag{font-size:13px;font-weight:700;color:var(--ground);background:var(--ground-tint);
   padding:5px 11px;border-radius:8px;display:inline-block;margin-bottom:18px}
 
@@ -269,12 +309,12 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:20px;paddi
 .svc .mk{color:var(--accent-ink);font-weight:800;flex:none;line-height:1.55}
 .svc b{font-family:var(--ff-display);font-weight:700;font-size:18px;
   letter-spacing:-.01em;display:block;margin-bottom:3px}
-.svc .d{color:var(--ink);opacity:.78;font-size:15px;line-height:1.5}
+.svc .d{color:var(--ink);opacity:.78;font-size:16px;line-height:1.5}
 
 /* ---- Proof (ground block) ---- */
 .proof{background:var(--ground);color:var(--ground-fg);border-radius:var(--r-block);
   padding:clamp(40px,5vw,60px)}
-.proof .eyebrow{color:var(--accent)}
+.proof .eyebrow{color:var(--accent-on-ground)}
 .proof h2{color:var(--surface);font-size:clamp(28px,4vw,44px);max-width:18ch;line-height:1.12}
 /* Natural inline flow: each name + literal "·" sits next to its neighbour
    with normal whitespace. (Was display:flex with a gap that did nothing
@@ -298,7 +338,7 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:20px;paddi
 /* ---- Negative space ---- */
 .neg{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}
 .neg li{list-style:none;border:1px dashed var(--rule-soft);border-radius:16px;
-  padding:24px;color:var(--muted);font-size:16px}
+  padding:24px;color:var(--muted);font-size:17px}
 .neg-us{margin-top:18px;border:2px solid var(--accent);border-radius:16px;
   padding:24px 26px;background:var(--accent-tint-softer);font-weight:600;font-size:18px}
 
@@ -311,7 +351,7 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:20px;paddi
   background:var(--ink);color:var(--bg);font-family:var(--ff-display);font-weight:800;
   font-size:18px;display:grid;place-items:center}
 .step h3{font-size:20px;margin-bottom:8px}
-.step p{color:var(--ink);opacity:.78;font-size:16px}
+.step p{color:var(--ink);opacity:.78;font-size:17px}
 
 /* ---- Related links ----
    Auxiliary nav, not feature cards. Typographic list with marigold arrows and
@@ -327,7 +367,7 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:20px;paddi
   font-size:18px;line-height:1.2;flex:none;align-self:center}
 .rel b{font-family:var(--ff-display);font-weight:700;font-size:19px;
   letter-spacing:-.01em;color:var(--ink);flex:none}
-.rel span{font-size:14px;color:var(--muted);line-height:1.5;
+.rel span{font-size:15px;color:var(--muted);line-height:1.5;
   margin-left:auto;text-align:right;max-width:48ch}
 @media(max-width:760px){
   .rel a{flex-wrap:wrap;align-items:flex-start;gap:6px 14px}
@@ -338,19 +378,20 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:20px;paddi
 .estimate{background:var(--ground);color:var(--ground-fg);border-radius:var(--r-block);
   padding:clamp(36px,5vw,60px);display:grid;grid-template-columns:1fr;
   gap:clamp(24px,3vw,32px);align-items:start}
-.estimate .eyebrow{color:var(--accent)}
+.estimate .eyebrow{color:var(--accent-on-ground)}
 .estimate h2{color:var(--surface);font-size:clamp(26px,3.6vw,40px);max-width:20ch;line-height:1.12}
 .estimate .blurb{margin-top:6px;font-size:17px;line-height:1.6;letter-spacing:.005em;opacity:.9;max-width:60ch}
-.estimate .reassure{font-size:15px;opacity:.78}
+.estimate .reassure{font-size:16px;opacity:.78}
 .estimate .cta-row{margin-top:8px}
 .estimate .btn-ghost{color:var(--ground-fg);border-color:var(--ground-fg)}
 .estimate .btn-ghost:hover{background:var(--ground-fg-tint)}
 
 /* ---- FAQ (peek pattern — feedback_faq_peek_pattern) ---- */
-.faq{margin-top:40px;border-top:1px solid var(--rule)}
+.faq{margin-top:28px}
 .qa{border-bottom:1px solid var(--rule)}
-.qa summary{list-style:none;cursor:pointer;padding:24px 4px;
-  display:grid;grid-template-columns:1fr 20px;column-gap:24px;row-gap:6px;
+.qa:last-child{border-bottom:0}
+.qa summary{list-style:none;cursor:pointer;padding:16px 4px;
+  display:grid;grid-template-columns:1fr 20px;column-gap:24px;row-gap:5px;
   align-items:start}
 .qa summary::-webkit-details-marker{display:none}
 .qa summary .q{grid-column:1;grid-row:1;
@@ -358,7 +399,7 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:20px;paddi
   font-size:clamp(18px,2.2vw,21px);line-height:1.3;color:var(--ink);
   transition:color .15s var(--ease)}
 .qa summary:hover .q{color:var(--accent-ink)}
-.qa .peek{grid-column:1;grid-row:2;font-weight:400;font-size:16px;
+.qa .peek{grid-column:1;grid-row:2;font-weight:400;font-size:17px;
   line-height:1.5;color:var(--muted);
   display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;overflow:hidden}
 .qa[open] .peek{display:none}
@@ -370,7 +411,7 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:20px;paddi
           mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M12 5v14M5 12h14'/%3E%3C/svg%3E") center/contain no-repeat;
   transition:transform .2s var(--ease)}
 .qa[open] summary::after{transform:rotate(45deg)}
-.qa .a{padding:0 4px 26px;max-width:64ch;color:var(--ink);opacity:.82;
+.qa .a{padding:0 4px 20px;color:var(--ink);opacity:.82;
   font-size:17px;line-height:1.6}
 .qa .a p+p{margin-top:12px}
 .qa .a a{font-weight:600;color:var(--accent-ink);text-underline-offset:3px}
@@ -379,16 +420,29 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:20px;paddi
 footer{background:var(--ground);color:var(--ground-fg);border:0}
 .foot{display:grid;grid-template-columns:1.4fr 1fr;gap:40px;
   padding:var(--s-18) 0 var(--s-10)}
-.foot .logo{color:var(--ground-fg)}
-.foot .mark{background:var(--ground-fg);color:var(--ground)}
-.foot p{opacity:.82;font-size:15px;margin-top:16px;max-width:36ch;line-height:1.6}
-.foot h3,.foot-dir h3{font-family:var(--ff-body);font-size:13px;font-weight:700;letter-spacing:.08em;
+/* font-size:20px restated because .foot a (0,1,1) outranks .logo (0,1,0) and
+   would otherwise shrink the footer wordmark to the 16px footer-link size. */
+.foot .logo{color:var(--ground-fg);font-size:20px}
+/* Inverted mark SVG (cream tile + green BOF) so the footer monogram matches the
+   nav letterforms exactly, recoloured for the dark-green ground. */
+.foot .mark{background:url(/assets/bof-mark-footer.svg) center/contain no-repeat}
+/* Footer wordmark: mirror the nav's "Factory" tail (weight 700 + recede). On the
+   green ground that means a dimmed cream — restate color to beat .wordmark .wm-fac
+   (warm grey), which now also matches since the footer uses the .wordmark wrapper. */
+.foot .wm-fac{font-weight:700;color:var(--ground-fg);opacity:.62}
+.foot p{opacity:.82;font-size:16px;margin-top:16px;max-width:36ch;line-height:1.6}
+.foot-dir h3{font-family:var(--ff-body);font-size:13px;font-weight:700;letter-spacing:.08em;
   text-transform:uppercase;opacity:.62;margin-bottom:16px}
-.foot ul,.foot-dir ul{list-style:none;display:flex;flex-direction:column;gap:11px}
-.foot a,.foot-dir a{text-decoration:none;opacity:.85;font-size:15px}
-.foot a:hover,.foot-dir a:hover{opacity:1;text-decoration:underline;text-underline-offset:3px}
-.foot-dir{display:grid;grid-template-columns:repeat(4,1fr) 2fr;gap:32px;
-  padding:var(--s-10) 0 var(--s-10);border-top:1px solid var(--ground-fg-rule)}
+.foot-dir ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.foot-dir a{text-decoration:none;opacity:.85;font-size:16px}
+.foot-dir a:hover{opacity:1;text-decoration:underline;text-underline-offset:3px}
+/* Last item in each column is the "explore / get started" link — mark it with a
+   trailing arrow + small hover nudge so it reads as a destination, not a peer. */
+.foot-dir li:last-child a::after{content:"\00a0\2192";display:inline-block;
+  transition:transform .15s var(--ease)}
+.foot-dir li:last-child a:hover::after{transform:translateX(3px)}
+.foot-dir{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;
+  padding:0 0 var(--s-10)}
 .foot-dir .foot-cols{display:grid;grid-template-columns:1fr 1fr;gap:11px 32px}
 .foot-dir details{display:contents}
 .foot-dir summary{display:block;list-style:none}
@@ -397,6 +451,9 @@ footer{background:var(--ground);color:var(--ground-fg);border:0}
 .foot-base{border-top:1px solid var(--ground-fg-rule);padding:24px 0 56px;
   display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
   font-size:13px;opacity:.75}
+.foot-legal{display:flex;gap:8px 14px;flex-wrap:wrap}
+.foot-base a{color:inherit;text-decoration:none}
+.foot-base a:hover{text-decoration:underline;text-underline-offset:3px}
 
 /* ---- Responsive ---- */
 @media(max-width:920px){

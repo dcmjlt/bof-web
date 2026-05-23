@@ -57,7 +57,7 @@ export async function onRequestPost({ request, env }) {
   ].filter(Boolean).join("\n");
 
   const slackText =
-    `:inbox_tray: *New estimate lead*\n${fieldLines}\n` +
+    `:inbox_tray: *New free-trial signup*\n${fieldLines}\n` +
     `*Source page:* \`${source}\`\n_${new Date().toISOString()}_`;
 
   try {
@@ -65,7 +65,7 @@ export async function onRequestPost({ request, env }) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        text: `New estimate lead from ${source}`,
+        text: `New free-trial signup from ${source}`,
         blocks: [{ type: "section", text: { type: "mrkdwn", text: slackText } }],
       }),
     });
@@ -96,11 +96,11 @@ function respond(wantsJson, ok, error, status) {
 
 function successHTML() {
   return page(
-    "Got it. Your estimate is on the way.",
-    `<span class="pill">Estimate request received</span>
-     <h1>Got it. Your estimate is on the way.</h1>
-     <p>We will come back by email with an honest indicative range, usually within
-        one working day. A real number, no runaround.</p>
+    "Got it. We'll be in touch about your free trial.",
+    `<span class="pill">Free trial requested</span>
+     <h1>Got it. We'll be in touch about your free trial.</h1>
+     <p>We will email you to set up your kickoff call and free trial, usually within
+        one working day.</p>
      <a href="/" class="btn btn-ghost">Back to Back Office Factory</a>`,
   );
 }
@@ -108,7 +108,7 @@ function successHTML() {
 function errorHTML(error) {
   return page(
     "Something went wrong",
-    `<h1>Something went wrong sending your estimate request.</h1>
+    `<h1>Something went wrong sending your request.</h1>
      <p>${escapeHtml(error || "Please try again.")}</p>
      <a href="/#estimate" class="btn btn-primary">Try again</a>`,
   );

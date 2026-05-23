@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>About — A Back Office That Runs Its Own Businesses | BOF</title>
 <meta name="description" content="Back Office Factory built the operation running our own digital businesses, then opened it up to other founders. People and AI agents, since 2006.">
-<meta name="theme-color" content="#FBF7F0">
+<meta name="theme-color" content="#FFFFFF">
 
 <!-- noindex while the founder photo placeholder is visible. Flip back to the
      index,follow line below when the real Rahman Hussain photo lands.
@@ -78,7 +78,7 @@
 <noscript>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=optional">
 </noscript>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23E8A33D'/%3E%3Ctext x='16' y='22' font-family='Verdana,sans-serif' font-size='17' font-weight='700' text-anchor='middle' fill='%231F1A14'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="/assets/bof-favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/site.css">
 <style>
   /* about-only: founder's letter layout */
@@ -106,7 +106,7 @@
   .brand-rows .brand-rows-more{font-style:italic;opacity:.7;font-size:15px}
   /* Firm non-compete on About proof, matching homepage treatment. */
   .proof .nc-firm{margin-top:22px;padding-top:18px;
-    border-top:1px solid rgba(232,163,61,.32);
+    border-top:1px solid rgba(194,96,47,.32);
     font-size:17px;line-height:1.6;font-weight:600;
     color:var(--surface);max-width:54ch}
 </style>
@@ -120,18 +120,39 @@
     <nav aria-label="Primary">
       <a class="logo" href="/" aria-label="Back Office Factory home">
         <span class="mark" aria-hidden="true">BOF</span>
-        <span class="wordmark">Back Office Factory</span>
+        <span class="wordmark">Back Office <span class="wm-fac">Factory</span></span>
       </a>
       <div class="navlinks">
         <a href="/#workforce">One workforce</a>
-        <a href="/#services">Services</a>
-        <a href="/#pricing">Pricing</a>
-        <a href="/#proof">Proof</a>
         <a href="/#how">How it works</a>
-        <a href="/#faq">FAQ</a>
+        <div class="has-sub">
+          <button type="button" class="sub-trigger" aria-haspopup="true">Services
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="submenu">
+            <a href="/services/customer-support/">Customer support</a>
+            <a href="/services/finance-and-accounting/">Finance &amp; accounting</a>
+            <a href="/services/back-office-automation/">Back-office automation</a>
+            <a href="/services/ai-automation/">AI automation</a>
+            <a href="/services/digital-transformation/">Digital transformation</a>
+            <a href="/services/" class="sub-all">Explore all services</a>
+          </div>
+        </div>
+        <div class="has-sub">
+          <button type="button" class="sub-trigger" aria-haspopup="true">Hire a role
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="submenu">
+            <a href="/hire/bookkeeper/">Bookkeeper</a>
+            <a href="/hire/accounts-specialist/">Accounts specialist</a>
+            <a href="/hire/payroll-specialist/">Payroll specialist</a>
+            <a href="/hire/customer-support-specialist/">Customer support specialist</a>
+            <a href="/hire/ecommerce-support-specialist/">Ecommerce support specialist</a>
+            <a href="/services/" class="sub-all">Explore all roles</a>
+          </div>
+        </div>
+        <a href="/#faq">FAQs</a>
       </div>
       <div class="nav-cta">
-        <a href="/?src=about#estimate" class="btn btn-primary btn-sm">Get your estimate</a>
+        <a href="/?src=about#estimate" class="btn btn-primary btn-sm">Try free</a>
         <details class="mobile">
           <summary aria-label="Menu">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -139,12 +160,33 @@
           </summary>
           <div class="menu">
             <a href="/#workforce">One workforce</a>
-            <a href="/#services">Services</a>
-            <a href="/#pricing">Pricing</a>
-            <a href="/#proof">Proof</a>
             <a href="/#how">How it works</a>
-            <a href="/#faq">FAQ</a>
-            <a href="/?src=about#estimate" class="btn btn-primary">Get your estimate
+            <details class="m-sub">
+              <summary>Services
+                <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+              <div class="m-sublist">
+                <a href="/services/customer-support/">Customer support</a>
+                <a href="/services/finance-and-accounting/">Finance &amp; accounting</a>
+                <a href="/services/back-office-automation/">Back-office automation</a>
+                <a href="/services/ai-automation/">AI automation</a>
+                <a href="/services/digital-transformation/">Digital transformation</a>
+                <a href="/services/">Explore all services</a>
+              </div>
+            </details>
+            <details class="m-sub">
+              <summary>Hire a role
+                <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+              <div class="m-sublist">
+                <a href="/hire/bookkeeper/">Bookkeeper</a>
+                <a href="/hire/accounts-specialist/">Accounts specialist</a>
+                <a href="/hire/payroll-specialist/">Payroll specialist</a>
+                <a href="/hire/customer-support-specialist/">Customer support specialist</a>
+                <a href="/hire/ecommerce-support-specialist/">Ecommerce support specialist</a>
+                <a href="/services/">Explore all roles</a>
+              </div>
+            </details>
+            <a href="/#faq">FAQs</a>
+            <a href="/?src=about#estimate" class="btn btn-primary">Try free for 30 days
               <span aria-hidden="true">&rarr;</span></a>
           </div>
         </details>
@@ -171,11 +213,11 @@
         We built the operation running our own digital and ecommerce businesses, then opened it
         up to other founders. The same people and AI agents, the same workflow, the same bar.</p>
       <div class="cta-row">
-        <a href="/?src=about#estimate" class="btn btn-primary">Get your estimate
+        <a href="/?src=about#estimate" class="btn btn-primary">Try free for 30 days
           <span aria-hidden="true">&rarr;</span></a>
         <a href="/#how" class="btn btn-ghost">How it works</a>
       </div>
-      <p class="micro">A real number, early. No runaround.</p>
+      <p class="micro">Free for 30 days. No obligation.</p>
 
       <dl class="meta">
         <div><dt>Since 2006</dt><dd>a battle-tested operation, not a startup experiment</dd></div>
@@ -254,9 +296,9 @@
       <div class="grid2">
         <article class="card">
           <span class="tag">Honesty</span>
-          <h3>A straight number, early</h3>
-          <p>We give an honest indicative range up front and a firm quote after a short
-            conversation. No asterisks, no runaround, no surprise invoices. Ever.</p>
+          <h3>Honest, simple pricing</h3>
+          <p>By the hour, no lock-in, no hidden fees, no surprise invoices. A clear, honest rate
+            once we understand the work. Ever.</p>
         </article>
         <article class="card">
           <span class="tag">Independence</span>
@@ -292,9 +334,9 @@
           <li><span class="check" aria-hidden="true">&check;</span> By the hour, you only pay for work delivered</li>
           <li><span class="check" aria-hidden="true">&check;</span> No long contracts, no lock-in, walk away anytime</li>
           <li><span class="check" aria-hidden="true">&check;</span> No hidden fees, no asterisks, no surprise invoices</li>
-          <li><span class="check" aria-hidden="true">&check;</span> A straight number at the first conversation</li>
+          <li><span class="check" aria-hidden="true">&check;</span> A clear, honest rate, no surprises</li>
         </ul>
-        <a href="/?src=about#estimate" class="btn btn-primary" style="margin-top:26px">Get your estimate
+        <a href="/?src=about#estimate" class="btn btn-primary" style="margin-top:26px">Try free for 30 days
           <span aria-hidden="true">&rarr;</span></a>
         <p class="micro">Honest math beats clever pricing.</p>
       </div>
@@ -344,13 +386,13 @@
   <section aria-labelledby="cta-h">
     <div class="wrap">
       <div class="estimate">
-        <p class="eyebrow">Get your estimate</p>
-        <h2 id="cta-h">A real number, early. No runaround.</h2>
-        <p class="blurb">Tell us roughly what needs running. We come back with an honest
-          indicative range &mdash; <strong>by email, before end of day</strong> &mdash; then a firm
-          quote after a short conversation. No obligation, no sales theatre.</p>
+        <p class="eyebrow">Free trial</p>
+        <h2 id="cta-h">Try free for 30 days.</h2>
+        <p class="blurb">Tell us what you need. We&rsquo;ll set up a short call to understand your
+          requirements, then start your <strong>free 30-day trial</strong>, up to 50 hours per role.
+          No obligation.</p>
         <div class="cta-row">
-          <a href="/?src=about#estimate" class="btn btn-primary">Get your estimate
+          <a href="/?src=about#estimate" class="btn btn-primary">Try free for 30 days
             <span aria-hidden="true">&rarr;</span></a>
           <a href="/#how" class="btn btn-ghost">How it works</a>
         </div>
@@ -365,25 +407,11 @@
   <div class="wrap">
     <div class="foot">
       <div>
-        <a class="logo" href="/" aria-label="Back Office Factory home">
-          <span class="mark" aria-hidden="true">BOF</span> Back Office Factory
-        </a>
+        <span class="logo">
+          <span class="mark" aria-hidden="true">BOF</span> <span class="wordmark">Back Office <span class="wm-fac">Factory</span></span>
+        </span>
         <p>The back office that runs your growing digital business &mdash; including our own.
           People and AI agents, on one workflow, hired by the hour.</p>
-      </div>
-      <div>
-        <h3>Contact</h3>
-        <ul>
-          <li>United Kingdom
-            <span class="flag" title="Required launch trust artefact">Placeholder &middot; UK contact route to be confirmed (no email)</span>
-          </li>
-          <li>We handle your data carefully and under UK data-protection law
-            <span class="flag" title="Required launch trust artefact">Placeholder &middot; confirm exact data-protection wording</span>
-          </li>
-          <li>Security and certification status to be confirmed
-            <span class="flag" title="Required launch trust artefact">Placeholder &middot; confirm real cert status</span>
-          </li>
-        </ul>
       </div>
     </div>
     <nav class="foot-dir" aria-label="Footer">
@@ -392,12 +420,11 @@
           <summary><h3>Company</h3></summary>
           <ul>
             <li><a href="/#workforce">One workforce</a></li>
-            <li><a href="/#services">Services</a></li>
-            <li><a href="/#proof">Proof</a></li>
+            <li><a href="/#proof">Why us</a></li>
             <li><a href="/#how">How it works</a></li>
-            <li><a href="/#faq">FAQ</a></li>
+            <li><a href="/#faq">FAQs</a></li>
             <li><a href="/about/">About</a></li>
-            <li><a href="/?src=about#estimate">Get your estimate</a></li>
+            <li><a href="/?src=about#estimate">Try free for 30 days</a></li>
           </ul>
         </details>
       </div>
@@ -410,52 +437,27 @@
             <li><a href="/services/back-office-automation/">Back-office automation</a></li>
             <li><a href="/services/ai-automation/">AI automation</a></li>
             <li><a href="/services/digital-transformation/">Digital transformation</a></li>
+            <li><a href="/services/">Explore all services</a></li>
           </ul>
         </details>
       </div>
       <div>
-        <details open>
-          <summary><h3>By vertical / region</h3></summary>
-          <ul>
-            <li><a href="/ai-back-office/">AI back office</a></li>
-            <li><a href="/shopify-back-office/">Shopify back office</a></li>
-            <li><a href="/amazon-seller-back-office/">Amazon seller back office</a></li>
-            <li><a href="/uk/">UK back office</a></li>
-          </ul>
-        </details>
-      </div>
-      <div>
-        <details open>
-          <summary><h3>Compare</h3></summary>
-          <ul>
-            <li><a href="/compare/vs-full-time-hire/">vs full-time hire</a></li>
-            <li><a href="/compare/vs-va-agency/">vs VA agency</a></li>
-            <li><a href="/compare/vs-ai-tool/">vs AI tool</a></li>
-          </ul>
-        </details>
-      </div>
-      <div class="foot-roles">
         <details open>
           <summary><h3>Hire a role</h3></summary>
-          <ul class="foot-cols">
+          <ul>
             <li><a href="/hire/bookkeeper/">Bookkeeper</a></li>
             <li><a href="/hire/accounts-specialist/">Accounts specialist</a></li>
             <li><a href="/hire/payroll-specialist/">Payroll specialist</a></li>
             <li><a href="/hire/customer-support-specialist/">Customer support specialist</a></li>
             <li><a href="/hire/ecommerce-support-specialist/">Ecommerce support specialist</a></li>
-            <li><a href="/hire/order-processing-specialist/">Order processing specialist</a></li>
-            <li><a href="/hire/document-processing-specialist/">Document processing specialist</a></li>
-            <li><a href="/hire/data-entry-specialist/">Data entry specialist</a></li>
-            <li><a href="/hire/virtual-assistant/">Virtual assistant</a></li>
-            <li><a href="/hire/administration-assistant/">Administration assistant</a></li>
-            <li><a href="/hire/real-estate-data-specialist/">Real estate data specialist</a></li>
+            <li><a href="/services/">Explore all roles</a></li>
           </ul>
         </details>
       </div>
     </nav>
     <div class="foot-base">
       <span>&copy; 2026 Back Office Factory. Operating since 2006 &mdash; battle-tested, not a startup experiment.</span>
-      <span><strong>A back office built for our own businesses. Now opened up to yours.</strong></span>
+      <span class="foot-legal"><a href="/privacy.html">Privacy Policy</a> &middot; <a href="/terms.html">Terms</a> &middot; <a href="/cookies.html">Cookie Policy</a></span>
     </div>
   </div>
 </footer>

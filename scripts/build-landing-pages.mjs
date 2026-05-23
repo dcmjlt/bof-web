@@ -27,7 +27,7 @@ const TEMPLATE = `<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{TITLE}}</title>
 <meta name="description" content="{{META_DESC}}">
-<meta name="theme-color" content="#FBF7F0">
+<meta name="theme-color" content="#FFFFFF">
 
 <!-- LAUNCH BLOCKER: noindex stays until the placeholder trust artefacts
      (price-honesty quote, named case studies, UK contact, data-protection
@@ -94,7 +94,7 @@ const TEMPLATE = `<!DOCTYPE html>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap">
   <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500&display=swap">
 </noscript>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23E8A33D'/%3E%3Ctext x='16' y='22' font-family='Verdana,sans-serif' font-size='17' font-weight='700' text-anchor='middle' fill='%231F1A14'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="/assets/bof-favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
@@ -106,18 +106,39 @@ const TEMPLATE = `<!DOCTYPE html>
     <nav aria-label="Primary">
       <a class="logo" href="/" aria-label="Back Office Factory home">
         <span class="mark" aria-hidden="true">BOF</span>
-        <span class="wordmark">Back Office Factory</span>
+        <span class="wordmark">Back Office <span class="wm-fac">Factory</span></span>
       </a>
       <div class="navlinks">
         <a href="/#workforce">One workforce</a>
-        <a href="/#services">Services</a>
-        <a href="/#pricing">Pricing</a>
-        <a href="/#proof">Proof</a>
         <a href="/#how">How it works</a>
-        <a href="/#faq">FAQ</a>
+        <div class="has-sub">
+          <button type="button" class="sub-trigger" aria-haspopup="true">Services
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="submenu">
+            <a href="/services/customer-support/">Customer support</a>
+            <a href="/services/finance-and-accounting/">Finance &amp; accounting</a>
+            <a href="/services/back-office-automation/">Back-office automation</a>
+            <a href="/services/ai-automation/">AI automation</a>
+            <a href="/services/digital-transformation/">Digital transformation</a>
+            <a href="/services/" class="sub-all">Explore all services</a>
+          </div>
+        </div>
+        <div class="has-sub">
+          <button type="button" class="sub-trigger" aria-haspopup="true">Hire a role
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="submenu">
+            <a href="/hire/bookkeeper/">Bookkeeper</a>
+            <a href="/hire/accounts-specialist/">Accounts specialist</a>
+            <a href="/hire/payroll-specialist/">Payroll specialist</a>
+            <a href="/hire/customer-support-specialist/">Customer support specialist</a>
+            <a href="/hire/ecommerce-support-specialist/">Ecommerce support specialist</a>
+            <a href="/services/" class="sub-all">Explore all roles</a>
+          </div>
+        </div>
+        <a href="/#faq">FAQs</a>
       </div>
       <div class="nav-cta">
-        <a href="/?src={{SRC}}#estimate" class="btn btn-primary btn-sm">Get your estimate</a>
+        <a href="/?src={{SRC}}#estimate" class="btn btn-primary btn-sm">Try free</a>
         <details class="mobile">
           <summary aria-label="Menu">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -125,12 +146,33 @@ const TEMPLATE = `<!DOCTYPE html>
           </summary>
           <div class="menu">
             <a href="/#workforce">One workforce</a>
-            <a href="/#services">Services</a>
-            <a href="/#pricing">Pricing</a>
-            <a href="/#proof">Proof</a>
             <a href="/#how">How it works</a>
-            <a href="/#faq">FAQ</a>
-            <a href="/?src={{SRC}}#estimate" class="btn btn-primary">Get your estimate</a>
+            <details class="m-sub">
+              <summary>Services
+                <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+              <div class="m-sublist">
+                <a href="/services/customer-support/">Customer support</a>
+                <a href="/services/finance-and-accounting/">Finance &amp; accounting</a>
+                <a href="/services/back-office-automation/">Back-office automation</a>
+                <a href="/services/ai-automation/">AI automation</a>
+                <a href="/services/digital-transformation/">Digital transformation</a>
+                <a href="/services/">Explore all services</a>
+              </div>
+            </details>
+            <details class="m-sub">
+              <summary>Hire a role
+                <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+              <div class="m-sublist">
+                <a href="/hire/bookkeeper/">Bookkeeper</a>
+                <a href="/hire/accounts-specialist/">Accounts specialist</a>
+                <a href="/hire/payroll-specialist/">Payroll specialist</a>
+                <a href="/hire/customer-support-specialist/">Customer support specialist</a>
+                <a href="/hire/ecommerce-support-specialist/">Ecommerce support specialist</a>
+                <a href="/services/">Explore all roles</a>
+              </div>
+            </details>
+            <a href="/#faq">FAQs</a>
+            <a href="/?src={{SRC}}#estimate" class="btn btn-primary">Try free for 30 days</a>
           </div>
         </details>
       </div>
@@ -158,11 +200,11 @@ const TEMPLATE = `<!DOCTYPE html>
       <p class="dog">The same team runs <b><a class="brand-link" href="https://www.ticketstodo.com/" target="_blank" rel="noopener external">TicketsToDo</a>, <a class="brand-link" href="https://vouchercodes.ae/" target="_blank" rel="noopener external">VoucherCodes.ae</a>, <a class="brand-link" href="https://www.dcmnetwork.com/" target="_blank" rel="noopener external">DCMnetwork</a></b> and more.
         We do not take on business that competes with us or you.</p>
       <div class="cta-row">
-        <a href="/?src={{SRC}}#estimate" class="btn btn-primary">Get your estimate
+        <a href="/?src={{SRC}}#estimate" class="btn btn-primary">Try free for 30 days
           <span aria-hidden="true">&rarr;</span></a>
         <a href="/#how" class="btn btn-ghost">How it works</a>
       </div>
-      <p class="micro">A real number, early. No runaround.</p>
+      <p class="micro">Free for 30 days. No obligation.</p>
 
       <dl class="meta">
         <div><dt>Since 2006</dt><dd>a battle-tested operation, not a startup experiment</dd></div>
@@ -231,11 +273,11 @@ const TEMPLATE = `<!DOCTYPE html>
           <li><span class="check" aria-hidden="true">&check;</span> By the hour, you only pay for work delivered</li>
           <li><span class="check" aria-hidden="true">&check;</span> No long contracts, no lock-in, walk away anytime</li>
           <li><span class="check" aria-hidden="true">&check;</span> No hidden fees, no asterisks, no surprise invoices</li>
-          <li><span class="check" aria-hidden="true">&check;</span> A straight number at the first conversation</li>
+          <li><span class="check" aria-hidden="true">&check;</span> A clear, honest rate, no surprises</li>
         </ul>
-        <a href="/?src={{SRC}}#estimate" class="btn btn-primary" style="margin-top:26px">Get your estimate
+        <a href="/?src={{SRC}}#estimate" class="btn btn-primary" style="margin-top:26px">Try free for 30 days
           <span aria-hidden="true">&rarr;</span></a>
-        <p class="micro">A real number, early. No runaround.</p>
+        <p class="micro">Free for 30 days. No obligation.</p>
       </div>
     </div>
   </section>
@@ -269,14 +311,14 @@ const TEMPLATE = `<!DOCTYPE html>
         <details class="qa">
           <summary>
             <span class="q">What does it cost?</span>
-            <span class="peek">Quality work, priced fairly, by the hour, with a real number early.</span>
+            <span class="peek">Free for 30 days, then quality work priced fairly, by the hour.</span>
           </summary>
           <div class="a">
-            <p>Quality work, priced fairly. You are billed by the hour and only pay for work
-              delivered, with no long contracts, no lock-in and no hidden fees. You get a real
-              indicative range early, then a firm quote after a short conversation.</p>
-            <p><a href="/?src={{SRC}}#estimate">Get your estimate &rarr;</a>
-              A real number, early. No runaround.</p>
+            <p>Start with a free 30-day trial (up to 50 hours per role). After that, you are billed
+              by the hour and only pay for work delivered, with no long contracts, no lock-in and
+              no hidden fees.</p>
+            <p><a href="/?src={{SRC}}#estimate">Try free for 30 days &rarr;</a>
+              See the work first, decide after.</p>
           </div>
         </details>
       </div>
@@ -300,25 +342,11 @@ const TEMPLATE = `<!DOCTYPE html>
   <div class="wrap">
     <div class="foot">
       <div>
-        <a class="logo" href="/" aria-label="Back Office Factory home">
-          <span class="mark" aria-hidden="true">BOF</span> Back Office Factory
-        </a>
+        <span class="logo">
+          <span class="mark" aria-hidden="true">BOF</span> <span class="wordmark">Back Office <span class="wm-fac">Factory</span></span>
+        </span>
         <p>The back office that runs growing digital businesses, including our own. Real people
           and AI agents, on the same workflow, hired by the hour.</p>
-      </div>
-      <div>
-        <h3>Contact</h3>
-        <ul>
-          <li>United Kingdom
-            <span class="flag" title="Required launch trust artefact">Placeholder &middot; UK contact route to be confirmed (no email)</span>
-          </li>
-          <li>We handle your data carefully and under UK data-protection law
-            <span class="flag" title="Required launch trust artefact">Placeholder &middot; confirm exact data-protection wording</span>
-          </li>
-          <li>Security and certification status to be confirmed
-            <span class="flag" title="Required launch trust artefact">Placeholder &middot; confirm real cert status</span>
-          </li>
-        </ul>
       </div>
     </div>
     <nav class="foot-dir" aria-label="Footer">
@@ -327,12 +355,11 @@ const TEMPLATE = `<!DOCTYPE html>
           <summary><h3>Company</h3></summary>
           <ul>
             <li><a href="/#workforce">One workforce</a></li>
-            <li><a href="/#services">Services</a></li>
-            <li><a href="/#proof">Proof</a></li>
+            <li><a href="/#proof">Why us</a></li>
             <li><a href="/#how">How it works</a></li>
-            <li><a href="/#faq">FAQ</a></li>
+            <li><a href="/#faq">FAQs</a></li>
             <li><a href="/about/">About</a></li>
-            <li><a href="/?src={{SRC}}#estimate">Get your estimate</a></li>
+            <li><a href="/?src={{SRC}}#estimate">Try free for 30 days</a></li>
           </ul>
         </details>
       </div>
@@ -345,31 +372,27 @@ const TEMPLATE = `<!DOCTYPE html>
             <li><a href="/services/back-office-automation/">Back-office automation</a></li>
             <li><a href="/services/ai-automation/">AI automation</a></li>
             <li><a href="/services/digital-transformation/">Digital transformation</a></li>
+            <li><a href="/services/">Explore all services</a></li>
           </ul>
         </details>
       </div>
-      <div class="foot-roles">
+      <div>
         <details open>
           <summary><h3>Hire a role</h3></summary>
-          <ul class="foot-cols">
+          <ul>
             <li><a href="/hire/bookkeeper/">Bookkeeper</a></li>
             <li><a href="/hire/accounts-specialist/">Accounts specialist</a></li>
             <li><a href="/hire/payroll-specialist/">Payroll specialist</a></li>
             <li><a href="/hire/customer-support-specialist/">Customer support specialist</a></li>
             <li><a href="/hire/ecommerce-support-specialist/">Ecommerce support specialist</a></li>
-            <li><a href="/hire/order-processing-specialist/">Order processing specialist</a></li>
-            <li><a href="/hire/document-processing-specialist/">Document processing specialist</a></li>
-            <li><a href="/hire/data-entry-specialist/">Data entry specialist</a></li>
-            <li><a href="/hire/virtual-assistant/">Virtual assistant</a></li>
-            <li><a href="/hire/administration-assistant/">Administration assistant</a></li>
-            <li><a href="/hire/real-estate-data-specialist/">Real estate data specialist</a></li>
+            <li><a href="/services/">Explore all roles</a></li>
           </ul>
         </details>
       </div>
     </nav>
     <div class="foot-base">
       <span>&copy; 2026 Back Office Factory. Operating since 2006.</span>
-      <span>No long contracts. No hidden fees. No surprise invoices.</span>
+      <span class="foot-legal"><a href="/privacy.html">Privacy Policy</a> &middot; <a href="/terms.html">Terms</a> &middot; <a href="/cookies.html">Cookie Policy</a></span>
     </div>
   </div>
 </footer>
@@ -415,7 +438,7 @@ const PAGES = [
   {
     type: "role", slug: "ecommerce-support-specialist",
     title: "Hire an Ecommerce Support Specialist, By the Hour | Back Office Factory",
-    metaDesc: "Hire a trained ecommerce support specialist by the hour: customer support, order and returns handling, inbox triage. Real people and AI agents on one workflow. A real number, early.",
+    metaDesc: "Hire a trained ecommerce support specialist by the hour: customer support, order and returns handling, inbox triage. Real people and AI agents on one workflow. Free for 30 days, no obligation.",
     ogTitle: "Hire an ecommerce support specialist, by the hour",
     ogDesc: "Customer support, order and returns handling and inbox triage for growing ecommerce businesses, by real people and AI agents on one workflow, hired by the hour.",
     twDesc: "Ecommerce customer support, order and returns handling and inbox triage by people and AI agents, hired by the hour.",
@@ -449,7 +472,7 @@ const PAGES = [
   {
     type: "role", slug: "customer-support-specialist",
     title: "Hire a Customer Support Specialist, By the Hour | Back Office Factory",
-    metaDesc: "Hire a trained customer support specialist by the hour: tickets, live chat, inbox triage and escalations. Real people and AI agents on one workflow. A real number, early.",
+    metaDesc: "Hire a trained customer support specialist by the hour: tickets, live chat, inbox triage and escalations. Real people and AI agents on one workflow. Free for 30 days, no obligation.",
     ogTitle: "Hire a customer support specialist, by the hour",
     ogDesc: "Tickets, live chat, inbox triage and escalations for growing digital businesses, by real people and AI agents on one workflow, hired by the hour.",
     twDesc: "Tickets, live chat, inbox triage and escalations by people and AI agents, hired by the hour.",
@@ -483,7 +506,7 @@ const PAGES = [
   {
     type: "role", slug: "order-processing-specialist",
     title: "Hire an Order Processing Specialist, By the Hour | Back Office Factory",
-    metaDesc: "Hire a trained order processing specialist by the hour: order entry, exceptions, returns and fulfilment coordination. Real people and AI agents on one workflow. A real number, early.",
+    metaDesc: "Hire a trained order processing specialist by the hour: order entry, exceptions, returns and fulfilment coordination. Real people and AI agents on one workflow. Free for 30 days, no obligation.",
     ogTitle: "Hire an order processing specialist, by the hour",
     ogDesc: "Order entry, exceptions, returns and fulfilment coordination for growing digital businesses, by real people and AI agents on one workflow, hired by the hour.",
     twDesc: "Order entry, exceptions, returns and fulfilment coordination by people and AI agents, hired by the hour.",
@@ -517,7 +540,7 @@ const PAGES = [
   {
     type: "role", slug: "bookkeeper",
     title: "Hire a Bookkeeper, By the Hour | Back Office Factory",
-    metaDesc: "Hire a bookkeeper by the hour: day-to-day books, bank reconciliation, invoicing and month-end prep. Real people and AI agents on one workflow. A real number, early.",
+    metaDesc: "Hire a bookkeeper by the hour: day-to-day books, bank reconciliation, invoicing and month-end prep. Real people and AI agents on one workflow. Free for 30 days, no obligation.",
     ogTitle: "Hire a bookkeeper, by the hour",
     ogDesc: "Day-to-day books, bank reconciliation, invoicing and month-end prep for growing digital businesses, by real people and AI agents on one workflow, hired by the hour.",
     twDesc: "Day-to-day books, reconciliation, invoicing and month-end prep by people and AI agents, hired by the hour.",
@@ -551,7 +574,7 @@ const PAGES = [
   {
     type: "role", slug: "virtual-assistant",
     title: "Hire a Virtual Assistant, By the Hour | Back Office Factory",
-    metaDesc: "Hire a virtual assistant by the hour: inbox and calendar, scheduling, research, document prep and follow-ups. Real people and AI agents on one workflow. A real number, early.",
+    metaDesc: "Hire a virtual assistant by the hour: inbox and calendar, scheduling, research, document prep and follow-ups. Real people and AI agents on one workflow. Free for 30 days, no obligation.",
     ogTitle: "Hire a virtual assistant, by the hour",
     ogDesc: "Inbox and calendar, scheduling, research, document prep and follow-ups for busy founders, by real people and AI agents on one workflow, hired by the hour.",
     twDesc: "Inbox, calendar, scheduling, research and follow-ups by people and AI agents, hired by the hour.",
@@ -585,7 +608,7 @@ const PAGES = [
   {
     type: "role", slug: "administration-assistant",
     title: "Hire an Administration Assistant, By the Hour | Back Office Factory",
-    metaDesc: "Hire an administration assistant by the hour: business admin, records, scheduling, supplier coordination and reporting prep. Real people and AI agents on one workflow. A real number, early.",
+    metaDesc: "Hire an administration assistant by the hour: business admin, records, scheduling, supplier coordination and reporting prep. Real people and AI agents on one workflow. Free for 30 days, no obligation.",
     ogTitle: "Hire an administration assistant, by the hour",
     ogDesc: "Business admin, records, scheduling, supplier coordination and reporting prep for growing teams, by real people and AI agents on one workflow, hired by the hour.",
     twDesc: "Business admin, records, scheduling and supplier coordination by people and AI agents, hired by the hour.",
@@ -619,7 +642,7 @@ const PAGES = [
   {
     type: "role", slug: "data-entry-specialist",
     title: "Hire a Data Entry Specialist, By the Hour | Back Office Factory",
-    metaDesc: "Hire a data entry specialist by the hour: high-volume entry, migration, cleanup, deduplication and CRM hygiene. Real people and AI agents on one workflow. A real number, early.",
+    metaDesc: "Hire a data entry specialist by the hour: high-volume entry, migration, cleanup, deduplication and CRM hygiene. Real people and AI agents on one workflow. Free for 30 days, no obligation.",
     ogTitle: "Hire a data entry specialist, by the hour",
     ogDesc: "High-volume data entry, migration, cleanup, deduplication and CRM hygiene, by real people and AI agents on one workflow, hired by the hour.",
     twDesc: "High-volume data entry, migration, cleanup and CRM hygiene by people and AI agents, hired by the hour.",
@@ -653,7 +676,7 @@ const PAGES = [
   {
     type: "role", slug: "payroll-specialist",
     title: "Hire a Payroll Specialist, By the Hour | Back Office Factory",
-    metaDesc: "Hire a payroll specialist by the hour: payroll preparation, starters and leavers, timesheets and payslip distribution admin. Real people and AI agents on one workflow. A real number, early.",
+    metaDesc: "Hire a payroll specialist by the hour: payroll preparation, starters and leavers, timesheets and payslip distribution admin. Real people and AI agents on one workflow. Free for 30 days, no obligation.",
     ogTitle: "Hire a payroll specialist, by the hour",
     ogDesc: "Payroll preparation, starters and leavers, timesheets and payslip distribution admin, by real people and AI agents on one workflow, hired by the hour.",
     twDesc: "Payroll preparation, starters and leavers and timesheet admin by people and AI agents, hired by the hour.",
@@ -687,7 +710,7 @@ const PAGES = [
   {
     type: "role", slug: "accounts-specialist",
     title: "Hire an Accounts Specialist, By the Hour | Back Office Factory",
-    metaDesc: "Hire an accounts specialist by the hour: accounts payable and receivable, invoicing, credit control and reconciliation. Real people and AI agents on one workflow. A real number, early.",
+    metaDesc: "Hire an accounts specialist by the hour: accounts payable and receivable, invoicing, credit control and reconciliation. Real people and AI agents on one workflow. Free for 30 days, no obligation.",
     ogTitle: "Hire an accounts specialist, by the hour",
     ogDesc: "Accounts payable and receivable, invoicing, credit control and reconciliation, by real people and AI agents on one workflow, hired by the hour.",
     twDesc: "Accounts payable and receivable, invoicing and credit control by people and AI agents, hired by the hour.",
@@ -721,7 +744,7 @@ const PAGES = [
   {
     type: "role", slug: "document-processing-specialist",
     title: "Hire a Document Processing Specialist, By the Hour | Back Office Factory",
-    metaDesc: "Hire a document processing specialist by the hour: document intake, data extraction, indexing, digitisation and records management. Real people and AI agents on one workflow. A real number, early.",
+    metaDesc: "Hire a document processing specialist by the hour: document intake, data extraction, indexing, digitisation and records management. Real people and AI agents on one workflow. Free for 30 days, no obligation.",
     ogTitle: "Hire a document processing specialist, by the hour",
     ogDesc: "Document intake, data extraction, indexing, digitisation and records management, by real people and AI agents on one workflow, hired by the hour.",
     twDesc: "Document intake, data extraction, indexing and records management by people and AI agents, hired by the hour.",
@@ -791,7 +814,7 @@ const PAGES = [
   {
     type: "service", slug: "back-office-automation",
     title: "Back-Office Automation, Run by People and AI | Back Office Factory",
-    metaDesc: "Back-office automation delivered as an operation: repetitive process work mapped, automated and run by people and AI agents on one workflow, hired by the hour. A real number, early.",
+    metaDesc: "Back-office automation delivered as an operation: repetitive process work mapped, automated and run by people and AI agents on one workflow, hired by the hour. Free for 30 days, no obligation.",
     ogTitle: "Back-office automation, run by people and AI",
     ogDesc: "Repetitive back-office processes mapped, automated and run end to end by people and AI agents on one workflow, hired by the hour.",
     twDesc: "Repetitive back-office processes automated and run by people and AI agents, hired by the hour.",
@@ -825,7 +848,7 @@ const PAGES = [
   {
     type: "service", slug: "ai-automation",
     title: "AI Automation for Back-Office Operations | Back Office Factory",
-    metaDesc: "AI automation for back-office operations: support, document and data work run by AI agents with human-in-the-loop review, on one workflow, hired by the hour. A real number, early.",
+    metaDesc: "AI automation for back-office operations: support, document and data work run by AI agents with human-in-the-loop review, on one workflow, hired by the hour. Free for 30 days, no obligation.",
     ogTitle: "AI automation for back-office operations",
     ogDesc: "Support, document and data work run by AI agents with human-in-the-loop review, on one workflow, hired by the hour.",
     twDesc: "Back-office work run by AI agents with human-in-the-loop review, hired by the hour.",
@@ -893,7 +916,7 @@ const PAGES = [
   {
     type: "service", slug: "customer-support",
     title: "Customer Support, as a Service | Back Office Factory",
-    metaDesc: "Customer support as a service: tickets, live chat, inbox triage, escalations and order or returns queries, by people and AI agents on one workflow, hired by the hour. A real number, early.",
+    metaDesc: "Customer support as a service: tickets, live chat, inbox triage, escalations and order or returns queries, by people and AI agents on one workflow, hired by the hour. Free for 30 days, no obligation.",
     ogTitle: "Customer support, as a service",
     ogDesc: "Tickets, live chat, inbox triage, escalations and order or returns queries, by people and AI agents on one workflow, hired by the hour.",
     twDesc: "Tickets, live chat, inbox triage and escalations by people and AI agents, hired by the hour.",
@@ -1002,3 +1025,335 @@ for (const p of PAGES) {
   console.log(`  ${path}/`);
 }
 console.log(`\nGenerated ${count} landing pages.`);
+
+/* ===== /services/ hub — lists every service + role from the same PAGES data, so
+ * it never drifts out of sync with the detail pages. noindex,follow like the rest
+ * (same trust-artefact gate); do NOT add to sitemap.xml until that is lifted.
+ * NOTE: nav + footer markup below is kept identical to TEMPLATE on purpose — if
+ * you change the chrome in TEMPLATE, mirror it here too. */
+const HUB_TEMPLATE = `<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Services and Roles We Run | Back Office Factory</title>
+<meta name="description" content="Every back-office service and role Back Office Factory runs for growing digital and ecommerce businesses, by real people and AI agents on one workflow, hired by the hour. Free for 30 days.">
+<meta name="theme-color" content="#FFFFFF">
+
+<!-- LAUNCH BLOCKER: noindex stays until the placeholder trust artefacts are real.
+     Same gate as index.html + the detail pages. Not in sitemap.xml until lifted. -->
+<meta name="robots" content="noindex,follow">
+
+<link rel="canonical" href="https://backofficefactory.com/services/">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://backofficefactory.com/services/">
+<meta property="og:title" content="Services and roles we run">
+<meta property="og:description" content="Every back-office service and role we run for growing digital and ecommerce businesses, by people and AI agents on one workflow, hired by the hour.">
+<meta property="og:locale" content="en_GB">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Services and roles we run">
+<meta name="twitter:description" content="Every back-office service and role we run, by people and AI agents on one workflow, hired by the hour.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://backofficefactory.com/#organization",
+      "name": "Back Office Factory",
+      "url": "https://backofficefactory.com/",
+      "description": "Back-office team that runs growing digital and ecommerce businesses, delivered by real people and AI agents on one workflow, hired by the hour.",
+      "foundingDate": "2006"
+    },
+    {
+      "@type": "CollectionPage",
+      "@id": "https://backofficefactory.com/services/#collection",
+      "name": "Services and roles we run",
+      "url": "https://backofficefactory.com/services/",
+      "isPartOf": { "@id": "https://backofficefactory.com/#organization" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://backofficefactory.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Services" }
+      ]
+    }
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" media="print" onload="this.media='all'">
+<link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500&display=swap" media="print" onload="this.media='all'">
+<noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap">
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500&display=swap">
+</noscript>
+<link rel="icon" href="/assets/bof-favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="nav-shell" id="navShell">
+  <div class="wrap">
+    <nav aria-label="Primary">
+      <a class="logo" href="/" aria-label="Back Office Factory home">
+        <span class="mark" aria-hidden="true">BOF</span>
+        <span class="wordmark">Back Office <span class="wm-fac">Factory</span></span>
+      </a>
+      <div class="navlinks">
+        <a href="/#workforce">One workforce</a>
+        <a href="/#how">How it works</a>
+        <div class="has-sub">
+          <button type="button" class="sub-trigger" aria-haspopup="true">Services
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="submenu">
+            <a href="/services/customer-support/">Customer support</a>
+            <a href="/services/finance-and-accounting/">Finance &amp; accounting</a>
+            <a href="/services/back-office-automation/">Back-office automation</a>
+            <a href="/services/ai-automation/">AI automation</a>
+            <a href="/services/digital-transformation/">Digital transformation</a>
+            <a href="/services/" class="sub-all">Explore all services</a>
+          </div>
+        </div>
+        <div class="has-sub">
+          <button type="button" class="sub-trigger" aria-haspopup="true">Hire a role
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="submenu">
+            <a href="/hire/bookkeeper/">Bookkeeper</a>
+            <a href="/hire/accounts-specialist/">Accounts specialist</a>
+            <a href="/hire/payroll-specialist/">Payroll specialist</a>
+            <a href="/hire/customer-support-specialist/">Customer support specialist</a>
+            <a href="/hire/ecommerce-support-specialist/">Ecommerce support specialist</a>
+            <a href="/services/" class="sub-all">Explore all roles</a>
+          </div>
+        </div>
+        <a href="/#faq">FAQs</a>
+      </div>
+      <div class="nav-cta">
+        <a href="/?src=services-hub#estimate" class="btn btn-primary btn-sm">Try free</a>
+        <details class="mobile">
+          <summary aria-label="Menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+          </summary>
+          <div class="menu">
+            <a href="/#workforce">One workforce</a>
+            <a href="/#how">How it works</a>
+            <details class="m-sub">
+              <summary>Services
+                <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+              <div class="m-sublist">
+                <a href="/services/customer-support/">Customer support</a>
+                <a href="/services/finance-and-accounting/">Finance &amp; accounting</a>
+                <a href="/services/back-office-automation/">Back-office automation</a>
+                <a href="/services/ai-automation/">AI automation</a>
+                <a href="/services/digital-transformation/">Digital transformation</a>
+                <a href="/services/">Explore all services</a>
+              </div>
+            </details>
+            <details class="m-sub">
+              <summary>Hire a role
+                <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+              <div class="m-sublist">
+                <a href="/hire/bookkeeper/">Bookkeeper</a>
+                <a href="/hire/accounts-specialist/">Accounts specialist</a>
+                <a href="/hire/payroll-specialist/">Payroll specialist</a>
+                <a href="/hire/customer-support-specialist/">Customer support specialist</a>
+                <a href="/hire/ecommerce-support-specialist/">Ecommerce support specialist</a>
+                <a href="/services/">Explore all roles</a>
+              </div>
+            </details>
+            <a href="/#faq">FAQs</a>
+            <a href="/?src=services-hub#estimate" class="btn btn-primary">Try free for 30 days</a>
+          </div>
+        </details>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<main id="main">
+
+  <div class="wrap">
+    <nav class="crumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li class="sep" aria-hidden="true">/</li>
+        <li aria-current="page">Services</li>
+      </ol>
+    </nav>
+
+    <header class="hero">
+      <span class="pill">Services &amp; roles</span>
+      <h1>Everything we run, in one place.</h1>
+      <p class="sub">The back-office services we take off your plate, and the specific roles you can
+        hire by the hour. Both delivered by real people and AI agents on one workflow.</p>
+      <p class="dog">The same team runs <b><a class="brand-link" href="https://www.ticketstodo.com/" target="_blank" rel="noopener external">TicketsToDo</a>, <a class="brand-link" href="https://vouchercodes.ae/" target="_blank" rel="noopener external">VoucherCodes.ae</a>, <a class="brand-link" href="https://www.dcmnetwork.com/" target="_blank" rel="noopener external">DCMnetwork</a></b> and more.
+        We do not take on business that competes with us or you.</p>
+      <div class="cta-row">
+        <a href="/?src=services-hub#estimate" class="btn btn-primary">Try free for 30 days
+          <span aria-hidden="true">&rarr;</span></a>
+        <a href="/#how" class="btn btn-ghost">How it works</a>
+      </div>
+      <p class="micro">Free for 30 days. No obligation.</p>
+
+      <dl class="meta">
+        <div><dt>Since 2006</dt><dd>a battle-tested operation, not a startup experiment</dd></div>
+        <div><dt>People + AI</dt><dd>the same workflow, you get whichever does the job best</dd></div>
+        <div><dt>By the hour</dt><dd>no long contracts, walk away anytime</dd></div>
+      </dl>
+    </header>
+  </div>
+
+  <section aria-labelledby="svc-h">
+    <div class="wrap">
+      <p class="eyebrow">Services</p>
+      <h2 class="sec-h" id="svc-h" style="max-width:22ch">Whole operations we take off your plate.</h2>
+      <p class="deck">Run end to end on one workflow, so a function stops being your problem.</p>
+      <ul class="rel">
+{{SERVICES_LIST}}
+      </ul>
+    </div>
+  </section>
+
+  <section aria-labelledby="roles-h">
+    <div class="wrap">
+      <p class="eyebrow">Hire a role</p>
+      <h2 class="sec-h" id="roles-h" style="max-width:22ch">Or hire a specific role, by the hour.</h2>
+      <p class="deck">Prefer a single seat filled? Hire a trained operator, backed by AI agents on the
+        same workflow, for exactly the work you need.</p>
+      <ul class="rel">
+{{ROLES_LIST}}
+      </ul>
+    </div>
+  </section>
+
+  <section aria-labelledby="price-h">
+    <div class="wrap">
+      <p class="eyebrow">How we work and what it costs</p>
+      <div class="price-block">
+        <h2 class="vframe" id="price-h">Quality work, priced fairly.</h2>
+        <p class="lede">Product-grade quality at honest, reasonable prices, structured so it is
+          profitable for you too, not just us.</p>
+        <ul class="price-list">
+          <li><span class="check" aria-hidden="true">&check;</span> By the hour, you only pay for work delivered</li>
+          <li><span class="check" aria-hidden="true">&check;</span> No long contracts, no lock-in, walk away anytime</li>
+          <li><span class="check" aria-hidden="true">&check;</span> No hidden fees, no asterisks, no surprise invoices</li>
+          <li><span class="check" aria-hidden="true">&check;</span> A clear, honest rate, no surprises</li>
+        </ul>
+        <a href="/?src=services-hub#estimate" class="btn btn-primary" style="margin-top:26px">Try free for 30 days
+          <span aria-hidden="true">&rarr;</span></a>
+        <p class="micro">Free for 30 days. No obligation.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer aria-labelledby="footer-h">
+  <h2 class="vh" id="footer-h">Back Office Factory</h2>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <span class="logo">
+          <span class="mark" aria-hidden="true">BOF</span> <span class="wordmark">Back Office <span class="wm-fac">Factory</span></span>
+        </span>
+        <p>The back office that runs growing digital businesses, including our own. Real people
+          and AI agents, on the same workflow, hired by the hour.</p>
+      </div>
+    </div>
+    <nav class="foot-dir" aria-label="Footer">
+      <div>
+        <details open>
+          <summary><h3>Company</h3></summary>
+          <ul>
+            <li><a href="/#workforce">One workforce</a></li>
+            <li><a href="/#proof">Why us</a></li>
+            <li><a href="/#how">How it works</a></li>
+            <li><a href="/#faq">FAQs</a></li>
+            <li><a href="/about/">About</a></li>
+            <li><a href="/?src=services-hub#estimate">Try free for 30 days</a></li>
+          </ul>
+        </details>
+      </div>
+      <div>
+        <details open>
+          <summary><h3>Services</h3></summary>
+          <ul>
+            <li><a href="/services/customer-support/">Customer support</a></li>
+            <li><a href="/services/finance-and-accounting/">Finance &amp; accounting</a></li>
+            <li><a href="/services/back-office-automation/">Back-office automation</a></li>
+            <li><a href="/services/ai-automation/">AI automation</a></li>
+            <li><a href="/services/digital-transformation/">Digital transformation</a></li>
+            <li><a href="/services/">Explore all services</a></li>
+          </ul>
+        </details>
+      </div>
+      <div>
+        <details open>
+          <summary><h3>Hire a role</h3></summary>
+          <ul>
+            <li><a href="/hire/bookkeeper/">Bookkeeper</a></li>
+            <li><a href="/hire/accounts-specialist/">Accounts specialist</a></li>
+            <li><a href="/hire/payroll-specialist/">Payroll specialist</a></li>
+            <li><a href="/hire/customer-support-specialist/">Customer support specialist</a></li>
+            <li><a href="/hire/ecommerce-support-specialist/">Ecommerce support specialist</a></li>
+            <li><a href="/services/">Explore all roles</a></li>
+          </ul>
+        </details>
+      </div>
+    </nav>
+    <div class="foot-base">
+      <span>&copy; 2026 Back Office Factory. Operating since 2006.</span>
+      <span class="foot-legal"><a href="/privacy.html">Privacy Policy</a> &middot; <a href="/terms.html">Terms</a> &middot; <a href="/cookies.html">Cookie Policy</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var shell=document.getElementById('navShell');
+    var tick=false;
+    function upd(){shell.dataset.stuck=window.scrollY>8;tick=false;}
+    addEventListener('scroll',function(){
+      if(!tick){requestAnimationFrame(upd);tick=true;}
+    },{passive:true});
+    upd();
+    var m=document.querySelector('.mobile');
+    if(m){m.addEventListener('click',function(e){
+      if(e.target.closest('a')) m.removeAttribute('open');
+    });}
+    var fd=document.querySelectorAll('.foot-dir details');
+    function footSync(){var mob=matchMedia('(max-width:760px)').matches;
+      fd.forEach(function(x){x.open=!mob;});}
+    footSync();addEventListener('resize',footSync,{passive:true});
+  })();
+</script>
+
+</body>
+</html>
+`;
+
+const servicesList = PAGES.filter((p) => p.type === "service")
+  .map((p) => rel(`/services/${p.slug}/`, p.svcName, p.svcType)).join("\n");
+const rolesList = PAGES.filter((p) => p.type === "role")
+  .map((p) => rel(`/hire/${p.slug}/`, p.svcName, p.svcType)).join("\n");
+
+const hubHtml = HUB_TEMPLATE
+  .replaceAll("{{SERVICES_LIST}}", servicesList)
+  .replaceAll("{{ROLES_LIST}}", rolesList);
+
+mkdirSync(join(ROOT, "services"), { recursive: true });
+writeFileSync(join(ROOT, "services", "index.html"), hubHtml);
+console.log(`  services/  (hub: ${PAGES.filter((p) => p.type === "service").length} services + ${PAGES.filter((p) => p.type === "role").length} roles)`);
