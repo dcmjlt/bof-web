@@ -112,7 +112,7 @@ const TEMPLATE = `<!DOCTYPE html>
         <a href="/#workforce">One workforce</a>
         <a href="/#how">How it works</a>
         <div class="has-sub">
-          <button type="button" class="sub-trigger" aria-haspopup="true">Services
+          <button type="button" class="sub-trigger" aria-haspopup="true" aria-expanded="false">Services
             <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
           <div class="submenu">
             <a href="/services/customer-support/">Customer support</a>
@@ -124,7 +124,7 @@ const TEMPLATE = `<!DOCTYPE html>
           </div>
         </div>
         <div class="has-sub">
-          <button type="button" class="sub-trigger" aria-haspopup="true">Hire a role
+          <button type="button" class="sub-trigger" aria-haspopup="true" aria-expanded="false">Hire a role
             <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
           <div class="submenu">
             <a href="/hire/bookkeeper/">Bookkeeper</a>
@@ -142,7 +142,7 @@ const TEMPLATE = `<!DOCTYPE html>
         <details class="mobile">
           <summary aria-label="Menu">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                 stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+                 stroke-linecap="round" aria-hidden="true"><path class="bar-h" d="M3 6h18M3 12h18M3 18h18"/><path class="bar-x" d="M6 6l12 12M18 6l-12 12"/></svg>
           </summary>
           <div class="menu">
             <a href="/#workforce">One workforce</a>
@@ -415,6 +415,16 @@ const TEMPLATE = `<!DOCTYPE html>
     function footSync(){var mob=matchMedia('(max-width:760px)').matches;
       fd.forEach(function(x){x.open=!mob;});}
     footSync();addEventListener('resize',footSync,{passive:true});
+
+    // Dropdown triggers: reflect open/closed state for assistive tech (CSS drives the visual).
+    document.querySelectorAll('.has-sub').forEach(function(hs){
+      var t=hs.querySelector('.sub-trigger'); if(!t) return;
+      function set(v){t.setAttribute('aria-expanded',v?'true':'false');}
+      hs.addEventListener('mouseenter',function(){set(true);});
+      hs.addEventListener('mouseleave',function(){if(!hs.contains(document.activeElement))set(false);});
+      hs.addEventListener('focusin',function(){set(true);});
+      hs.addEventListener('focusout',function(e){if(!hs.contains(e.relatedTarget))set(false);});
+    });
   })();
 </script>
 
@@ -1115,7 +1125,7 @@ const HUB_TEMPLATE = `<!DOCTYPE html>
         <a href="/#workforce">One workforce</a>
         <a href="/#how">How it works</a>
         <div class="has-sub">
-          <button type="button" class="sub-trigger" aria-haspopup="true">Services
+          <button type="button" class="sub-trigger" aria-haspopup="true" aria-expanded="false">Services
             <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
           <div class="submenu">
             <a href="/services/customer-support/">Customer support</a>
@@ -1127,7 +1137,7 @@ const HUB_TEMPLATE = `<!DOCTYPE html>
           </div>
         </div>
         <div class="has-sub">
-          <button type="button" class="sub-trigger" aria-haspopup="true">Hire a role
+          <button type="button" class="sub-trigger" aria-haspopup="true" aria-expanded="false">Hire a role
             <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
           <div class="submenu">
             <a href="/hire/bookkeeper/">Bookkeeper</a>
@@ -1145,7 +1155,7 @@ const HUB_TEMPLATE = `<!DOCTYPE html>
         <details class="mobile">
           <summary aria-label="Menu">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                 stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+                 stroke-linecap="round" aria-hidden="true"><path class="bar-h" d="M3 6h18M3 12h18M3 18h18"/><path class="bar-x" d="M6 6l12 12M18 6l-12 12"/></svg>
           </summary>
           <div class="menu">
             <a href="/#workforce">One workforce</a>
@@ -1338,6 +1348,16 @@ const HUB_TEMPLATE = `<!DOCTYPE html>
     function footSync(){var mob=matchMedia('(max-width:760px)').matches;
       fd.forEach(function(x){x.open=!mob;});}
     footSync();addEventListener('resize',footSync,{passive:true});
+
+    // Dropdown triggers: reflect open/closed state for assistive tech (CSS drives the visual).
+    document.querySelectorAll('.has-sub').forEach(function(hs){
+      var t=hs.querySelector('.sub-trigger'); if(!t) return;
+      function set(v){t.setAttribute('aria-expanded',v?'true':'false');}
+      hs.addEventListener('mouseenter',function(){set(true);});
+      hs.addEventListener('mouseleave',function(){if(!hs.contains(document.activeElement))set(false);});
+      hs.addEventListener('focusin',function(){set(true);});
+      hs.addEventListener('focusout',function(e){if(!hs.contains(e.relatedTarget))set(false);});
+    });
   })();
 </script>
 

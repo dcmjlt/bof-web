@@ -334,6 +334,10 @@
     border:1.5px solid var(--ink);display:grid;place-items:center;background:transparent}
   .mobile > summary::-webkit-details-marker{display:none}
   .mobile > summary svg{width:20px;height:20px}
+  /* Hamburger <-> cross: swap to the X path while the menu is open. */
+  .mobile > summary .bar-x{display:none}
+  .mobile[open] > summary .bar-h{display:none}
+  .mobile[open] > summary .bar-x{display:inline}
   .mobile[open] .menu{display:flex}
   .menu{display:none;flex-direction:column;gap:4px;position:absolute;left:16px;right:16px;
     top:100%;margin-top:8px;background:var(--surface);border:1px solid var(--rule);
@@ -458,9 +462,7 @@
     letter-spacing:-.01em;line-height:1.2;color:var(--ink)}
   .svc-card .d{grid-column:1/-1;color:var(--ink);opacity:.72;font-size:14px;line-height:1.45}
 
-  /* ---- Pulled callout (voice-principle line) ----
-     Same bordered terracotta-tint box as .neg-us, so the two "takeaway" lines
-     read as one family across the page. */
+  /* ---- Pulled callout (voice-principle line) — bordered terracotta-tint box. */
   .pull{margin-top:36px;border:2px solid var(--accent);border-radius:16px;
     padding:24px 26px;background:var(--accent-tint-softer);font-weight:600;font-size:18px}
 
@@ -505,15 +507,7 @@
     display:flex;gap:12px;align-items:flex-start}
   .price-list li:last-child{border:0}
   .check{color:var(--accent-ink);font-weight:800;flex:none;line-height:1.5}
-  /* One human sentence after the policy bullets — names the failure mode the
-     buyer brings to this section. Italic + muted so it reads as voice, not
-     a new claim. Doesn't drag competitors, just names the pattern. */
-  .recog-line{margin-top:22px;font-size:17px;line-height:1.55;font-style:italic;
-    color:var(--ink);opacity:.78;max-width:46ch}
 
-  /* ---- Negative space ---- the "this is us" highlight closing the comparison cards. */
-  .neg-us{margin-top:32px;border:2px solid var(--accent);border-radius:16px;
-    padding:24px 26px;background:var(--accent-tint-softer);font-weight:600;font-size:18px}
   /* Comparison cards (What we're not) — 3 alternatives, each links to its compare page.
      Text-led with a "Compare" affordance, distinct from the icon service cards. */
   .cmp{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
@@ -648,7 +642,6 @@
   .foot-dir li:last-child a:hover::after{transform:translateX(3px)}
   .foot-dir{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;
     padding:0 0 var(--s-10)}
-  .foot-dir .foot-cols{display:grid;grid-template-columns:1fr 1fr;gap:11px 32px}
   .foot-dir details{display:contents}
   .foot-dir summary{display:block;list-style:none}
   .foot-dir summary::-webkit-details-marker{display:none}
@@ -694,7 +687,6 @@
     .grid2.lead{grid-template-columns:1fr 1fr}
     .foot{grid-template-columns:1fr}
     .foot-dir{grid-template-columns:1fr 1fr}
-    .foot-dir .foot-roles{grid-column:1 / -1}
   }
   @media(max-width:760px){
     .wrap{padding:0 20px}
@@ -742,7 +734,6 @@
       transition:transform .2s var(--ease)}
     .foot-dir details[open] summary::after{transform:rotate(45deg)}
     .foot-dir details>ul{padding:0 0 18px}
-    .foot-dir .foot-cols{grid-template-columns:1fr 1fr;gap:11px 20px}
     section{padding:var(--s-14) 0}
   }
 
@@ -768,7 +759,7 @@
         <a href="#workforce">One workforce</a>
         <a href="#how">How it works</a>
         <div class="has-sub">
-          <button type="button" class="sub-trigger" aria-haspopup="true">Services
+          <button type="button" class="sub-trigger" aria-haspopup="true" aria-expanded="false">Services
             <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
           <div class="submenu">
             <a href="/services/customer-support/">Customer support</a>
@@ -780,7 +771,7 @@
           </div>
         </div>
         <div class="has-sub">
-          <button type="button" class="sub-trigger" aria-haspopup="true">Hire a role
+          <button type="button" class="sub-trigger" aria-haspopup="true" aria-expanded="false">Hire a role
             <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
           <div class="submenu">
             <a href="/hire/bookkeeper/">Bookkeeper</a>
@@ -801,7 +792,7 @@
           <summary aria-label="Menu">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                  stroke-linecap="round" aria-hidden="true">
-              <path d="M3 6h18M3 12h18M3 18h18"/>
+              <path class="bar-h" d="M3 6h18M3 12h18M3 18h18"/><path class="bar-x" d="M6 6l12 12M18 6l-12 12"/>
             </svg>
           </summary>
           <div class="menu">
@@ -1366,6 +1357,16 @@
     function footSync(){var mob=matchMedia('(max-width:760px)').matches;
       fd.forEach(function(x){x.open=!mob;});}
     footSync();addEventListener('resize',footSync,{passive:true});
+
+    // Dropdown triggers: reflect open/closed state for assistive tech (CSS drives the visual).
+    document.querySelectorAll('.has-sub').forEach(function(hs){
+      var t=hs.querySelector('.sub-trigger'); if(!t) return;
+      function set(v){t.setAttribute('aria-expanded',v?'true':'false');}
+      hs.addEventListener('mouseenter',function(){set(true);});
+      hs.addEventListener('mouseleave',function(){if(!hs.contains(document.activeElement))set(false);});
+      hs.addEventListener('focusin',function(){set(true);});
+      hs.addEventListener('focusout',function(e){if(!hs.contains(e.relatedTarget))set(false);});
+    });
 
     // Estimate form: accessible inline validation + progressive-enhancement submit.
     // No-JS users POST directly to /api/estimate (Cloudflare Pages Function),

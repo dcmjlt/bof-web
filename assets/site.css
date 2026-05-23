@@ -236,6 +236,10 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:20px;paddi
   border:1.5px solid var(--ink);display:grid;place-items:center;background:transparent}
 .mobile > summary::-webkit-details-marker{display:none}
 .mobile > summary svg{width:20px;height:20px}
+/* Hamburger <-> cross: swap to the X path while the menu is open. */
+.mobile > summary .bar-x{display:none}
+.mobile[open] > summary .bar-h{display:none}
+.mobile[open] > summary .bar-x{display:inline}
 .mobile[open] .menu{display:flex}
 .menu{display:none;flex-direction:column;gap:4px;position:absolute;left:16px;right:16px;
   top:100%;margin-top:8px;background:var(--surface);border:1px solid var(--rule);
@@ -339,8 +343,6 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:20px;paddi
 .neg{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}
 .neg li{list-style:none;border:1px dashed var(--rule-soft);border-radius:16px;
   padding:24px;color:var(--muted);font-size:17px}
-.neg-us{margin-top:18px;border:2px solid var(--accent);border-radius:16px;
-  padding:24px 26px;background:var(--accent-tint-softer);font-weight:600;font-size:18px}
 
 /* ---- Steps ---- */
 .steps{counter-reset:step;margin-top:40px;display:grid;
@@ -443,7 +445,6 @@ footer{background:var(--ground);color:var(--ground-fg);border:0}
 .foot-dir li:last-child a:hover::after{transform:translateX(3px)}
 .foot-dir{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;
   padding:0 0 var(--s-10)}
-.foot-dir .foot-cols{display:grid;grid-template-columns:1fr 1fr;gap:11px 32px}
 .foot-dir details{display:contents}
 .foot-dir summary{display:block;list-style:none}
 .foot-dir summary::-webkit-details-marker{display:none}
@@ -462,7 +463,6 @@ footer{background:var(--ground);color:var(--ground-fg);border:0}
   .grid2.lead{grid-template-columns:1fr 1fr}
   .foot{grid-template-columns:1fr}
   .foot-dir{grid-template-columns:1fr 1fr}
-  .foot-dir .foot-roles{grid-column:1 / -1}
 }
 @media(max-width:760px){
   .wrap{padding:0 20px}
@@ -494,7 +494,6 @@ footer{background:var(--ground);color:var(--ground-fg);border:0}
     transition:transform .2s var(--ease)}
   .foot-dir details[open] summary::after{transform:rotate(45deg)}
   .foot-dir details>ul{padding:0 0 18px}
-  .foot-dir .foot-cols{grid-template-columns:1fr 1fr;gap:11px 20px}
   section{padding:var(--s-14) 0}
 }
 
