@@ -1,9 +1,11 @@
-// Cloudflare Pages Function: receives the BOF estimate form POST and forwards
-// to a Slack Incoming Webhook.
+// Cloudflare Pages Function: receives the BOF estimate form POST, forwards the
+// lead to a Slack Incoming Webhook, and emails the user a welcome message via
+// Postmark.
 //
 // Setup (one-time, per environment):
 //   Cloudflare dashboard -> Pages project -> Settings -> Environment variables ->
-//     SLACK_WEBHOOK_URL = https://hooks.slack.com/services/...
+//     SLACK_WEBHOOK_URL      = https://hooks.slack.com/services/...
+//     POSTMARK_SERVER_TOKEN  = <Postmark server token>  (store as a Secret)
 //   Set on Production. Optionally also on Preview (or use a separate channel).
 //
 // Behaviour:
@@ -15,6 +17,9 @@
 //   - Missing required fields: 422 (JS) or error HTML (no-JS)
 //   - SLACK_WEBHOOK_URL missing: log and still return success to the user
 //     (the lead is lost, but operations gets the log; ship-blocker condition)
+//   - Welcome email: sent best-effort after the lead is captured. A Postmark
+//     failure (or a missing POSTMARK_SERVER_TOKEN) is logged but never blocks
+//     the submission — the lead is already safely in Slack.
 
 export async function onRequestPost({ request, env }) {
   const accept = request.headers.get("accept") || "";
@@ -76,7 +81,45 @@ export async function onRequestPost({ request, env }) {
     console.error("Slack POST failed:", err);
   }
 
+  // Best-effort welcome email to the user. Never blocks the response: the lead
+  // is already in Slack, so a Postmark hiccup must not fail the submission.
+  await sendWelcomeEmail(env, { name, email });
+
   return respond(wantsJson, true);
+}
+
+// Sends the "welcome" templated email to the user via Postmark.
+// No-ops (with a log) if POSTMARK_SERVER_TOKEN is not configured.
+async function sendWelcomeEmail(env, { name, email }) {
+  const token = env.POSTMARK_SERVER_TOKEN;
+  if (!token) {
+    console.error("POSTMARK_SERVER_TOKEN not set; welcome email not sent.");
+    return;
+  }
+
+  try {
+    const r = await fetch("https://api.postmarkapp.com/email/withTemplate", {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "X-Postmark-Server-Token": token,
+      },
+      body: JSON.stringify({
+        From: "sales@backofficefactory.com",
+        To: email,
+        TemplateAlias: "welcome",
+        // Template variables. The "welcome" template can reference {{name}};
+        // any unused fields are ignored by Postmark.
+        TemplateModel: { name },
+      }),
+    });
+    if (!r.ok) {
+      console.error(`Postmark ${r.status}: ${await r.text()}`);
+    }
+  } catch (err) {
+    console.error("Postmark POST failed:", err);
+  }
 }
 
 function respond(wantsJson, ok, error, status) {
