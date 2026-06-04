@@ -1369,7 +1369,7 @@
     });
 
     // Estimate form: accessible inline validation + progressive-enhancement submit.
-    // No-JS users POST directly to /api/estimate (Cloudflare Pages Function),
+    // No-JS users POST directly to https://user.dcm-inc.com/backoffice_factory,
     // which returns an inline thank-you page. JS users get JSON + inline success.
     var box=document.getElementById('eform');
     var form=box.querySelector('form');
@@ -1431,9 +1431,9 @@
       var data=new URLSearchParams(new FormData(form));
       var btn=form.querySelector('button[type=submit]');
       btn.disabled=true;
-      // POST to the Cloudflare Pages Function (functions/api/estimate.js).
+      // POST to https://user.dcm-inc.com/backoffice_factory
       // Accept JSON so the function returns { ok: true } instead of HTML.
-      fetch('/api/estimate',{method:'POST',
+      fetch('https://user.dcm-inc.com/backoffice_factory',{method:'POST',
         headers:{'Content-Type':'application/x-www-form-urlencoded','Accept':'application/json'},
         body:data})
         .catch(function(){/* still confirm; ops alarms on failed Slack POST */})
