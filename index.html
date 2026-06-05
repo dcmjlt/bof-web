@@ -269,13 +269,15 @@
      page scroll. Pure CSS scroll-driven animation — GPU-composited, zero JS, no CLS.
      Sits at scaleX(0) at the top (invisible over a clean hero) and the nav's stuck
      hairline acts as its track. @supports-guarded so unsupported browsers show
-     nothing (never a stuck full bar). */
+     nothing (never a stuck full bar). Desktop-only — on mobile a thin top bar
+     reads as a page-load spinner, so it stays hidden below 760px. */
   .scroll-progress{display:none}
   @keyframes sp-grow{to{transform:scaleX(1)}}
   @supports (animation-timeline: scroll()){
     .scroll-progress{display:block;position:absolute;left:0;bottom:-1px;width:100%;height:3px;
       background:var(--accent);transform-origin:0 50%;transform:scaleX(0);
       animation:sp-grow auto linear both;animation-timeline:scroll(root)}
+    @media(max-width:760px){.scroll-progress{display:none}}
   }
 
   /* ---- Nav ---- */
@@ -834,8 +836,8 @@
             <span aria-hidden="true">&rarr;</span></a>
           <a href="#how" class="btn btn-ghost">How it works</a>
         </div>
-        <p class="hero-trust">Only pay if you&rsquo;re happy with the work &middot; People + AI on one workflow &middot;
-          By the job or by the hour, walk away anytime.</p>
+        <p class="hero-trust">Only pay if you&rsquo;re happy &middot; By the job or by the hour &middot;
+          People + AI on one workflow. No fixed contracts.</p>
       </div>
       <!-- "Work, handled" motif: illustrative (aria-hidden) card stack showing
            back-office tasks handled by people + AI. Reinforces the sub visually. -->
