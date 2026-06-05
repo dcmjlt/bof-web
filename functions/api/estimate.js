@@ -139,11 +139,11 @@ function respond(wantsJson, ok, error, status) {
 
 function successHTML() {
   return page(
-    "Got it. We'll be in touch about your free trial.",
+    "Thank you for contacting us.",
     `<span class="pill">Free trial requested</span>
-     <h1>Got it. We'll be in touch about your free trial.</h1>
-     <p>We will email you to set up your kickoff call and free trial, usually within
-        one working day.</p>
+     <h1>Thank you for contacting us.</h1>
+     <p>We've just sent you an email with a link to book your kickoff call. If you don't
+        see it, check your spam folder.</p>
      <a href="/" class="btn btn-ghost">Back to Back Office Factory</a>`,
   );
 }
