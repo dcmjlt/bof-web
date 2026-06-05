@@ -28,7 +28,7 @@ const SITECSS_PATH = resolve(repoRoot, 'assets/site.css');
 // every entry is one more thing future edits have to keep in step.
 const SENTINELS = [
   { selector: '.proof h2', properties: ['color'] },
-  { selector: '.estimate h2', properties: ['color'] },
+  { selector: '.trial h2', properties: ['color'] },
   { selector: '.qa .peek', properties: ['font-size'] },
   { selector: '.meta dt', properties: ['font-family', 'font-weight', 'font-size'] },
   { selector: '.meta dd', properties: ['font-size', 'max-width'] },

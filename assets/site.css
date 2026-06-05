@@ -58,20 +58,23 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 
-/* Cabinet Grotesk self-hosted (same-origin + preload + display:optional eliminates
-   font-swap CLS). Fontshare's CDN forces font-display:swap which produced live CLS
-   on the hero h1 — moving to self-hosted lets us set display:optional ourselves. */
+/* Cabinet Grotesk self-hosted (same-origin + preload). display:swap guarantees the
+   web font actually renders; the metric-matched "Cabinet Grotesk Fallback" face below
+   (capsize ascent/descent/size-adjust) holds identical space, so the swap is ~0 CLS.
+   NB: display:optional was previously used, but on prod the font routinely missed
+   optional's ~100ms block window (network latency + must-revalidate caching) and was
+   dropped permanently to the Arial fallback — so headings rendered in Arial. */
 @font-face{
   font-family:"Cabinet Grotesk";src:url("/assets/fonts/cabinet-grotesk-500.woff2") format("woff2");
-  font-weight:500;font-style:normal;font-display:optional;
+  font-weight:500;font-style:normal;font-display:swap;
 }
 @font-face{
   font-family:"Cabinet Grotesk";src:url("/assets/fonts/cabinet-grotesk-700.woff2") format("woff2");
-  font-weight:700;font-style:normal;font-display:optional;
+  font-weight:700;font-style:normal;font-display:swap;
 }
 @font-face{
   font-family:"Cabinet Grotesk";src:url("/assets/fonts/cabinet-grotesk-800.woff2") format("woff2");
-  font-weight:800;font-style:normal;font-display:optional;
+  font-weight:800;font-style:normal;font-display:swap;
 }
 @font-face{
   font-family:"DM Sans Fallback";src:local('Arial'),local('ArialMT');
@@ -370,17 +373,17 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:20px;paddi
   .rel span{margin-left:32px;text-align:left;flex-basis:100%;max-width:none}
 }
 
-/* ---- Estimate CTA band ---- */
-.estimate{background:var(--ground);color:var(--ground-fg);border-radius:var(--r-block);
+/* ---- Trial CTA band ---- */
+.trial{background:var(--ground);color:var(--ground-fg);border-radius:var(--r-block);
   padding:clamp(36px,5vw,60px);display:grid;grid-template-columns:1fr;
   gap:clamp(24px,3vw,32px);align-items:start}
-.estimate .eyebrow{color:var(--accent-on-ground)}
-.estimate h2{color:var(--surface);font-size:clamp(26px,3.6vw,40px);max-width:20ch;line-height:1.12}
-.estimate .blurb{margin-top:6px;font-size:17px;line-height:1.6;letter-spacing:.005em;opacity:.9;max-width:60ch}
-.estimate .reassure{font-size:16px;opacity:.78}
-.estimate .cta-row{margin-top:8px}
-.estimate .btn-ghost{color:var(--ground-fg);border-color:var(--ground-fg)}
-.estimate .btn-ghost:hover{background:var(--ground-fg-tint)}
+.trial .eyebrow{color:var(--accent-on-ground)}
+.trial h2{color:var(--surface);font-size:clamp(26px,3.6vw,40px);max-width:20ch;line-height:1.12}
+.trial .blurb{margin-top:6px;font-size:17px;line-height:1.6;letter-spacing:.005em;opacity:.9;max-width:60ch}
+.trial .reassure{font-size:16px;opacity:.78}
+.trial .cta-row{margin-top:8px}
+.trial .btn-ghost{color:var(--ground-fg);border-color:var(--ground-fg)}
+.trial .btn-ghost:hover{background:var(--ground-fg-tint)}
 
 /* ---- FAQ (peek pattern — feedback_faq_peek_pattern) ---- */
 .faq{margin-top:28px}
