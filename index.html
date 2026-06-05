@@ -99,7 +99,7 @@
     --accent-tint-soft:rgba(194,96,47,.08);     /* testimonial wash */
     --accent-tint-softer:rgba(194,96,47,.07);   /* neg-us "this is us" fill */
     --ground-tint:rgba(30,61,50,.1);             /* sector tags, .tag */
-    --ground-tint-soft:rgba(30,61,50,.12);       /* estimate-done tick */
+    --ground-tint-soft:rgba(30,61,50,.12);       /* trial-done tick */
     --ink-tint-soft:rgba(31,26,20,.05);          /* ghost-btn hover */
     --ink-tint-softer:rgba(31,26,20,.04);        /* menu-item hover */
     --ground-fg-rule:rgba(244,239,226,.16);      /* dividers on ground footer */
@@ -255,7 +255,7 @@
   #main>section:first-of-type{border-top:1px solid var(--rule)}
   /* Rhythm overrides: proof + not + pricing form a contiguous trust block
      (claim → comparison → terms); compact spacing keeps them feeling like
-     one argument. More arrival room before estimate. */
+     one argument. More arrival room before the trial form. */
   section#proof{padding-bottom:var(--s-18)}
   section#not{padding:var(--s-18) 0}
   section#pricing{padding-top:var(--s-18)}
@@ -532,15 +532,15 @@
   .step p{color:var(--ink);opacity:.78;font-size:17px}
 
 
-  /* ---- Estimate flow ---- */
-  .estimate{background:var(--ground);color:var(--ground-fg);border-radius:var(--r-block);
+  /* ---- Trial flow ---- */
+  .trial{background:var(--ground);color:var(--ground-fg);border-radius:var(--r-block);
     padding:clamp(36px,5vw,60px);display:grid;grid-template-columns:0.95fr 1.05fr;
     gap:clamp(36px,5vw,64px);align-items:start}
-  .estimate .eyebrow{color:var(--accent-on-ground)}
-  .estimate h2{color:var(--surface);font-size:clamp(26px,3.6vw,40px);max-width:15ch;line-height:1.12}
-  .estimate .blurb{margin-top:18px;font-size:17px;line-height:1.6;letter-spacing:.005em;opacity:.9;max-width:46ch}
-  .estimate .reassure{margin-top:22px;font-size:16px;opacity:.78}
-  .eform{background:var(--surface);color:var(--ink);border-radius:var(--r-card);padding:32px}
+  .trial .eyebrow{color:var(--accent-on-ground)}
+  .trial h2{color:var(--surface);font-size:clamp(26px,3.6vw,40px);max-width:15ch;line-height:1.12}
+  .trial .blurb{margin-top:18px;font-size:17px;line-height:1.6;letter-spacing:.005em;opacity:.9;max-width:46ch}
+  .trial .reassure{margin-top:22px;font-size:16px;opacity:.78}
+  .trial-form{background:var(--surface);color:var(--ink);border-radius:var(--r-card);padding:32px}
   .field{margin-bottom:20px}
   .field:last-of-type{margin-bottom:24px}
   .label-row{display:flex;justify-content:space-between;align-items:baseline;
@@ -567,17 +567,17 @@
     -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 7.5v5.5'/%3E%3Cpath d='M12 16.5h.01'/%3E%3C/svg%3E") center/contain no-repeat;
             mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 7.5v5.5'/%3E%3Cpath d='M12 16.5h.01'/%3E%3C/svg%3E") center/contain no-repeat}
   @keyframes err-in{from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:none}}
-  .eform .btn-primary{width:100%;justify-content:center;margin-top:6px}
-  .eform .fineprint{font-size:13px;color:var(--muted);margin-top:16px;line-height:1.5}
+  .trial-form .btn-primary{width:100%;justify-content:center;margin-top:6px}
+  .trial-form .fineprint{font-size:13px;color:var(--muted);margin-top:16px;line-height:1.5}
   .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-  .eform-done{display:none;text-align:center;padding:20px 8px}
-  .eform-done .tick{width:54px;height:54px;border-radius:50%;background:var(--ground-tint-soft);
+  .trial-form-done{display:none;text-align:center;padding:20px 8px}
+  .trial-form-done .tick{width:54px;height:54px;border-radius:50%;background:var(--ground-tint-soft);
     color:var(--ground);display:grid;place-items:center;margin:0 auto 16px;
     font-family:var(--ff-display);font-weight:800;font-size:26px}
-  .eform-done h3{font-size:22px;margin-bottom:8px}
-  .eform-done p{color:var(--muted);font-size:16px;max-width:38ch;margin:0 auto}
-  .eform[data-sent="true"] form{display:none}
-  .eform[data-sent="true"] .eform-done{display:block}
+  .trial-form-done h3{font-size:22px;margin-bottom:8px}
+  .trial-form-done p{color:var(--muted);font-size:16px;max-width:38ch;margin:0 auto}
+  .trial-form[data-sent="true"] form{display:none}
+  .trial-form[data-sent="true"] .trial-form-done{display:block}
 
   /* ---- FAQ ---- */
   .faq{margin-top:28px}
@@ -664,7 +664,7 @@
        was too short and clipped the lower cards (overflow:hidden). */
     .hero-art{align-self:auto;min-height:0;aspect-ratio:auto}
     .hero-copy{transform:none}
-    .price-block,.estimate{grid-template-columns:1fr;gap:36px}
+    .price-block,.trial{grid-template-columns:1fr;gap:36px}
     .steps{grid-template-columns:1fr 1fr}
     .svc-grid{grid-template-columns:repeat(2,1fr)}
     /* Tablet: drop .lead asymmetry to even halves so neither card cramps. */
@@ -696,14 +696,14 @@
     /* Pricing-trust CTA matches the hero pattern on mobile: full-width
        tap target, centered label. Single button — no stacking needed. */
     .price-block .btn-primary{width:100%;justify-content:center}
-    /* Estimate flow: stacked container paddings (.estimate 36px + .eform 32px
+    /* Trial flow: stacked container paddings (.trial 36px + .trial-form 32px
        + .btn 28px) collapsed the form button's content area to 143px on a
        375 viewport, wrapping the form-button label to two lines. Tighten
        both card paddings + the form button's own horizontal padding on
        mobile so the label + arrow sit on one row. */
-    .estimate{padding:28px}
-    .eform{padding:22px}
-    .eform .btn-primary{padding-inline:16px;font-size:16px;gap:6px;white-space:nowrap}
+    .trial{padding:28px}
+    .trial-form{padding:22px}
+    .trial-form .btn-primary{padding-inline:16px;font-size:16px;gap:6px;white-space:nowrap}
     .foot{grid-template-columns:1fr;gap:32px}
     .foot-dir{grid-template-columns:1fr;gap:0;padding-bottom:var(--s-8)}
     .foot-dir>div{border-top:1px solid var(--ground-fg-rule-soft)}
@@ -1161,20 +1161,20 @@
     </div>
   </section>
 
-  <!-- 9. ESTIMATE FLOW -->
-  <section id="estimate" aria-labelledby="estimate-h">
+  <!-- 9. TRIAL FLOW -->
+  <section id="estimate" aria-labelledby="trial-h">
     <div class="wrap">
-      <div class="estimate">
+      <div class="trial">
         <div>
           <p class="eyebrow">Free trial</p>
-          <h2 id="estimate-h">Try free for 30 days.</h2>
+          <h2 id="trial-h">Try free for 30 days.</h2>
           <p class="blurb">Tell us what you need. We&rsquo;ll set up a short call to understand your
             requirements, then start your <strong>free 30-day trial</strong>, up to 50 hours per
             role. No obligation.</p>
         </div>
 
-        <div class="eform" id="eform">
-          <form name="estimate" method="POST" action="https://user.dcm-inc.com/backoffice_factory" novalidate>
+        <div class="trial-form" id="trial-form">
+          <form name="trial" method="POST" action="https://user.dcm-inc.com/backoffice_factory" novalidate>
             <div class="hp" aria-hidden="true" inert>
               <label>Do not fill this in
                 <input tabindex="-1" autocomplete="off" name="company-website"></label>
@@ -1230,13 +1230,13 @@
               lists, no spam. See our <a href="/privacy.html">privacy policy</a>.</p>
           </form>
 
-          <div class="eform-done" role="status" tabindex="-1">
+          <div class="trial-form-done" role="status" tabindex="-1">
             <div class="tick" aria-hidden="true">&check;</div>
             <h3>Got it.</h3>
             <!-- ETA line is overwritten at submit time with a precise reply window
                  (e.g. "by email, before end of day") based on local hour + day.
                  The default text is the Mon-Thu morning case, the honest no-JS fallback. -->
-            <p id="eform-done-eta">We&rsquo;ll email you to set up your kickoff call and free
+            <p id="trial-form-done-eta">We&rsquo;ll email you to set up your kickoff call and free
               trial.</p>
           </div>
         </div>
@@ -1360,10 +1360,10 @@
       hs.addEventListener('focusout',function(e){if(!hs.contains(e.relatedTarget))set(false);});
     });
 
-    // Estimate form: accessible inline validation + progressive-enhancement submit.
+    // Trial form: accessible inline validation + progressive-enhancement submit.
     // No-JS users POST directly to https://user.dcm-inc.com/backoffice_factory,
     // which returns an inline thank-you page. JS users get JSON + inline success.
-    var box=document.getElementById('eform');
+    var box=document.getElementById('trial-form');
     var form=box.querySelector('form');
 
     // Stamp the source page so submissions are attributable when the form
@@ -1437,7 +1437,7 @@
           // time (local clock). The buyer gets a real promise, not "within
           // one working day" theatre. Friday-late + weekend roll to next
           // working day; afternoon rolls to tomorrow morning.
-          var eta=document.getElementById('eform-done-eta');
+          var eta=document.getElementById('trial-form-done-eta');
           if(eta){
             var now=new Date(),d=now.getDay(),h=now.getHours();
             var rollover=(d===0||d===6)||(d===5&&h>=17);
@@ -1448,7 +1448,7 @@
             eta.textContent=line+' To set up your kickoff call and free trial.';
           }
           box.dataset.sent='true';
-          var done=box.querySelector('.eform-done');
+          var done=box.querySelector('.trial-form-done');
           done.focus();
           var smooth=!matchMedia('(prefers-reduced-motion:reduce)').matches;
           box.scrollIntoView({behavior:smooth?'smooth':'auto',block:'center'});
