@@ -1233,12 +1233,9 @@
 
           <div class="trial-form-done" role="status" tabindex="-1">
             <div class="tick" aria-hidden="true">&check;</div>
-            <h3>Got it.</h3>
-            <!-- ETA line is overwritten at submit time with a precise reply window
-                 (e.g. "by email, before end of day") based on local hour + day.
-                 The default text is the Mon-Thu morning case, the honest no-JS fallback. -->
-            <p id="trial-form-done-eta">We&rsquo;ll email you to set up your kickoff call and free
-              trial.</p>
+            <h3>Thank you for contacting us.</h3>
+            <p id="eform-done-eta">We&rsquo;ve just sent you an email with a link to book your
+              kickoff call. If you don&rsquo;t see it, check your spam folder.</p>
           </div>
         </div>
       </div>
@@ -1432,22 +1429,8 @@
       fetch('https://user.dcm-inc.com/backoffice_factory',{method:'POST',
         headers:{'Content-Type':'application/x-www-form-urlencoded','Accept':'application/json'},
         body:data})
-        .catch(function(){/* still confirm; ops alarms on failed Slack POST */})
+        .catch(function(){/* still confirm; ops alarms on failed submit POST */})
         .finally(function(){
-          // Replace the static SLA with a precise window computed at submit
-          // time (local clock). The buyer gets a real promise, not "within
-          // one working day" theatre. Friday-late + weekend roll to next
-          // working day; afternoon rolls to tomorrow morning.
-          var eta=document.getElementById('trial-form-done-eta');
-          if(eta){
-            var now=new Date(),d=now.getDay(),h=now.getHours();
-            var rollover=(d===0||d===6)||(d===5&&h>=17);
-            var line=rollover?'We’ll come back to you by email, first thing on the next working day.':
-                     (h<12)?'We’ll come back to you by email, before end of day.':
-                     (h<17)?'We’ll come back to you by email, tomorrow morning.':
-                            'We’ll come back to you by email, first thing tomorrow morning.';
-            eta.textContent=line+' To set up your kickoff call and free trial.';
-          }
           box.dataset.sent='true';
           var done=box.querySelector('.trial-form-done');
           done.focus();
