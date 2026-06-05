@@ -66,6 +66,85 @@
 </noscript>
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/site.css">
+
+<!-- Homepage design components mirrored onto the services hub: the split hero +
+     green hero-art/work-stack panel (same as index.html's inline style), a
+     grouped linked-card directory (.dir-*) modeled on the homepage .cmp-card,
+     and the 2-column price-block. Kept inline to match the codebase pattern
+     (these newer components live per-page, not in shared site.css). All design
+     tokens (--ground, --surface, --ease, --r-card, etc.) resolve from site.css. -->
+<style>
+  /* Split hero */
+  .hero--split{padding:clamp(20px,3.5vh,44px) 0 80px;margin-top:24px;
+    display:grid;grid-template-columns:1.4fr 1fr;gap:clamp(32px,5vw,64px);
+    align-items:center;min-height:min(500px,calc(100svh - 220px))}
+  .hero--split h1{font-size:clamp(40px,4.8vw,64px);max-width:none;margin-top:0;line-height:1.12}
+  .hero-copy{transform:translateY(2px)}
+  .hero-copy .sub{font-size:clamp(16px,1.5vw,19px);max-width:48ch;margin:22px 0 26px;opacity:.86;line-height:1.55}
+  .hero-trust{margin-top:26px;font-size:15px;color:var(--muted);line-height:1.5;max-width:46ch}
+  .hero-art{position:relative;align-self:center;aspect-ratio:9/10;
+    background:var(--ground);border-radius:var(--r-block);overflow:hidden;
+    display:grid;place-items:center;padding:clamp(22px,3vw,34px)}
+  .hero-art::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(130% 90% at 100% -10%, rgba(232,155,106,.40), transparent 55%),
+      radial-gradient(rgba(244,239,226,.12) 1.5px, transparent 1.6px);
+    background-size:auto, 26px 26px}
+  .work-stack{position:relative;display:flex;flex-direction:column;gap:12px;width:100%;max-width:330px}
+  .work-head{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--accent-on-ground);margin-bottom:6px}
+  .work-card{display:flex;align-items:center;gap:13px;background:var(--surface);
+    border-radius:14px;padding:13px 15px;box-shadow:0 14px 34px -22px rgba(0,0,0,.55)}
+  .wc-by{flex:none;width:36px;height:36px;border-radius:11px;
+    display:grid;place-items:center;font-size:12px;font-weight:800;letter-spacing:.02em}
+  .wc-ai{background:var(--ground);color:var(--accent-on-ground)}
+  .wc-person{background:var(--accent-tint);color:var(--accent-ink)}
+  .wc-task{flex:1;font-weight:600;font-size:15px;color:var(--ink)}
+  .wc-done{flex:none;width:24px;height:24px;border-radius:999px;background:var(--accent-deep);
+    color:#fff;display:grid;place-items:center}
+
+  /* Grouped directory of linked cards (services + roles), modeled on .cmp-card */
+  .dir-group{margin-top:44px}
+  .dir-label{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--accent-ink);margin-bottom:18px}
+  .dir-grid{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+  .dir-card{position:relative;display:flex;flex-direction:column;gap:8px;height:100%;
+    background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-card);
+    padding:22px 22px 20px;text-decoration:none;color:inherit;
+    transition:transform .15s var(--ease),border-color .15s var(--ease),box-shadow .15s var(--ease)}
+  .dir-card:hover{transform:translateY(-2px);border-color:var(--accent);
+    box-shadow:0 16px 32px -22px rgba(31,26,20,.45)}
+  .dir-card b{font-family:var(--ff-display);font-weight:700;font-size:18px;line-height:1.25;
+    color:var(--ink);padding-right:24px}
+  .dir-card b::after{content:"\2192";position:absolute;top:21px;right:20px;
+    color:var(--accent-ink);font-weight:800;opacity:.5;
+    transition:transform .15s var(--ease),opacity .15s var(--ease)}
+  .dir-card:hover b::after{opacity:1;transform:translateX(3px)}
+  .dir-card .d{font-size:15px;line-height:1.5;color:var(--ink);opacity:.78}
+
+  /* Pricing trust, 2-column block (mirrors homepage); checklist single-column */
+  .price-block{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(28px,4vw,52px);
+    align-items:center;padding:clamp(28px,3.4vw,40px)}
+  .price-block .lede{opacity:.82;margin-bottom:24px;max-width:44ch}
+  .price-list{grid-template-columns:1fr;gap:0}
+
+  /* Responsive (mirrors homepage breakpoints) */
+  @media(max-width:920px){
+    .hero--split{grid-template-columns:1fr;min-height:0;gap:32px;margin-top:8px}
+    .hero-art{align-self:auto;min-height:0;aspect-ratio:auto}
+    .hero-copy{transform:none}
+    .dir-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .price-block{grid-template-columns:1fr;gap:32px}
+  }
+  @media(max-width:760px){
+    .hero .cta-row{flex-direction:column;align-items:stretch}
+    .hero .cta-row .btn{width:100%;justify-content:center}
+    .price-block .btn-primary{width:100%;justify-content:center}
+  }
+  @media(max-width:540px){
+    .dir-grid{grid-template-columns:1fr}
+  }
+</style>
 </head>
 <body>
 
@@ -97,9 +176,9 @@
           <button type="button" class="sub-trigger" aria-haspopup="true" aria-expanded="false">Hire a role
             <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
           <div class="submenu">
-            <a href="/hire/bookkeeper/">Bookkeeper</a>
+            <a href="/hire/data-entry-specialist/">Data entry specialist</a>
             <a href="/hire/accounts-specialist/">Accounts specialist</a>
-            <a href="/hire/payroll-specialist/">Payroll specialist</a>
+            <a href="/hire/virtual-assistant/">Virtual assistant</a>
             <a href="/hire/customer-support-specialist/">Customer support specialist</a>
             <a href="/hire/ecommerce-support-specialist/">Ecommerce support specialist</a>
             <a href="/services/" class="sub-all">Explore all roles</a>
@@ -133,9 +212,9 @@
               <summary>Hire a role
                 <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
               <div class="m-sublist">
-                <a href="/hire/bookkeeper/">Bookkeeper</a>
+                <a href="/hire/data-entry-specialist/">Data entry specialist</a>
                 <a href="/hire/accounts-specialist/">Accounts specialist</a>
-                <a href="/hire/payroll-specialist/">Payroll specialist</a>
+                <a href="/hire/virtual-assistant/">Virtual assistant</a>
                 <a href="/hire/customer-support-specialist/">Customer support specialist</a>
                 <a href="/hire/ecommerce-support-specialist/">Ecommerce support specialist</a>
                 <a href="/services/">Explore all roles</a>
@@ -161,94 +240,123 @@
       </ol>
     </nav>
 
-    <header class="hero">
-      <span class="pill">Services &amp; roles</span>
-      <h1>Everything we run, in one place.</h1>
-      <p class="sub">The back-office services we take off your plate, and the specific roles you can
-        hire by the job or by the hour. Both delivered by real people and AI agents on one workflow.</p>
-      <p class="dog">The same team runs <b><a class="brand-link" href="https://www.ticketstodo.com/" target="_blank" rel="noopener external">TicketsToDo</a>, <a class="brand-link" href="https://vouchercodes.ae/" target="_blank" rel="noopener external">VoucherCodes.ae</a>, <a class="brand-link" href="https://www.dcmnetwork.com/" target="_blank" rel="noopener external">DCMnetwork</a></b> and more.
-        We do not take on business that competes with us or you.</p>
-      <div class="cta-row">
-        <a href="/?src=services-hub#estimate" class="btn btn-primary">Try for 30 days
-          <span aria-hidden="true">&rarr;</span></a>
-        <a href="/#how" class="btn btn-ghost">How it works</a>
+    <header class="hero hero--split">
+      <div class="hero-copy">
+        <h1>Everything we run, in one place.</h1>
+        <p class="sub">Every service we run and every role you can hire, by the job or by the hour.
+          All delivered by real people and AI agents on one workflow.</p>
+        <div class="cta-row">
+          <a href="/?src=services-hub#estimate" class="btn btn-primary">Try for 30 days
+            <span aria-hidden="true">&rarr;</span></a>
+          <a href="/#how" class="btn btn-ghost">How it works</a>
+        </div>
+        <p class="hero-trust">Only pay if you&rsquo;re happy with the work &middot; Priced by the job or by the hour &middot;
+          No fixed contracts.</p>
       </div>
-      <p class="micro">Only pay if you&rsquo;re happy with the work. No obligation.</p>
-
-      <dl class="meta">
-        <div><dt>Since 2006</dt><dd>a battle-tested operation, not a startup experiment</dd></div>
-        <div><dt>People + AI</dt><dd>the same workflow, you get whichever does the job best</dd></div>
-        <div><dt>By the job or the hour</dt><dd>no fixed contract, walk away anytime</dd></div>
-      </dl>
+      <div class="hero-art" aria-hidden="true">
+        <div class="work-stack">
+          <p class="work-head">People + AI &middot; one workflow</p>
+          <div class="work-card">
+            <span class="wc-by wc-person"><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M5 20a7 7 0 0 1 14 0z"/></svg></span>
+            <span class="wc-task">Customer support</span>
+            <span class="wc-done"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4 10-11"/></svg></span>
+          </div>
+          <div class="work-card">
+            <span class="wc-by wc-ai">AI</span>
+            <span class="wc-task">Order processing</span>
+            <span class="wc-done"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4 10-11"/></svg></span>
+          </div>
+          <div class="work-card">
+            <span class="wc-by wc-person"><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M5 20a7 7 0 0 1 14 0z"/></svg></span>
+            <span class="wc-task">Product design</span>
+            <span class="wc-done"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4 10-11"/></svg></span>
+          </div>
+          <div class="work-card">
+            <span class="wc-by wc-ai">AI</span>
+            <span class="wc-task">Data entry</span>
+            <span class="wc-done"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4 10-11"/></svg></span>
+          </div>
+        </div>
+      </div>
     </header>
   </div>
 
   <section aria-labelledby="svc-h">
     <div class="wrap">
       <p class="eyebrow">Services</p>
-      <h2 class="sec-h" id="svc-h" style="max-width:22ch">Whole operations we take off your plate.</h2>
+      <h2 class="sec-h" id="svc-h" style="max-width:24ch">Whole operations we take off your plate.</h2>
       <p class="deck">Run end to end on one workflow, so a function stops being your problem.</p>
-      <ul class="rel">
-        <li><a href="/services/back-office-automation/">
-          <b>Back-office automation</b>
-          <span>Back-office process automation and operations delivery</span></a></li>
-        <li><a href="/services/ai-automation/">
-          <b>AI automation</b>
-          <span>AI agent automation for back-office operations with human-in-the-loop review</span></a></li>
-        <li><a href="/services/finance-and-accounting/">
-          <b>Finance and accounting support</b>
-          <span>Bookkeeping, reconciliation, accounts payable and receivable, payroll admin, month-end preparation</span></a></li>
-        <li><a href="/services/customer-support/">
-          <b>Customer support, as a service</b>
-          <span>Customer support operations: tickets, live chat, inbox triage, escalations</span></a></li>
-        <li><a href="/services/digital-transformation/">
-          <b>Digital transformation</b>
-          <span>Process digitisation, data migration and cleanup, tooling rollout, ongoing operations</span></a></li>
-      </ul>
+
+      <div class="dir-group">
+        <p class="dir-label">Run your operations</p>
+        <ul class="dir-grid">
+          <li><a class="dir-card" href="/services/customer-support/"><b>Customer support</b><span class="d">Tickets, live chat, inbox triage and escalations.</span></a></li>
+          <li><a class="dir-card" href="/services/finance-and-accounting/"><b>Finance &amp; accounting</b><span class="d">Bookkeeping, reconciliation, accounts payable and receivable, month-end.</span></a></li>
+          <li><a class="dir-card" href="/services/back-office-automation/"><b>Back-office automation</b><span class="d">Repetitive back-office processes automated and run.</span></a></li>
+          <li><a class="dir-card" href="/services/ai-automation/"><b>AI automation</b><span class="d">AI agents on the high-volume work, with human review.</span></a></li>
+          <li><a class="dir-card" href="/services/digital-transformation/"><b>Digital transformation</b><span class="d">Process digitisation, data migration, tooling rollout.</span></a></li>
+        </ul>
+      </div>
+
+      <div class="dir-group">
+        <p class="dir-label">Build, design and launch</p>
+        <ul class="dir-grid">
+          <li><a class="dir-card" href="/services/software-development/"><b>Software development</b><span class="d">Web and app builds, internal tools, integrations.</span></a></li>
+          <li><a class="dir-card" href="/services/product-design/"><b>Product &amp; web design</b><span class="d">Web pages, product screens, store design and assets.</span></a></li>
+          <li><a class="dir-card" href="/services/software-testing/"><b>Software testing &amp; QA</b><span class="d">Manual, exploratory and regression testing, bug reports.</span></a></li>
+          <li><a class="dir-card" href="/services/content-writing/"><b>Content writing</b><span class="d">Product copy, listing copy, SEO pages, blog posts.</span></a></li>
+          <li><a class="dir-card" href="/services/new-online-business/"><b>Launch a new online business</b><span class="d">Store setup, catalogue and go-live, done for you.</span></a></li>
+        </ul>
+      </div>
     </div>
   </section>
 
   <section aria-labelledby="roles-h">
     <div class="wrap">
       <p class="eyebrow">Hire a role</p>
-      <h2 class="sec-h" id="roles-h" style="max-width:22ch">Or hire a specific role, by the job or by the hour.</h2>
+      <h2 class="sec-h" id="roles-h" style="max-width:24ch">Or hire a specific role, by the job or by the hour.</h2>
       <p class="deck">Prefer a single seat filled? Hire a trained operator, backed by AI agents on the
         same workflow, for exactly the work you need.</p>
-      <ul class="rel">
-        <li><a href="/hire/ecommerce-support-specialist/">
-          <b>Ecommerce support specialist</b>
-          <span>Ecommerce customer support, order and returns handling, inbox triage</span></a></li>
-        <li><a href="/hire/customer-support-specialist/">
-          <b>Customer support specialist</b>
-          <span>Customer support, live chat, inbox triage, escalations</span></a></li>
-        <li><a href="/hire/order-processing-specialist/">
-          <b>Order processing specialist</b>
-          <span>Order entry, order exceptions, returns, fulfilment coordination</span></a></li>
-        <li><a href="/hire/bookkeeper/">
-          <b>Bookkeeper</b>
-          <span>Bookkeeping, bank reconciliation, invoicing, month-end preparation</span></a></li>
-        <li><a href="/hire/virtual-assistant/">
-          <b>Virtual assistant</b>
-          <span>Inbox and calendar management, scheduling, research, document preparation</span></a></li>
-        <li><a href="/hire/administration-assistant/">
-          <b>Administration assistant</b>
-          <span>Business administration, records, scheduling, supplier coordination</span></a></li>
-        <li><a href="/hire/data-entry-specialist/">
-          <b>Data entry specialist</b>
-          <span>Data entry, data migration, data cleanup, deduplication, CRM hygiene</span></a></li>
-        <li><a href="/hire/payroll-specialist/">
-          <b>Payroll specialist</b>
-          <span>Payroll preparation, starters and leavers, timesheets, payslip distribution</span></a></li>
-        <li><a href="/hire/accounts-specialist/">
-          <b>Accounts specialist</b>
-          <span>Accounts payable, accounts receivable, invoicing, credit control, reconciliation</span></a></li>
-        <li><a href="/hire/document-processing-specialist/">
-          <b>Document processing specialist</b>
-          <span>Document intake, data extraction, indexing, digitisation, records management</span></a></li>
-        <li><a href="/hire/real-estate-data-specialist/">
-          <b>Real estate data specialist</b>
-          <span>Property and listing data entry, portal and CRM updates, comparables research</span></a></li>
-      </ul>
+
+      <div class="dir-group">
+        <p class="dir-label">Customer &amp; ecommerce</p>
+        <ul class="dir-grid">
+          <li><a class="dir-card" href="/hire/customer-support-specialist/"><b>Customer support specialist</b><span class="d">Live chat, inbox triage and escalations.</span></a></li>
+          <li><a class="dir-card" href="/hire/ecommerce-support-specialist/"><b>Ecommerce support specialist</b><span class="d">Orders, returns and marketplace support.</span></a></li>
+          <li><a class="dir-card" href="/hire/order-processing-specialist/"><b>Order processing specialist</b><span class="d">Order entry, exceptions, returns, fulfilment.</span></a></li>
+        </ul>
+      </div>
+
+      <div class="dir-group">
+        <p class="dir-label">Finance &amp; admin</p>
+        <ul class="dir-grid">
+          <li><a class="dir-card" href="/hire/bookkeeper/"><b>Bookkeeper</b><span class="d">Bookkeeping, bank reconciliation, invoicing, month-end.</span></a></li>
+          <li><a class="dir-card" href="/hire/accounts-specialist/"><b>Accounts specialist</b><span class="d">Payable, receivable, invoicing, credit control.</span></a></li>
+          <li><a class="dir-card" href="/hire/payroll-specialist/"><b>Payroll specialist</b><span class="d">Payroll prep, starters and leavers, payslips.</span></a></li>
+          <li><a class="dir-card" href="/hire/administration-assistant/"><b>Administration assistant</b><span class="d">Business admin, records, supplier coordination.</span></a></li>
+          <li><a class="dir-card" href="/hire/virtual-assistant/"><b>Virtual assistant</b><span class="d">Inbox, calendar, scheduling and research.</span></a></li>
+        </ul>
+      </div>
+
+      <div class="dir-group">
+        <p class="dir-label">Data, documents &amp; monitoring</p>
+        <ul class="dir-grid">
+          <li><a class="dir-card" href="/hire/data-entry-specialist/"><b>Data entry specialist</b><span class="d">Entry, migration, cleanup and CRM hygiene.</span></a></li>
+          <li><a class="dir-card" href="/hire/document-processing-specialist/"><b>Document processing specialist</b><span class="d">Intake, extraction, indexing, digitisation.</span></a></li>
+          <li><a class="dir-card" href="/hire/real-estate-data-specialist/"><b>Real estate data specialist</b><span class="d">Property and listing data, portal and CRM updates.</span></a></li>
+          <li><a class="dir-card" href="/hire/cctv-monitoring-specialist/"><b>CCTV monitoring operator</b><span class="d">Live feed monitoring, detection and escalation.</span></a></li>
+        </ul>
+      </div>
+
+      <div class="dir-group">
+        <p class="dir-label">Build &amp; product</p>
+        <ul class="dir-grid">
+          <li><a class="dir-card" href="/hire/software-developer/"><b>Software developer</b><span class="d">Features, fixes, integrations, internal tools.</span></a></li>
+          <li><a class="dir-card" href="/hire/software-tester/"><b>Software tester</b><span class="d">Manual, exploratory and regression testing.</span></a></li>
+          <li><a class="dir-card" href="/hire/product-designer/"><b>Product designer</b><span class="d">UI and product screens, web pages, assets.</span></a></li>
+          <li><a class="dir-card" href="/hire/content-writer/"><b>Content writer</b><span class="d">Product copy, SEO content, blog posts, editing.</span></a></li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -256,9 +364,13 @@
     <div class="wrap">
       <p class="eyebrow">How we work and what it costs</p>
       <div class="price-block">
-        <h2 class="vframe" id="price-h">Quality work, priced fairly.</h2>
-        <p class="lede">Product-grade quality at honest, reasonable prices, structured so it is
-          profitable for you too, not just us.</p>
+        <div>
+          <h2 class="vframe" id="price-h">Quality work, priced fairly.</h2>
+          <p class="lede">Product-grade quality at honest, reasonable prices, structured so it is
+            profitable for you too, not just us.</p>
+          <a href="/?src=services-hub#estimate" class="btn btn-primary" style="margin-top:22px">Only pay if you&rsquo;re happy
+            <span aria-hidden="true">&rarr;</span></a>
+        </div>
         <ul class="price-list">
           <li><span class="check" aria-hidden="true">&check;</span> Two honest ways to pay: by the job or by the hour, whichever works better for you</li>
           <li><span class="check" aria-hidden="true">&check;</span> By the job, a set price per task (think a few pence per order, ticket or invoice). You pay for the result, not our hours</li>
@@ -266,9 +378,6 @@
           <li><span class="check" aria-hidden="true">&check;</span> No fixed contract, no lock-in, walk away anytime</li>
           <li><span class="check" aria-hidden="true">&check;</span> No hidden fees, no asterisks, no surprise invoices</li>
         </ul>
-        <a href="/?src=services-hub#estimate" class="btn btn-primary" style="margin-top:26px">Only pay if you&rsquo;re happy
-          <span aria-hidden="true">&rarr;</span></a>
-        <p class="micro">Only pay if you&rsquo;re happy with the work. No obligation.</p>
       </div>
     </div>
   </section>
@@ -318,9 +427,9 @@
         <details open>
           <summary><h3>Hire a role</h3></summary>
           <ul>
-            <li><a href="/hire/bookkeeper/">Bookkeeper</a></li>
+            <li><a href="/hire/data-entry-specialist/">Data entry specialist</a></li>
             <li><a href="/hire/accounts-specialist/">Accounts specialist</a></li>
-            <li><a href="/hire/payroll-specialist/">Payroll specialist</a></li>
+            <li><a href="/hire/virtual-assistant/">Virtual assistant</a></li>
             <li><a href="/hire/customer-support-specialist/">Customer support specialist</a></li>
             <li><a href="/hire/ecommerce-support-specialist/">Ecommerce support specialist</a></li>
             <li><a href="/services/">Explore all roles</a></li>
