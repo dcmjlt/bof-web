@@ -65,7 +65,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/cabinet-grotesk-800.woff2" crossorigin>
-<!-- Webfonts: Cabinet Grotesk self-hosted (font-display:optional, no swap CLS).
+<!-- Webfonts: Cabinet Grotesk self-hosted (font-display:swap + metric-matched fallback).
      DM Sans via Google Fonts (display=optional is honored upstream). -->
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=optional">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=optional" media="print" onload="this.media='all'">
@@ -127,21 +127,22 @@
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
 
-  /* Cabinet Grotesk self-hosted with font-display:optional. Fontshare's CDN
-     forces font-display:swap, which produced visible CLS on the hero h1.
-     Self-hosted + preload + optional = font is ready before render OR
-     fallback is used permanently for this load — zero swap-induced shift. */
+  /* Cabinet Grotesk self-hosted with font-display:swap. The metric-matched
+     "Cabinet Grotesk Fallback" face below (capsize ascent/descent/size-adjust)
+     occupies identical space, so swapping in the real font causes ~0 CLS.
+     (display:optional was dropped: on prod the font kept missing optional's
+     ~100ms block window, so the hero rendered permanently in the Arial fallback.) */
   @font-face{
     font-family:"Cabinet Grotesk";src:url("/assets/fonts/cabinet-grotesk-500.woff2") format("woff2");
-    font-weight:500;font-style:normal;font-display:optional;
+    font-weight:500;font-style:normal;font-display:swap;
   }
   @font-face{
     font-family:"Cabinet Grotesk";src:url("/assets/fonts/cabinet-grotesk-700.woff2") format("woff2");
-    font-weight:700;font-style:normal;font-display:optional;
+    font-weight:700;font-style:normal;font-display:swap;
   }
   @font-face{
     font-family:"Cabinet Grotesk";src:url("/assets/fonts/cabinet-grotesk-800.woff2") format("woff2");
-    font-weight:800;font-style:normal;font-display:optional;
+    font-weight:800;font-style:normal;font-display:swap;
   }
   /* Fallback faces sized to the real fonts so text occupies identical space
      before and after swap (ascent/descent/size-adjust via @capsizecss). */
