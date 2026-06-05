@@ -261,6 +261,10 @@
   section#not{padding:var(--s-18) 0}
   section#pricing{padding-top:var(--s-18)}
   section#estimate{padding-top:calc(var(--s-22) + 16px)}
+  /* Keep the arrival padding for normal scrolling, but on an anchor jump from
+     "Get started"/QR, land the green card just under the nav instead of in the
+     empty padding above it (offset the padding out of the scroll target). */
+  section#estimate{scroll-margin-top:calc(96px - var(--s-22) - 16px)}
   .sec-h{font-size:clamp(28px,4vw,44px);max-width:18ch;line-height:1.1}
   .deck{font-size:20px;color:var(--ink);opacity:.84;max-width:var(--measure);margin-top:18px}
 
@@ -1233,7 +1237,7 @@
                 placeholder="Bookkeeping, customer support, order processing. A sentence is plenty."></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary">Get started
+            <button type="submit" class="btn btn-primary">Submit request
               <span aria-hidden="true">&rarr;</span></button>
             <p class="fineprint">We use this only to set up your trial and reply once. No
               lists, no spam. See our <a href="/privacy.html">privacy policy</a>.</p>
