@@ -488,3 +488,92 @@ footer{background:var(--ground);color:var(--ground-fg);border:0}
   html{scroll-behavior:auto}
   *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
 }
+
+/* ===== Shared redesign components (added 2026-06-06) =====
+   Split hero + green People+AI panel, a grouped linked-card directory (.dir-*),
+   and a 2-column pricing block (.price-block.cols-2). Promoted from the
+   homepage/hub inline styles so the /services/ hub and every service + role
+   detail page share one source. The homepage keeps its own inline copy (tuned
+   for its 1200px container); its inline rules win there via source order.
+   New class names only + a .cols-2 modifier, so single-column .price-block on
+   non-redesigned pages is untouched. */
+.hero--split{padding:clamp(20px,3.5vh,44px) 0 80px;margin-top:24px;
+  display:grid;grid-template-columns:1.4fr 1fr;gap:clamp(32px,5vw,64px);
+  align-items:center;min-height:min(500px,calc(100svh - 220px))}
+.hero--split h1{font-size:clamp(40px,4.8vw,64px);max-width:none;margin-top:0;line-height:1.12}
+.hero-copy{transform:translateY(2px)}
+.hero-copy .sub{font-size:clamp(16px,1.5vw,19px);max-width:48ch;margin:22px 0 26px;opacity:.86;line-height:1.55}
+.hero-trust{margin-top:26px;font-size:15px;color:var(--muted);line-height:1.5;max-width:46ch}
+.hero-art{position:relative;align-self:center;aspect-ratio:9/10;
+  background:var(--ground);border-radius:var(--r-block);overflow:hidden;
+  display:grid;place-items:center;padding:clamp(22px,3vw,34px)}
+.hero-art::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(130% 90% at 100% -10%, rgba(232,155,106,.40), transparent 55%),
+    radial-gradient(rgba(244,239,226,.12) 1.5px, transparent 1.6px);
+  background-size:auto, 26px 26px}
+.work-stack{position:relative;display:flex;flex-direction:column;gap:12px;width:100%;max-width:330px}
+.work-head{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--accent-on-ground);margin-bottom:6px}
+.work-card{display:flex;align-items:center;gap:13px;background:var(--surface);
+  border-radius:14px;padding:13px 15px;box-shadow:0 14px 34px -22px rgba(0,0,0,.55)}
+.wc-by{flex:none;width:36px;height:36px;border-radius:11px;
+  display:grid;place-items:center;font-size:12px;font-weight:800;letter-spacing:.02em}
+.wc-ai{background:var(--ground);color:var(--accent-on-ground)}
+.wc-person{background:var(--accent-tint);color:var(--accent-ink)}
+.wc-task{flex:1;font-weight:600;font-size:15px;color:var(--ink)}
+.wc-done{flex:none;width:24px;height:24px;border-radius:999px;background:var(--accent-deep);
+  color:#fff;display:grid;place-items:center}
+
+.dir-group{margin-top:36px}
+.dir-label{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--accent-ink);margin-bottom:18px}
+.dir-grid{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.dir-card{position:relative;display:flex;flex-direction:column;gap:8px;height:100%;
+  background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-card);
+  padding:22px 22px 20px;text-decoration:none;color:inherit;
+  transition:transform .15s var(--ease),border-color .15s var(--ease),box-shadow .15s var(--ease)}
+.dir-card:hover{transform:translateY(-2px);border-color:var(--accent);
+  box-shadow:0 16px 32px -22px rgba(31,26,20,.45)}
+.dir-card b{font-family:var(--ff-display);font-weight:700;font-size:18px;line-height:1.25;
+  color:var(--ink);padding-right:24px}
+.dir-card b::after{content:"\2192";position:absolute;top:21px;right:20px;
+  color:var(--accent-ink);font-weight:800;opacity:.5;
+  transition:transform .15s var(--ease),opacity .15s var(--ease)}
+.dir-card:hover b::after{opacity:1;transform:translateX(3px)}
+.dir-card .d{font-size:15px;line-height:1.5;color:var(--ink);opacity:.78}
+
+.price-block.cols-2{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(28px,4vw,52px);
+  align-items:center;padding:clamp(28px,3.4vw,40px)}
+.price-block.cols-2 .price-list{grid-template-columns:1fr;gap:0}
+
+@media(max-width:920px){
+  .hero--split{grid-template-columns:1fr;min-height:0;gap:32px;margin-top:8px}
+  .hero-art{align-self:auto;min-height:0;aspect-ratio:auto}
+  .hero-copy{transform:none}
+  .dir-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .price-block.cols-2{grid-template-columns:1fr;gap:32px}
+}
+@media(max-width:760px){
+  .hero--split .cta-row{flex-direction:column;align-items:stretch}
+  .hero--split .cta-row .btn{width:100%;justify-content:center}
+  .price-block.cols-2 .btn-primary{width:100%;justify-content:center}
+}
+@media(max-width:540px){
+  .dir-grid{grid-template-columns:1fr}
+}
+
+/* Detail-page refinements (2026-06-06): a hero-to-first-section divider (scoped
+   to split-hero pages so non-redesigned pages are untouched), spacing for a
+   related-cards grid that follows a section heading, and the portfolio logo
+   strip for the green "why us" proof block. */
+#main:has(.hero--split)>section:first-of-type{border-top:1px solid var(--rule)}
+.sec-h + .dir-grid{margin-top:32px}
+.portfolio{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:26px 0 0;max-width:600px}
+.portfolio>li{display:grid}
+.pf-card{display:grid;place-items:center;background:var(--surface);border-radius:12px;
+  text-decoration:none;color:var(--ink);
+  transition:transform .15s var(--ease),box-shadow .15s var(--ease)}
+.pf-card:hover{transform:translateY(-3px);box-shadow:0 22px 44px -26px rgba(0,0,0,.6)}
+.pf-logo{display:grid;place-items:center;padding:14px 14px}
+.pf-logo img{max-height:44px;max-width:150px;width:auto;height:auto;object-fit:contain}
