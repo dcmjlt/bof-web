@@ -188,18 +188,12 @@ section#estimate{padding-top:calc(var(--s-22) + 16px)}
   transition:border-color .2s var(--ease),background .2s var(--ease)}
 .nav-shell[data-stuck="true"]{border-bottom-color:var(--rule);background:var(--bg-nav-stuck)}
 nav{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px 0}
-.logo{display:flex;align-items:center;gap:12px;font-family:var(--ff-display);
-  font-weight:800;font-size:20px;text-decoration:none;letter-spacing:-.01em}
-/* Wordmark: "Back Office" stays bold charcoal (the category); "Factory" drops a
-   weight + shifts to warm grey so it reads as the lighter tail of the mark. */
-.wordmark .wm-fac{font-weight:700;color:var(--muted)}
-/* Nav/logo monogram: real BOF mark SVG (charcoal tile + cream BOF). Rendered as the
-   box background; the "BOF" text is kept (transparent) for the footer, where
-   .foot .mark overrides back to a cream tile + green text on the green ground. */
-.mark{width:42px;height:42px;background:url(/assets/bof-mark.svg) center/contain no-repeat;
-  color:transparent;border-radius:var(--r-mark);
-  display:grid;place-items:center;font-family:var(--ff-display);font-weight:800;
-  font-size:15px;letter-spacing:-.03em;flex:none}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+/* Nav/footer logo: real BOF brand SVGs (icon tile + wordmark). Nav uses the
+   primary (charcoal) set; the footer .logo swaps to the secondary (green-ground)
+   set via its img src inline, so no per-ground CSS override is needed. */
+.mark{width:42px;height:42px;flex:none;display:block}
+.wordmark{height:19px;width:auto;display:block}
 .navlinks{display:flex;gap:30px;align-items:center;font-weight:500;font-size:15px}
 .navlinks a{text-decoration:none;opacity:.82;transition:opacity .15s var(--ease)}
 .navlinks a:hover{opacity:1}
@@ -422,16 +416,6 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:20px;paddi
 footer{background:var(--ground);color:var(--ground-fg);border:0}
 .foot{display:grid;grid-template-columns:1.4fr 1fr;gap:40px;
   padding:var(--s-18) 0 var(--s-10)}
-/* font-size:20px restated because .foot a (0,1,1) outranks .logo (0,1,0) and
-   would otherwise shrink the footer wordmark to the 16px footer-link size. */
-.foot .logo{color:var(--ground-fg);font-size:20px}
-/* Inverted mark SVG (cream tile + green BOF) so the footer monogram matches the
-   nav letterforms exactly, recoloured for the dark-green ground. */
-.foot .mark{background:url(/assets/bof-mark-footer.svg) center/contain no-repeat}
-/* Footer wordmark: mirror the nav's "Factory" tail (weight 700 + recede). On the
-   green ground that means a dimmed cream — restate color to beat .wordmark .wm-fac
-   (warm grey), which now also matches since the footer uses the .wordmark wrapper. */
-.foot .wm-fac{font-weight:700;color:var(--ground-fg);opacity:.62}
 .foot p{opacity:.82;font-size:16px;margin-top:16px;max-width:36ch;line-height:1.6}
 .foot-dir h3{font-family:var(--ff-body);font-size:13px;font-weight:700;letter-spacing:.08em;
   text-transform:uppercase;opacity:.62;margin-bottom:16px}
