@@ -1,0 +1,12 @@
+# Files excluded from the published static assets (Workers Assets).
+# Everything here lives in the repo for source/build/ops reasons but must not
+# be served on the public site.
+.git
+.github
+node_modules
+scripts
+functions
+README.md
+wrangler.jsonc
+.assetsignore
+.gitignore

@@ -1,0 +1,16 @@
+{
+  // Static-assets Worker for the Back Office Factory marketing site.
+  // The repo is a plain static site (HTML at root + assets/, about/, services/,
+  // …), so there is no Worker script — `assets.directory` alone tells Wrangler
+  // what to publish. The Cloudflare build runs `npx wrangler versions upload`,
+  // which reads this file.
+  //
+  // IMPORTANT: `name` MUST match the existing Worker this build is attached to
+  // (Cloudflare dashboard → Workers & Pages → your project). If it doesn't
+  // match, the deploy lands on the wrong Worker and the live domain won't update.
+  "name": "bof-web",
+  "compatibility_date": "2026-06-05",
+  "assets": {
+    "directory": "./"
+  }
+}
