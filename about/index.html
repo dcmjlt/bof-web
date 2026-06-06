@@ -112,9 +112,10 @@
   /* About proof: each portfolio brand gets its own row with a one-sentence
      operational lesson. The bold display name leads; body prose follows on
      the same row. Hairline rules between rows; final "And more." muted. */
-  .brand-rows{list-style:none;margin-top:28px;display:flex;flex-direction:column;gap:0}
+  .brand-rows{list-style:none;margin-top:28px;display:flex;flex-direction:column;gap:0;
+    max-width:62ch;font-size:17px}
   .brand-rows li{padding:18px 0;border-top:1px solid rgba(244,239,226,.16);
-    font-size:17px;line-height:1.6;color:var(--ground-fg);opacity:.95;max-width:62ch}
+    font-size:17px;line-height:1.6;color:var(--ground-fg);opacity:.95}
   .brand-rows li strong{font-family:var(--ff-display);font-weight:700;font-size:19px;
     color:var(--surface);letter-spacing:-.01em}
   .brand-rows .brand-rows-more{font-style:italic;opacity:.7;font-size:15px}
