@@ -576,4 +576,8 @@ footer{background:var(--ground);color:var(--ground-fg);border:0}
   transition:transform .15s var(--ease),box-shadow .15s var(--ease)}
 .pf-card:hover{transform:translateY(-3px);box-shadow:0 22px 44px -26px rgba(0,0,0,.6)}
 .pf-logo{display:grid;place-items:center;padding:14px 14px}
-.pf-logo img{max-height:44px;max-width:150px;width:auto;height:auto;object-fit:contain}
+.pf-logo img{max-height:44px;max-width:100%;width:auto;height:auto;object-fit:contain}
+/* Stack the 3 logo cards on phones so they don't overflow the green proof card. */
+@media(max-width:600px){
+  .portfolio{grid-template-columns:1fr;max-width:340px}
+}
