@@ -7,11 +7,9 @@
 <meta name="description" content="Back Office Factory built the operation running our own digital businesses, then opened it up to other founders. People and AI agents, since 2006.">
 <meta name="theme-color" content="#FFFFFF">
 
-<!-- noindex while the founder photo placeholder is visible. Flip back to the
-     index,follow line below when the real Rahman Hussain photo lands.
-     See TODOS.md §1. -->
-<meta name="robots" content="noindex,follow">
-<!-- <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1"> -->
+<!-- Indexable: placeholders removed 2026-06-06 (founder photo + data/trust
+     placeholder section dropped); real registered-company details added. -->
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
 
 <link rel="canonical" href="https://backofficefactory.com/about/">
 
@@ -21,13 +19,13 @@
 <meta property="og:title" content="About: A Back Office That Runs Its Own Businesses">
 <meta property="og:description" content="Back Office Factory built the operation running our own digital businesses, then opened it up to other founders. People and AI agents, since 2006.">
 <meta property="og:locale" content="en_GB">
-<!-- og:image removed pending /assets/og/social-card.png creation — see SEO-AUDIT.md §3 -->
+<!-- og:image removed pending /assets/og/social-card.png creation; see SEO-AUDIT.md §3 -->
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@backofficefactory">
 <meta name="twitter:title" content="About: A Back Office That Runs Its Own Businesses">
 <meta name="twitter:description" content="Back Office Factory built the operation running our own digital businesses, then opened it up to other founders. People and AI agents, since 2006.">
-<!-- twitter:image removed pending /assets/og/social-card.png creation — see SEO-AUDIT.md §3 -->
+<!-- twitter:image removed pending /assets/og/social-card.png creation; see SEO-AUDIT.md §3 -->
 
 <script type="application/ld+json">
 {
@@ -40,7 +38,15 @@
       "url": "https://backofficefactory.com/",
       "description": "Back-office team that runs growing digital and ecommerce businesses, delivered by people and AI agents on one workflow, hired by the job or by the hour.",
       "foundingDate": "2006",
-      "founder": { "@id": "https://backofficefactory.com/about/#founder" }
+      "founder": { "@id": "https://backofficefactory.com/about/#founder" },
+      "parentOrganization": { "@type": "Organization", "name": "Digital Conversions Media" },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "176 Allison Street",
+        "addressLocality": "Glasgow",
+        "postalCode": "G42 8RR",
+        "addressCountry": "GB"
+      }
     },
     {
       "@type": "Person",
@@ -84,9 +90,7 @@
   /* about-only: founder's letter layout */
   .letter{display:grid;grid-template-columns:200px 1fr;gap:40px;margin-top:40px;align-items:start}
   .letter .photo{width:200px;height:200px;border-radius:var(--r-card);
-    background:var(--ink-tint-soft);border:1px solid var(--rule);
-    display:grid;place-items:center;text-align:center;padding:18px}
-  .letter .photo span{font-size:13px;color:var(--muted);line-height:1.5}
+    object-fit:cover;border:1px solid var(--rule)}
   .letter blockquote p+p{margin-top:16px}
   .letter blockquote p{font-size:18px;line-height:1.6}
   .letter .sign{margin-top:20px;font-family:var(--ff-display);font-weight:700;font-size:18px}
@@ -94,21 +98,32 @@
     font-size:14px;color:var(--muted);margin-top:4px}
   @media(max-width:760px){.letter{grid-template-columns:1fr;gap:24px}
     .letter .photo{width:140px;height:140px}}
+  /* Registered-company cards (offices section) */
+  .offices{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:32px}
+  .office{background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-card);padding:24px}
+  .office-loc{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--accent-ink);margin-bottom:10px}
+  .office h3{font-size:19px;line-height:1.25;margin-bottom:10px}
+  .office address{font-style:normal;font-size:15px;line-height:1.6;color:var(--ink);opacity:.84}
+  .office-reg{margin-top:12px;font-size:14px;color:var(--muted)}
+  .office-reg a{color:var(--accent-ink);text-decoration:none}
+  .office-reg a:hover{text-decoration:underline;text-underline-offset:2px}
+  @media(max-width:640px){.offices{grid-template-columns:1fr}}
   /* About proof: each portfolio brand gets its own row with a one-sentence
      operational lesson. The bold display name leads; body prose follows on
      the same row. Hairline rules between rows; final "And more." muted. */
-  .brand-rows{list-style:none;margin-top:28px;display:flex;flex-direction:column;gap:0}
+  .brand-rows{list-style:none;margin-top:28px;display:flex;flex-direction:column;gap:0;
+    max-width:62ch;font-size:17px}
   .brand-rows li{padding:18px 0;border-top:1px solid rgba(244,239,226,.16);
-    font-size:17px;line-height:1.6;color:var(--ground-fg);opacity:.95;max-width:62ch}
+    font-size:17px;line-height:1.6;color:var(--ground-fg);opacity:.95}
   .brand-rows li strong{font-family:var(--ff-display);font-weight:700;font-size:19px;
     color:var(--surface);letter-spacing:-.01em}
-  .brand-rows li:last-child{border-bottom:1px solid rgba(244,239,226,.16)}
   .brand-rows .brand-rows-more{font-style:italic;opacity:.7;font-size:15px}
-  /* Firm non-compete on About proof, matching homepage treatment. */
+  /* Firm non-compete on About proof; same hairline as the brand rows. */
   .proof .nc-firm{margin-top:22px;padding-top:18px;
-    border-top:1px solid rgba(194,96,47,.32);
+    border-top:1px solid rgba(244,239,226,.16);
     font-size:17px;line-height:1.6;font-weight:600;
-    color:var(--surface);max-width:54ch}
+    color:var(--surface);max-width:62ch}
 </style>
 </head>
 <body>
@@ -206,24 +221,29 @@
       </ol>
     </nav>
 
-    <header class="hero">
-      <span class="pill">About us</span>
-      <h1>We run our own digital businesses. Your back office runs on the same team.</h1>
-      <p class="sub">Back Office Factory is not an agency that learned operations from a deck.
-        We built the operation running our own digital and ecommerce businesses, then opened it
-        up to other founders. The same people and AI agents, the same workflow, the same bar.</p>
-      <div class="cta-row">
-        <a href="/?src=about#estimate" class="btn btn-primary">Try for 30 days
-          <span aria-hidden="true">&rarr;</span></a>
-        <a href="/#how" class="btn btn-ghost">How it works</a>
+    <header class="hero hero--split">
+      <div class="hero-copy">
+        <h1>We run our own digital businesses. Your back office runs on the same team.</h1>
+        <p class="sub">Back Office Factory is not an agency that learned operations from a deck.
+          We built the operation running our own digital and ecommerce businesses, then opened it
+          up to other founders. The same people and AI agents, the same workflow, the same bar.</p>
+        <div class="cta-row">
+          <a href="/?src=about#estimate" class="btn btn-primary">Try for 30 days
+            <span aria-hidden="true">&rarr;</span></a>
+          <a href="/#how" class="btn btn-ghost">How it works</a>
+        </div>
+        <p class="hero-trust">Only pay if you&rsquo;re happy with the work &middot; Priced by the job or by the hour &middot;
+          No fixed contracts.</p>
       </div>
-      <p class="micro">Only pay if you&rsquo;re happy with the work. No obligation.</p>
-
-      <dl class="meta">
-        <div><dt>Since 2006</dt><dd>a battle-tested operation, not a startup experiment</dd></div>
-        <div><dt>People + AI</dt><dd>one workflow, the best mix per task</dd></div>
-        <div><dt>By the job or the hour</dt><dd>no fixed contract, walk away anytime</dd></div>
-      </dl>
+      <div class="hero-art" aria-hidden="true">
+        <div class="work-stack">
+          <p class="work-head">People + AI &middot; since 2006</p>
+          <div class="work-card"><span class="wc-done"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4 10-11"/></svg></span><span class="wc-task">Operating since 2006</span></div>
+          <div class="work-card"><span class="wc-done"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4 10-11"/></svg></span><span class="wc-task">Registered in 4 countries</span></div>
+          <div class="work-card"><span class="wc-done"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4 10-11"/></svg></span><span class="wc-task">People + AI, one workflow</span></div>
+          <div class="work-card"><span class="wc-done"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4 10-11"/></svg></span><span class="wc-task">We stay behind your brand</span></div>
+        </div>
+      </div>
     </header>
   </div>
 
@@ -232,11 +252,8 @@
       <p class="eyebrow">From the founder</p>
       <h2 class="sec-h" id="letter-h" style="max-width:18ch">Why we opened this up.</h2>
       <div class="letter">
-        <div class="photo" aria-hidden="true">
-          <span>Founder photo<br>
-            <span class="flag" title="Required launch trust artefact">Placeholder &middot; real photo of Rahman Hussain required before launch</span>
-          </span>
-        </div>
+        <img class="photo" src="/assets/founder/rahman-hussain.jpg" alt="Rahman Hussain, founder of Back Office Factory" width="200" height="200">
+
         <blockquote>
           <p>I have spent years running digital and ecommerce businesses, <a class="brand-link" href="https://www.ticketstodo.com/" target="_blank" rel="noopener external">TicketsToDo</a>,
             <a class="brand-link" href="https://vouchercodes.ae/" target="_blank" rel="noopener external">VoucherCodes.ae</a>, <a class="brand-link" href="https://www.dcmnetwork.com/" target="_blank" rel="noopener external">DCMnetwork</a> and more. The thing that quietly decides whether a
@@ -265,6 +282,17 @@
         <h2 id="proof-h">We run our own digital businesses on this exact team.</h2>
         <p class="nc" style="margin-top:24px">The strongest thing we can say about our back office
           is that we trust it with our own.</p>
+        <ul class="portfolio">
+          <li><a class="pf-card" href="https://www.ticketstodo.com/" target="_blank" rel="noopener external">
+            <span class="pf-logo"><img src="/assets/proof/ticketstodo-logo.png" alt="TicketsToDo" loading="lazy"></span>
+          </a></li>
+          <li><a class="pf-card" href="https://vouchercodes.ae/" target="_blank" rel="noopener external">
+            <span class="pf-logo"><img src="/assets/proof/vouchercodes-logo.png" alt="VoucherCodes.ae" loading="lazy"></span>
+          </a></li>
+          <li><a class="pf-card" href="https://www.dcmnetwork.com/" target="_blank" rel="noopener external">
+            <span class="pf-logo"><img src="/assets/proof/dcmnetwork-logo.svg" alt="DCMnetwork" loading="lazy"></span>
+          </a></li>
+        </ul>
         <ul class="brand-rows">
           <li>
             <a class="brand-link" href="https://www.ticketstodo.com/" target="_blank" rel="noopener external"><strong>TicketsToDo</strong></a>,
@@ -323,8 +351,8 @@
         <article class="card">
           <span class="tag">Scope</span>
           <h3>We tell you straight</h3>
-          <p>We run operational delivery. If something sits outside that, strategy, creative,
-            sales, we say so plainly rather than stretch and underdeliver.</p>
+          <p>We deliver the work, operations, build, design and support, rather than sell advice.
+            If something sits outside that, we say so plainly rather than stretch and underdeliver.</p>
         </article>
         <article class="card">
           <span class="tag">Reversibility</span>
@@ -339,11 +367,15 @@
 
   <section aria-labelledby="price-h">
     <div class="wrap">
-      <p class="eyebrow">How we work and what it costs</p>
-      <div class="price-block">
-        <h2 class="vframe" id="price-h">Quality work, priced fairly.</h2>
-        <p class="lede">Product-grade quality at honest, reasonable prices, structured so it is
-          profitable for you too, not just us.</p>
+      <p class="eyebrow">What it costs</p>
+      <div class="price-block cols-2">
+        <div>
+          <h2 class="vframe" id="price-h">Quality work, priced fairly.</h2>
+          <p class="lede">Product-grade quality at honest, reasonable prices, structured so it is
+            profitable for you too, not just us.</p>
+          <a href="/?src=about#estimate" class="btn btn-primary" style="margin-top:22px">Only pay if you&rsquo;re happy
+            <span aria-hidden="true">&rarr;</span></a>
+        </div>
         <ul class="price-list">
           <li><span class="check" aria-hidden="true">&check;</span> Two honest ways to pay: by the job or by the hour, whichever works better for you</li>
           <li><span class="check" aria-hidden="true">&check;</span> By the job, a set price per task (think a few pence per order, ticket or invoice). You pay for the result, not our hours</li>
@@ -351,31 +383,41 @@
           <li><span class="check" aria-hidden="true">&check;</span> No fixed contract, no lock-in, walk away anytime</li>
           <li><span class="check" aria-hidden="true">&check;</span> No hidden fees, no asterisks, no surprise invoices</li>
         </ul>
-        <a href="/?src=about#estimate" class="btn btn-primary" style="margin-top:26px">Only pay if you&rsquo;re happy
-          <span aria-hidden="true">&rarr;</span></a>
-        <p class="micro">Honest math beats clever pricing.</p>
       </div>
     </div>
   </section>
 
-  <section aria-labelledby="data-h">
+  <section aria-labelledby="offices-h" id="offices">
     <div class="wrap">
-      <p class="eyebrow">Data and trust</p>
-      <h2 class="sec-h" id="data-h" style="max-width:20ch">Straight answers on data and certifications.</h2>
-      <p class="deck" style="max-width:62ch">Most outsourcing sites carry a row of compliance
-        badges that don&rsquo;t survive a phone call. We&rsquo;d rather tell you exactly where we
-        stand.</p>
-      <ul class="svc" style="margin-top:32px">
-        <li><span class="mk" aria-hidden="true">&check;</span><span>
-          <b>Your data stays yours</b><span class="d">We handle your data carefully and under UK
-          data-protection law. <span class="flag" title="Required launch trust artefact">Placeholder &middot; confirm exact data-protection wording</span></span></span></li>
-        <li><span class="mk" aria-hidden="true">&check;</span><span>
-          <b>Non-compete by default</b><span class="d">We never take on business that competes with us or you.</span></span></li>
-        <li><span class="mk" aria-hidden="true">&check;</span><span>
-          <b>Certifications</b><span class="d">Security and certification status to be confirmed.
-          <span class="flag" title="Required launch trust artefact">Placeholder &middot; confirm real cert status, do not overclaim</span></span></span></li>
-        <li><span class="mk" aria-hidden="true">&check;</span><span>
-          <b>UK based</b><span class="d">United Kingdom. <span class="flag" title="Required launch trust artefact">Placeholder &middot; UK contact route to be confirmed (no email)</span></span></span></li>
+      <p class="eyebrow">The company behind Back Office Factory</p>
+      <h2 class="sec-h" id="offices-h" style="max-width:24ch">A real, registered business, since 2006.</h2>
+      <p class="deck" style="max-width:64ch">Back Office Factory is operated by Digital Conversions Media,
+        with registered legal entities in the United Kingdom, the UAE, the United States and Pakistan.
+        Not a marketplace listing, a company you can look up.</p>
+      <ul class="offices">
+        <li class="office">
+          <p class="office-loc">United Kingdom</p>
+          <h3>Digital Conversions Media Ltd</h3>
+          <address>176 Allison Street<br>Glasgow, G42 8RR<br>United Kingdom</address>
+        </li>
+        <li class="office">
+          <p class="office-loc">United Arab Emirates</p>
+          <h3>Digital Conversions Media FZCO</h3>
+          <address>Level 11, Uptown Tower<br>Dubai, United Arab Emirates<br>PO Box 938899</address>
+          <p class="office-reg">TRN 100308550100003</p>
+        </li>
+        <li class="office">
+          <p class="office-loc">United States</p>
+          <h3>Digital Conversions Media, Inc.</h3>
+          <address>651 N Broad St, Suite 206<br>Middletown, New Castle<br>Delaware 19709</address>
+          <p class="office-reg">Entity file no. 4717781 &middot; <a href="tel:+13024975541">+1 302 497 5541</a></p>
+        </li>
+        <li class="office">
+          <p class="office-loc">Pakistan</p>
+          <h3>Digital Conversions Media Private Limited</h3>
+          <address>Building 240C, 3rd Floor, Broad Way<br>Main Boulevard, Phase 8, DHA<br>Lahore</address>
+          <p class="office-reg"><a href="https://goo.gl/maps/Uh9EKtVhGjx" target="_blank" rel="noopener external">View on map</a></p>
+        </li>
       </ul>
     </div>
   </section>
@@ -384,16 +426,10 @@
     <div class="wrap">
       <p class="eyebrow">Where to go next</p>
       <h2 class="sec-h" id="rel-h" style="max-width:20ch">See the work, or get a number.</h2>
-      <ul class="rel">
-        <li><a href="/services/customer-support/">
-          <b>Customer support</b>
-          <span>The full support operation, people and AI agents on one workflow.</span></a></li>
-        <li><a href="/services/finance-and-accounting/">
-          <b>Finance &amp; accounting</b>
-          <span>Bookkeeping, reconciliation, AP/AR and payroll admin.</span></a></li>
-        <li><a href="/services/back-office-automation/">
-          <b>Back-office automation</b>
-          <span>Repetitive processes mapped, automated and run end to end.</span></a></li>
+      <ul class="dir-grid">
+        <li><a class="dir-card" href="/services/customer-support/"><b>Customer support</b><span class="d">The full support operation, people and AI agents on one workflow.</span></a></li>
+        <li><a class="dir-card" href="/services/finance-and-accounting/"><b>Finance &amp; accounting</b><span class="d">Bookkeeping, reconciliation, AP/AR and payroll admin.</span></a></li>
+        <li><a class="dir-card" href="/services/back-office-automation/"><b>Back-office automation</b><span class="d">Repetitive processes mapped, automated and run end to end.</span></a></li>
       </ul>
     </div>
   </section>
@@ -441,6 +477,7 @@
             <li><a href="/#how">How it works</a></li>
             <li><a href="/#faq">FAQs</a></li>
             <li><a href="/about/">About</a></li>
+            <li><a href="/about/#offices">Offices</a></li>
             <li><a href="/?src=about#estimate">Get started</a></li>
           </ul>
         </details>
