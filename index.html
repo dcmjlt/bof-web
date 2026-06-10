@@ -224,6 +224,14 @@
   .btn-ghost:hover{background:var(--ink-tint-soft);transform:translateY(-1px)}
   .btn-sm{padding:11px 20px;font-size:15px}
   .btn:disabled{opacity:.6;cursor:progress;pointer-events:none}
+  /* "Sending…" state for the homepage signup button */
+  .btn-spinner{
+    width:16px;height:16px;flex:none;border-radius:50%;
+    border:2px solid rgba(255,255,255,.45);border-top-color:#fff;
+    animation:btn-spin .7s linear infinite;
+  }
+  @keyframes btn-spin{to{transform:rotate(360deg)}}
+  @media (prefers-reduced-motion:reduce){.btn-spinner{display:none}}
   .micro{font-size:15px;color:var(--muted);margin-top:12px}
 
   /* Portfolio brand link: inherits parent color at rest so it reads as prose;
@@ -1449,19 +1457,32 @@
       var data=new URLSearchParams(new FormData(form));
       var btn=form.querySelector('button[type=submit]');
       btn.disabled=true;
+      btn.innerHTML='<span class="btn-spinner" aria-hidden="true"></span><span>Sending&hellip;</span>';
+
+      // Show the confirmation exactly once, whether the network replies or the
+      // bad-wifi safety net below fires first.
+      var confirmed=false;
+      function confirmSent(){
+        if(confirmed) return;
+        confirmed=true;
+        box.dataset.sent='true';
+        var done=box.querySelector('.trial-form-done');
+        done.focus();
+        var smooth=!matchMedia('(prefers-reduced-motion:reduce)').matches;
+        box.scrollIntoView({behavior:smooth?'smooth':'auto',block:'center'});
+      }
+      // Bad-wifi safety net: confirm within 15s even if the POST hasn't settled.
+      // The request is not aborted; it keeps sending in the background, so the
+      // lead still lands. Tune this one constant if needed.
+      var safety=setTimeout(confirmSent,15000);
+
       // POST to https://user.dcm-inc.com/backoffice_factory
       // Accept JSON so the function returns { ok: true } instead of HTML.
       fetch('https://user.dcm-inc.com/backoffice_factory',{method:'POST',
         headers:{'Content-Type':'application/x-www-form-urlencoded','Accept':'application/json'},
         body:data})
         .catch(function(){/* still confirm; ops alarms on failed submit POST */})
-        .finally(function(){
-          box.dataset.sent='true';
-          var done=box.querySelector('.trial-form-done');
-          done.focus();
-          var smooth=!matchMedia('(prefers-reduced-motion:reduce)').matches;
-          box.scrollIntoView({behavior:smooth?'smooth':'auto',block:'center'});
-        });
+        .finally(function(){ clearTimeout(safety); confirmSent(); });
     });
   })();
 </script>
