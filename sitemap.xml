@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 36 URLs. 10 added 2026-06-06 (services: software-development, product-design,
-     software-testing, content-writing, new-online-business; hire: software-developer,
-     software-tester, product-designer, content-writer, cctv-monitoring-specialist),
-     all noindex,follow pending trust artefacts.
-     Mixed robots state (2026-05-20): 23 pages index,follow + 3 pages
-     (homepage, about, privacy) noindex,follow until launch-blocker body-copy
-     placeholders resolve. Noindex pages remain in the sitemap so Search Console
-     sees the full structure; per-page robots meta is authoritative. See TODOS.md §1.
+<!-- 36 URLs — all indexable (index,follow). Legal pages (privacy/terms/cookies)
+     are omitted because they remain noindex. Updated 2026-06-20.
      Submit to Search Console: https://search.google.com/search-console (BOF property). -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://backofficefactory.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
   <url><loc>https://backofficefactory.com/about/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 
+  <url><loc>https://backofficefactory.com/services/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://backofficefactory.com/services/ai-automation/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://backofficefactory.com/services/back-office-automation/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://backofficefactory.com/services/customer-support/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
@@ -49,5 +44,4 @@
   <url><loc>https://backofficefactory.com/compare/vs-va-agency/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://backofficefactory.com/compare/vs-ai-tool/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 
-  <url><loc>https://backofficefactory.com/privacy.html</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
 </urlset>

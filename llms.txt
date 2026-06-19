@@ -1,0 +1,62 @@
+# Back Office Factory
+
+> The back-office team that runs your growing digital business — including our own. Real people and AI agents on one workflow, hired by the job or by the hour. Only pay if you're happy.
+
+Back Office Factory (backofficefactory.com) gives founders of growing digital, ecommerce and DTC businesses a back-office team — bookkeeping, customer support, order and document processing, data, payroll and the operational work that keeps a business running — delivered by real people and AI agents on a single workflow. You hire by the job or by the hour, whichever works better for you; there is no fixed contract and you can walk away anytime. The same team runs our own digital businesses (TicketsToDo, VoucherCodes.ae, DCMnetwork and more), and we do not take on business that competes with us or you — your work stays yours. Quality work, priced fairly. A battle-tested operation, running since 2006. Try it for 30 days and only pay if you're happy.
+
+## Core
+
+- [Home](https://backofficefactory.com/): Scale your business without scaling your headcount — people and AI agents handle bookkeeping, support, payroll and orders, by the job or by the hour.
+- [About](https://backofficefactory.com/about/): How BOF built the operation running our own digital businesses since 2006, then opened it to other founders.
+- [AI back office](https://backofficefactory.com/ai-back-office/): An AI back-office team for growing digital businesses — people for the judgement, AI agents for the volume, one workflow.
+
+## Services
+
+- [All services](https://backofficefactory.com/services/): Every back-office service and role BOF runs for growing digital and ecommerce businesses, by people and AI agents on one workflow.
+- [AI automation](https://backofficefactory.com/services/ai-automation/): Support, document and data work run by AI agents with human-in-the-loop review.
+- [Back-office automation](https://backofficefactory.com/services/back-office-automation/): Repetitive process work mapped, automated and run by people and AI agents as an operation.
+- [Customer support](https://backofficefactory.com/services/customer-support/): Tickets, live chat, inbox triage, escalations and order or returns queries.
+- [Digital transformation](https://backofficefactory.com/services/digital-transformation/): Process digitisation, data migration and cleanup, tooling rollout and the ongoing run.
+- [Finance and accounting](https://backofficefactory.com/services/finance-and-accounting/): Bookkeeping, reconciliation, accounts payable and receivable, payroll admin and month-end prep.
+- [Software development](https://backofficefactory.com/services/software-development/): Web and app builds, internal tools, integrations and ongoing product work.
+- [Product design](https://backofficefactory.com/services/product-design/): Web pages, product screens, store design and assets, designed to your brand and built to ship.
+- [Software testing](https://backofficefactory.com/services/software-testing/): Manual, exploratory and regression testing, release checks and clear bug reports.
+- [Content writing](https://backofficefactory.com/services/content-writing/): Product descriptions, listing copy, SEO pages and blog posts, written to your brand voice.
+- [New online business](https://backofficefactory.com/services/new-online-business/): Store setup, catalogue, configuration and go-live — we set it up, then run the back office.
+
+## Roles you can hire
+
+- [Bookkeeper](https://backofficefactory.com/hire/bookkeeper/): Day-to-day books, bank reconciliation, invoicing and month-end prep.
+- [Accounts specialist](https://backofficefactory.com/hire/accounts-specialist/): Accounts payable and receivable, invoicing, credit control and reconciliation.
+- [Payroll specialist](https://backofficefactory.com/hire/payroll-specialist/): Payroll preparation, starters and leavers, timesheets and payslip distribution admin.
+- [Customer support specialist](https://backofficefactory.com/hire/customer-support-specialist/): Tickets, live chat, inbox triage and escalations.
+- [Ecommerce support specialist](https://backofficefactory.com/hire/ecommerce-support-specialist/): Customer support, order and returns handling, inbox triage for online stores.
+- [Order processing specialist](https://backofficefactory.com/hire/order-processing-specialist/): Order entry, exceptions, returns and fulfilment coordination.
+- [Document processing specialist](https://backofficefactory.com/hire/document-processing-specialist/): Document intake, data extraction, indexing, digitisation and records management.
+- [Data entry specialist](https://backofficefactory.com/hire/data-entry-specialist/): High-volume entry, migration, cleanup, deduplication and CRM hygiene.
+- [Virtual assistant](https://backofficefactory.com/hire/virtual-assistant/): Inbox and calendar, scheduling, research, document prep and follow-ups.
+- [Administration assistant](https://backofficefactory.com/hire/administration-assistant/): Business admin, records, scheduling, supplier coordination and reporting prep.
+- [Real estate data specialist](https://backofficefactory.com/hire/real-estate-data-specialist/): Property and listing data entry, portal and CRM updates, comparables research.
+- [Software developer](https://backofficefactory.com/hire/software-developer/): Features, fixes, integrations and internal tools shipped in your codebase.
+- [Software tester](https://backofficefactory.com/hire/software-tester/): Manual, exploratory and regression testing with clear bug reports.
+- [Product designer](https://backofficefactory.com/hire/product-designer/): UI and product screens, web pages, store design and assets, to your brand and ready to build.
+- [Content writer](https://backofficefactory.com/hire/content-writer/): Product copy, SEO pages, blog posts and editing to your brand voice.
+- [CCTV monitoring specialist](https://backofficefactory.com/hire/cctv-monitoring-specialist/): Live feed monitoring, incident detection, logging and escalation.
+
+## Compare
+
+- [vs a full-time hire](https://backofficefactory.com/compare/vs-full-time-hire/): When you need the work done, not another full-time hire — a team you hire by the job or by the hour.
+- [vs a VA agency](https://backofficefactory.com/compare/vs-va-agency/): Not a generic VA agency with no operational context — a team that runs growing digital businesses, including our own.
+- [vs an AI tool](https://backofficefactory.com/compare/vs-ai-tool/): Not an AI tool you have to learn and run — we run the work, so you don't operate the AI.
+
+## By platform and region
+
+- [Shopify back office](https://backofficefactory.com/shopify-back-office/): The back office that runs growing Shopify stores — support, orders, returns, bookkeeping.
+- [Amazon seller back office](https://backofficefactory.com/amazon-seller-back-office/): For Amazon sellers — cases, returns, A-to-z claims, order exceptions, listing data.
+- [UK back office](https://backofficefactory.com/uk/): UK-based back-office team for growing digital and ecommerce businesses.
+
+## Company and legal
+
+- [Privacy](https://backofficefactory.com/privacy.html): How BOF handles the information you submit through the signup form.
+- [Terms](https://backofficefactory.com/terms.html): Plain-English terms for using the site and starting a 30-day trial.
+- [Cookies](https://backofficefactory.com/cookies.html): What cookies and tracking the site uses — no advertising or analytics cookies.
