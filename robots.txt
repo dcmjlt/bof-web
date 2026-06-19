@@ -1,12 +1,7 @@
 # Back Office Factory — backofficefactory.com
-# Mixed page-level robots state (2026-05-20):
-#   noindex,follow   index.html, about/index.html, privacy.html   (body-copy
-#                    placeholders: testimonial, case studies, founder photo,
-#                    legal entity / retention period / contact route)
-#   index,follow     all other 23 pages (only footer trust-flag placeholders;
-#                    risk knowingly accepted to start crawl coverage early)
-# See TODOS.md §1 for the flip-back conditions.
-# Indexing is controlled by the per-page meta robots tag, not by this file.
+# Indexing is per-page via the meta robots tag. All pages are index,follow as of
+# 2026-06-20, except the 3 legal pages (privacy / terms / cookies), which stay
+# noindex pending solicitor review. AI agents: see /llms.txt for a guided index.
 
 User-agent: *
 Allow: /
