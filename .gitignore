@@ -46,3 +46,10 @@ mockup-share/
 
 # --- Print / stand assets (generated working artefacts) ---
 print/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
