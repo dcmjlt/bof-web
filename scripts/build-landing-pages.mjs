@@ -42,10 +42,18 @@ const TEMPLATE = `<!DOCTYPE html>
 <meta property="og:title" content="{{OG_TITLE}}">
 <meta property="og:description" content="{{OG_DESC}}">
 <meta property="og:locale" content="en_GB">
+<meta property="og:image" content="https://backofficefactory.com/assets/og/social-card.png">
+<meta property="og:image:secure_url" content="https://backofficefactory.com/assets/og/social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Back Office Factory — back office team for ecommerce & digital businesses.">
 
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{TW_TITLE}}">
 <meta name="twitter:description" content="{{TW_DESC}}">
+<meta name="twitter:image" content="https://backofficefactory.com/assets/og/social-card.png">
+<meta name="twitter:image:alt" content="Back Office Factory — back office team for ecommerce & digital businesses.">
 
 <script type="application/ld+json">
 {
@@ -1061,10 +1069,18 @@ const HUB_TEMPLATE = `<!DOCTYPE html>
 <meta property="og:title" content="Services and roles we run">
 <meta property="og:description" content="Every back-office service and role we run for growing digital and ecommerce businesses, by people and AI agents on one workflow, hired by the hour.">
 <meta property="og:locale" content="en_GB">
+<meta property="og:image" content="https://backofficefactory.com/assets/og/social-card.png">
+<meta property="og:image:secure_url" content="https://backofficefactory.com/assets/og/social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Back Office Factory — back office team for ecommerce & digital businesses.">
 
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Services and roles we run">
 <meta name="twitter:description" content="Every back-office service and role we run, by people and AI agents on one workflow, hired by the hour.">
+<meta name="twitter:image" content="https://backofficefactory.com/assets/og/social-card.png">
+<meta name="twitter:image:alt" content="Back Office Factory — back office team for ecommerce & digital businesses.">
 
 <script type="application/ld+json">
 {
